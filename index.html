@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shushi Kashimura | Restoran Jepang Autentik</title>
+  <meta name="description" content="Shushi Kashimura - Restoran Jepang autentik dengan bahan berkualitas premium. Pengalaman kuliner Jepang terbaik dengan cita rasa tradisional.">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#C62828', // Merah Jepang
+            secondary: '#2E7D32', // Hijau untuk matcha
+            accent: '#FF6F00', // Oranye untuk salmon
+            'primary-dark': '#B71C1C',
+            dark: '#1A1A1A',
+            'dark-light': '#2A2520',
+            'japan-red': '#C62828',
+            'sakura-pink': '#F8BBD0',
+            'wasabi-green': '#C5E1A5',
+            'soy-brown': '#5D4037',
+            'rice-white': '#FFF8E1',
+          },
+          fontFamily: {
+            'sans': ['"Noto Sans JP"', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            'heading': ['"Yuji Mai"', '"Noto Serif JP"', 'serif'],
+          },
+          animation: {
+            'float': 'float 3s ease-in-out infinite',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'slide-up': 'slideUp 0.5s ease-out',
+            'fade-in': 'fadeIn 0.6s ease-out',
+            'sakura-fall': 'sakuraFall 10s linear infinite',
+            'zoom-in': 'zoomIn 0.5s ease-out',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            sakuraFall: {
+              '0%': { transform: 'translateY(-100px) rotate(0deg)', opacity: '0' },
+              '10%': { opacity: '1' },
+              '90%': { opacity: '1' },
+              '100%': { transform: 'translateY(100vh) rotate(360deg)', opacity: '0' },
+            },
+            zoomIn: {
+              '0%': { transform: 'scale(0.95)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Yuji+Mai&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Animate CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  
+  <style>
+    :root {
+      --primary-glow: rgba(198, 40, 40, 0.15);
+      --accent-glow: rgba(255, 111, 0, 0.15);
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #1A1A1A 0%, #2A2520 100%);
+      font-family: 'Noto Sans JP', sans-serif;
+      color: #fcfcfc;
+      overflow-x: hidden;
+    }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #2A2520;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #C62828;
+      border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B71C1C;
+    }
+    
+    /* Gradient Text */
+    .gradient-text {
+      background: linear-gradient(90deg, #C62828 0%, #FF6F00 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+    
+    /* Glass Effect */
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Japanese Pattern Background */
+    .japanese-pattern {
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(198, 40, 40, 0.1) 2px, transparent 2px),
+        radial-gradient(circle at 75% 75%, rgba(255, 111, 0, 0.1) 2px, transparent 2px);
+      background-size: 60px 60px;
+    }
+    
+    /* Sakura Effect */
+    .sakura {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #F8BBD0;
+      border-radius: 50% 0 50% 50%;
+      transform: rotate(45deg);
+      opacity: 0.7;
+      z-index: 1;
+    }
+    
+    /* Menu Cards */
+    .menu-card {
+      background: linear-gradient(145deg, rgba(198, 40, 40, 0.05), rgba(46, 125, 50, 0.05));
+      border: 1px solid rgba(198, 40, 40, 0.1);
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    
+    .menu-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(198, 40, 40, 0.3);
+      box-shadow: 0 10px 30px rgba(198, 40, 40, 0.1);
+    }
+    
+    /* Gallery Cards */
+    .gallery-card {
+      background: linear-gradient(145deg, rgba(198, 40, 40, 0.05), rgba(255, 111, 0, 0.05));
+      border: 1px solid rgba(198, 40, 40, 0.1);
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .gallery-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(198, 40, 40, 0.3);
+      box-shadow: 0 10px 30px rgba(198, 40, 40, 0.1);
+    }
+    
+    .gallery-card:hover .gallery-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(26, 26, 26, 0.95), transparent);
+      padding: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+    }
+    
+    /* Stats Cards */
+    .stat-card {
+      background: linear-gradient(145deg, rgba(198, 40, 40, 0.1), transparent);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(198, 40, 40, 0.1);
+    }
+    
+    .stat-card:hover {
+      border-color: rgba(198, 40, 40, 0.3);
+      transform: translateY(-5px);
+    }
+    
+    /* Button Styles */
+    .btn-primary {
+      background: linear-gradient(135deg, #C62828 0%, #B71C1C 100%);
+      color: #f7f7f4;
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(198, 40, 40, 0.3);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(198, 40, 40, 0.4);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: #C62828;
+      border: 2px solid #C62828;
+      padding: 12px 30px;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(198, 40, 40, 0.1);
+      transform: translateY(-3px);
+    }
+    
+    /* WhatsApp Button */
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    
+    .btn-whatsapp:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.3);
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(198, 40, 40, 0.1), rgba(255, 111, 0, 0.1));
+      border: 1px solid rgba(198, 40, 40, 0.2);
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 30%, rgba(198, 40, 40, 0.05) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 70%, rgba(255, 111, 0, 0.05) 0%, transparent 50%);
+    }
+    
+    /* Floating Elements */
+    .floating-element {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .floating-element-2 {
+      animation: float 7s ease-in-out infinite 0.5s;
+    }
+    
+    /* Form Styling */
+    .form-input {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+      color: #b4b0b0;
+      transition: all 0.3s ease;
+      font-size: 16px;
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: #C62828;
+      box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+    }
+    
+    /* Navbar */
+    .navbar {
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(198, 40, 40, 0.1);
+    }
+    
+    /* Hero Section */
+    .hero-pattern {
+      background-image: 
+        radial-gradient(circle at 20% 80%, rgba(198, 40, 40, 0.1) 2px, transparent 2px),
+        radial-gradient(circle at 80% 20%, rgba(255, 111, 0, 0.1) 2px, transparent 2px);
+      background-size: 80px 80px;
+    }
+    
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      background: linear-gradient(135deg, #2A2520, #3A3530);
+      border-left: 4px solid #C62828;
+      padding: 20px;
+      border-radius: 12px;
+      z-index: 9999;
+      max-width: 380px;
+      display: none;
+      animation: slideInRight 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    /* Lightbox Modal */
+    .lightbox-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 90%;
+      animation: zoomIn 0.3s ease;
+    }
+    
+    /* Reservasi Button */
+    .reservasi-float {
+      background: linear-gradient(135deg, #C62828, #B71C1C);
+      color: white;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 8px 25px rgba(198, 40, 40, 0.4);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: pulse-slow 2s infinite;
+    }
+    
+    .reservasi-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 35px rgba(198, 40, 40, 0.6);
+    }
+    
+    /* WhatsApp Float Button */
+    .whatsapp-float {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: pulse-slow 2s infinite;
+    }
+    
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+    }
+    
+    /* Japanese Decorative Elements */
+    .japanese-border {
+      position: relative;
+      padding-bottom: 20px;
+    }
+    
+    .japanese-border::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #C62828, transparent);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-pattern {
+        background-size: 60px 60px;
+      }
+      
+      .btn-primary, .btn-secondary, .btn-whatsapp {
+        padding: 12px 24px;
+      }
+      
+      .lightbox-content {
+        max-width: 95%;
+        max-height: 80%;
+      }
+      
+      .reservasi-float, .whatsapp-float {
+        width: 56px;
+        height: 56px;
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen overflow-x-hidden">
+  <!-- Sakura Animation -->
+  <div id="sakura-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+  
+  <!-- Navigation -->
+  <nav class="navbar fixed top-0 left-0 right-0 z-50 py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+          <a href="#home" class="flex items-center space-x-3">
+            <div class="relative">
+              <div class="absolute inset-0 bg-primary rounded-xl blur-sm"></div>
+              <div class="relative bg-primary p-3 rounded-xl">
+                <i class="fas fa-fish text-white text-2xl"></i>
+              </div>
+            </div>
+            <div>
+              <h1 class="text-2xl font-heading font-bold text-white">寿司<span class="text-primary">樫村</span></h1>
+              <p class="text-xs text-gray-400">Shushi Kashimura</p>
+            </div>
+          </a>
+        </div>
+        
+        <div class="hidden lg:flex space-x-8">
+          <a href="#home" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group">
+            <span>Beranda</span>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a href="menu-lengkap.html" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group">
+            <span>Menu</span>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a href="#galeri" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group">
+            <span>Galeri</span>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a href="#tentang" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group">
+            <span>Tentang</span>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a href="#reservasi" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group">
+            <span>Reservasi</span>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
+        </div>
+        
+        <div class="flex items-center space-x-4">
+          <a href="https://wa.me/6281290009691" target="_blank" class="hidden md:flex items-center space-x-2 text-gray-300 hover:text-green-500 transition-colors">
+            <i class="fab fa-whatsapp text-green-500"></i>
+            <span class="font-medium">+62 812-9000-9691</span>
+          </a>
+          <a href="#reservasi" 
+             class="btn-primary text-sm">
+            <i class="fas fa-calendar-check"></i>
+            <span>Reservasi</span>
+          </a>
+          <button class="lg:hidden text-gray-300 hover:text-primary transition-colors" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="lg:hidden hidden absolute top-full left-0 right-0 bg-dark border-t border-gray-800 p-4">
+      <div class="flex flex-col space-y-4">
+        <a href="#home" class="text-gray-300 hover:text-primary py-2 transition-colors" onclick="toggleMobileMenu()">Beranda</a>
+        <a href="#menu" class="text-gray-300 hover:text-primary py-2 transition-colors" onclick="toggleMobileMenu()">Menu</a>
+        <a href="#galeri" class="text-gray-300 hover:text-primary py-2 transition-colors" onclick="toggleMobileMenu()">Galeri</a>
+        <a href="#tentang" class="text-gray-300 hover:text-primary py-2 transition-colors" onclick="toggleMobileMenu()">Tentang</a>
+        <a href="#reservasi" class="text-gray-300 hover:text-primary py-2 transition-colors" onclick="toggleMobileMenu()">Reservasi</a>
+        <a href="https://wa.me/6281290009691" target="_blank" class="text-gray-300 hover:text-green-500 py-2 transition-colors" onclick="toggleMobileMenu()">
+          <i class="fab fa-whatsapp text-green-500 mr-2"></i>+62 812-9000-9691
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="pt-32 pb-20 relative overflow-hidden hero-pattern">
+    <div class="absolute inset-0 bg-gradient-to-br from-dark via-dark-light to-dark opacity-95"></div>
+    
+    <!-- Floating Elements -->
+    <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl floating-element"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl floating-element-2"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="animate__animated animate__fadeInLeft">
+          <div class="inline-flex items-center space-x-2 bg-primary/10 px-4 py-2 rounded-full mb-6">
+            <i class="fas fa-award text-primary"></i>
+            <span class="text-sm font-semibold">Restoran Jepang Autentik Sejak 2015</span>
+          </div>
+          
+          <h1 class="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 leading-tight">
+            本物の日本食体験<br>
+            <span class="gradient-text">Pengalaman Kuliner Jepang Autentik</span>
+          </h1>
+          
+          <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+            Menyajikan hidangan Jepang tradisional dengan bahan-bahan premium segar langsung dari pasar ikan Tsukiji. 
+            Dipersiapkan oleh koki berpengalaman dari Jepang.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="menu-lengkap.html" class="btn-primary">
+              <i class="fas fa-utensils"></i>
+              <span>Lihat Menu</span>
+            </a>
+            <a href="#reservasi" class="btn-secondary">
+              <i class="fas fa-clock"></i>
+              <span>Reservasi Online</span>
+            </a>
+          </div>
+          
+          <div class="grid grid-cols-3 gap-6 mt-12">
+            <div class="stat-card">
+              <div class="text-3xl font-bold text-primary mb-2">8+</div>
+              <div class="text-sm text-gray-400">Tahun Pengalaman</div>
+            </div>
+            <div class="stat-card">
+              <div class="text-3xl font-bold text-primary mb-2">200+</div>
+              <div class="text-sm text-gray-400">Menu Hidangan</div>
+            </div>
+            <div class="stat-card">
+              <div class="text-3xl font-bold text-primary mb-2">5K+</div>
+              <div class="text-sm text-gray-400">Pelanggan</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="relative animate__animated animate__fadeInRight">
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-500">
+            <img src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                 alt="Sushi Platter" 
+                 class="w-full h-[600px] object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent opacity-70"></div>
+          </div>
+          
+          <!-- Floating Card -->
+          <div class="absolute -bottom-6 -left-6 glass-effect p-6 rounded-2xl shadow-2xl max-w-xs">
+            <div class="flex items-center space-x-3 mb-3">
+              <div class="bg-primary/20 p-2 rounded-lg">
+                <i class="fas fa-clock text-primary text-xl"></i>
+              </div>
+              <div>
+                <div class="text-white font-semibold">Jam Buka</div>
+                <div class="text-sm text-gray-400">11:00 - 22:00 WIB</div>
+              </div>
+            </div>
+            <p class="text-sm text-gray-300">Setiap Hari</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="keunggulan" class="py-20">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-heading font-bold text-white mb-4 japanese-border">Keunggulan <span class="gradient-text">Shushi Kashimura</span></h2>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto">Kami menghadirkan pengalaman kuliner Jepang yang sesungguhnya</p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass-effect p-6 rounded-2xl transition-all duration-300 hover:translate-y-[-8px] hover:border-primary/30">
+          <div class="bg-primary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+            <i class="fas fa-fish text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3">Bahan Segar</h3>
+          <p class="text-gray-400">Ikan dan seafood segar setiap hari dari supplier terpercaya</p>
+        </div>
+        
+        <div class="glass-effect p-6 rounded-2xl transition-all duration-300 hover:translate-y-[-8px] hover:border-primary/30">
+          <div class="bg-primary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+            <i class="fas fa-user-tie text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3">Koki Profesional</h3>
+          <p class="text-gray-400">Koki berpengalaman langsung dari Jepang dengan sertifikasi</p>
+        </div>
+        
+        <div class="glass-effect p-6 rounded-2xl transition-all duration-300 hover:translate-y-[-8px] hover:border-primary/30">
+          <div class="bg-primary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+            <i class="fas fa-home text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3">Suasana Autentik</h3>
+          <p class="text-gray-400">Interior tradisional Jepang dengan sentuhan modern</p>
+        </div>
+        
+        <div class="glass-effect p-6 rounded-2xl transition-all duration-300 hover:translate-y-[-8px] hover:border-primary/30">
+          <div class="bg-primary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+            <i class="fas fa-wine-glass-alt text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3">Minuman Lengkap</h3>
+          <p class="text-gray-400">Sake, shochu, bir Jepang, dan minuman tradisional lengkap</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section id="menu" class="py-20 bg-dark-light">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-heading font-bold text-white mb-4 japanese-border">Menu <span class="gradient-text">Unggulan</span></h2>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto">Pilihan hidangan terbaik dari koki kami</p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="menu-card animate__animated animate__fadeInUp">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Sashimi Platter" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-bold">
+              Rp 280.000
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-white mb-2">Sashimi Platter Premium</h3>
+            <p class="text-gray-400 mb-4">Berisi 12 jenis sashimi segar: tuna, salmon, hamachi, uni, dan lainnya.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-primary font-semibold">★ 4.9</span>
+              <button class="text-primary hover:text-primary-dark transition-colors">
+                <i class="fas fa-plus-circle text-xl"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="menu-card animate__animated animate__fadeInUp" style="animation-delay: 0.1s">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Nigiri Set" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-bold">
+              Rp 180.000
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-white mb-2">Nigiri Omakase Set</h3>
+            <p class="text-gray-400 mb-4">10 piece nigiri pilihan koki dengan ikan terbaik hari ini.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-primary font-semibold">★ 4.8</span>
+              <button class="text-primary hover:text-primary-dark transition-colors">
+                <i class="fas fa-plus-circle text-xl"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="menu-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://i.ibb.co.com/vfsCvxD/download-5.jpg" 
+                 alt="Wagyu Teppanyaki" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-bold">
+              Rp 350.000
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-white mb-2">Wagyu A5 Teppanyaki</h3>
+            <p class="text-gray-400 mb-4">Wagyu grade A5 dengan sayuran segar, dimasak di depan Anda.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-primary font-semibold">★ 5.0</span>
+              <button class="text-primary hover:text-primary-dark transition-colors">
+                <i class="fas fa-plus-circle text-xl"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="menu-lengkap.html" class="btn-primary">
+          <i class="fas fa-book-open"></i>
+          <span>Lihat Menu Lengkap</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section (Mengganti Testimoni) -->
+  <section id="galeri" class="py-20 japanese-pattern">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-heading font-bold text-white mb-4 japanese-border">Galeri <span class="gradient-text">Tempat</span></h2>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto">Nikmati suasana autentik Jepang di setiap sudut restoran kami</p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <!-- Gallery Item 1: Sushi Bar -->
+        <div class="gallery-card animate__animated animate__fadeInUp" onclick="openLightbox('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Sushi Bar Premium')">
+          <div class="relative h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Sushi Bar" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="gallery-overlay">
+              <h3 class="text-xl font-bold text-white mb-2">Sushi Bar Premium</h3>
+              <p class="text-gray-300 text-sm">Nikmati pertunjukan langsung koki kami menyiapkan sushi terbaik</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gallery Item 2: Private Room -->
+        <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay: 0.1s" onclick="openLightbox('https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Ruangan Privat Tatami')">
+          <div class="relative h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Private Room" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="gallery-overlay">
+              <h3 class="text-xl font-bold text-white mb-2">Ruangan Privat Tatami</h3>
+              <p class="text-gray-300 text-sm">Ruangan tradisional Jepang untuk acara khusus dan keluarga</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gallery Item 3: Main Dining -->
+        <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s" onclick="openLightbox('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Area Makan Utama')">
+          <div class="relative h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Main Dining" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="gallery-overlay">
+              <h3 class="text-xl font-bold text-white mb-2">Area Makan Utama</h3>
+              <p class="text-gray-300 text-sm">Suasana elegan dengan sentuhan dekorasi tradisional Jepang</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gallery Item 4: Teppanyaki Station -->
+        <div class="gallery-card animate__animated animate__fadeInUp" onclick="openLightbox('https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Teppanyaki Station')">
+          <div class="relative h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Teppanyaki Station" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="gallery-overlay">
+              <h3 class="text-xl font-bold text-white mb-2">Teppanyaki Station</h3>
+              <p class="text-gray-300 text-sm">Menyaksikan langsung koki memasak di depan Anda</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gallery Item 5: Zen Garden View -->
+        <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay: 0.1s" onclick="openLightbox('https://images.unsplash.com/photo-1578474846511-04ba529f0b88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Pemandangan Zen Garden')">
+          <div class="relative h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1578474846511-04ba529f0b88?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Zen Garden" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="gallery-overlay">
+              <h3 class="text-xl font-bold text-white mb-2">Pemandangan Zen Garden</h3>
+              <p class="text-gray-300 text-sm">Taman Jepang tradisional yang menenangkan</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gallery Item 6: Sake Bar -->
+        <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s" onclick="openLightbox('https://images.unsplash.com/photo-1560512823-829485b8bf24?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Sake & Cocktail Bar')">
+          <div class="relative h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1560512823-829485b8bf24?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Sake Bar" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="gallery-overlay">
+              <h3 class="text-xl font-bold text-white mb-2">Sake & Cocktail Bar</h3>
+              <p class="text-gray-300 text-sm">Koleksi sake terbaik dan minuman khas Jepang</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center">
+        <button onclick="openGallery()" class="btn-secondary">
+          <i class="fas fa-images"></i>
+          <span>Lihat Semua Foto</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="tentang" class="py-20 bg-dark-light">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="glass-effect rounded-3xl p-8 md:p-12">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-heading font-bold text-white mb-4 japanese-border">Tentang <span class="gradient-text">Shushi Kashimura</span></h2>
+          <p class="text-xl text-gray-300">Membawa tradisi kuliner Jepang ke Jakarta sejak 2015</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Interior Restoran" 
+                 class="rounded-2xl shadow-2xl">
+          </div>
+          
+          <div>
+            <p class="text-gray-300 mb-6 leading-relaxed">
+              Shushi Kashimura didirikan oleh Chef Kenji Yamamoto, seorang koki dengan pengalaman 20 tahun 
+              di berbagai restoran bintang Michelin di Tokyo. Kami berkomitmen menghadirkan pengalaman 
+              kuliner Jepang yang autentik dengan bahan-bahan terbaik.
+            </p>
+            
+            <div class="space-y-4">
+              <div class="flex items-start space-x-3">
+                <i class="fas fa-check-circle text-primary mt-1"></i>
+                <span class="text-gray-300">Bahan-bahan premium import langsung dari Jepang</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <i class="fas fa-check-circle text-primary mt-1"></i>
+                <span class="text-gray-300">Koki bersertifikasi dengan pengalaman internasional</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <i class="fas fa-check-circle text-primary mt-1"></i>
+                <span class="text-gray-300">Suasana yang nyaman dengan desain interior tradisional Jepang</span>
+              </div>
+            </div>
+            
+            <div class="mt-8">
+              <a href="#reservasi" class="btn-primary">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Reservasi Sekarang</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="cta-section p-8 md:p-12 text-center">
+        <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-6">
+          Nikmati Pengalaman Kuliner <span class="gradient-text">Jepang Autentik</span>
+        </h2>
+        <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          Reservasi sekarang dan dapatkan diskon 15% untuk pemesanan pertama melalui website
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#reservasi" class="btn-primary">
+            <i class="fas fa-calendar-check"></i>
+            <span>Reservasi Online</span>
+          </a>
+          <a href="https://wa.me/6281290009691" target="_blank" class="btn-whatsapp">
+            <i class="fab fa-whatsapp"></i>
+            <span>Chat WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Reservasi Section -->
+  <section id="reservasi" class="py-20">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-heading font-bold text-white mb-4 japanese-border">Reservasi <span class="gradient-text">Meja</span></h2>
+        <p class="text-xl text-gray-400">Pesan meja Anda sekarang untuk pengalaman terbaik</p>
+      </div>
+      
+      <div class="grid lg:grid-cols-2 gap-12">
+        <div class="glass-effect rounded-3xl p-8">
+          <form id="reservasiForm" class="space-y-6">
+            <div>
+              <label class="block text-gray-300 mb-2">Nama Lengkap</label>
+              <input type="text" id="reservasiName" placeholder="Masukkan nama Anda" 
+                     class="form-input w-full" required>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-gray-300 mb-2">Jumlah Orang</label>
+                <select id="reservasiJumlah" class="form-input w-full" required>
+                  <option value="1">1 Orang</option>
+                  <option value="2">2 Orang</option>
+                  <option value="3">3 Orang</option>
+                  <option value="4">4 Orang</option>
+                  <option value="5">5-8 Orang</option>
+                  <option value="9">9+ Orang (Group)</option>
+                </select>
+              </div>
+              
+              <div>
+                <label class="block text-gray-300 mb-2">Tanggal</label>
+                <input type="date" id="reservasiTanggal" 
+                       class="form-input w-full" required>
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-gray-300 mb-2">Waktu</label>
+                <select id="reservasiWaktu" class="form-input w-full" required>
+                  <option value="11:00">11:00</option>
+                  <option value="12:00">12:00</option>
+                  <option value="13:00">13:00</option>
+                  <option value="18:00">18:00</option>
+                  <option value="19:00">19:00</option>
+                  <option value="20:00">20:00</option>
+                  <option value="21:00">21:00</option>
+                </select>
+              </div>
+              
+              <div>
+                <label class="block text-gray-300 mb-2">Nomor WhatsApp</label>
+                <input type="tel" id="reservasiTelepon" placeholder="0812-3456-7890" 
+                       class="form-input w-full" required>
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-gray-300 mb-2">Permintaan Khusus</label>
+              <textarea id="reservasiPermintaan" placeholder="Permintaan khusus (kursi bayi, alergi, dll)" 
+                        rows="3" class="form-input w-full"></textarea>
+            </div>
+            
+            <button type="button" onclick="submitReservasiWhatsApp()" class="btn-primary w-full">
+              <i class="fab fa-whatsapp"></i>
+              <span>Reservasi via WhatsApp</span>
+            </button>
+            
+            <div class="text-center">
+              <p class="text-gray-400 text-sm">Atau</p>
+            </div>
+            
+            <button type="submit" class="btn-secondary w-full">
+              <i class="fas fa-paper-plane"></i>
+              <span>Kirim Reservasi Online</span>
+            </button>
+          </form>
+        </div>
+        
+        <div class="space-y-6">
+          <div class="glass-effect rounded-3xl p-8">
+            <h3 class="text-2xl font-bold text-white mb-6">Info Kontak</h3>
+            
+            <div class="space-y-4">
+              <div class="flex items-center space-x-4">
+                <div class="bg-primary/10 p-3 rounded-xl">
+                  <i class="fas fa-map-marker-alt text-primary text-xl"></i>
+                </div>
+                <div>
+                  <div class="text-gray-400 text-sm">Alamat</div>
+                  <div class="text-white font-semibold">Jl. Kp Mleayu. 123, Jakarta Timur</div>
+                </div>
+              </div>
+              
+              <div class="flex items-center space-x-4">
+                <div class="bg-green-500/10 p-3 rounded-xl">
+                  <i class="fab fa-whatsapp text-green-500 text-xl"></i>
+                </div>
+                <div>
+                  <div class="text-gray-400 text-sm">WhatsApp</div>
+                  <a href="https://wa.me/6281290009691" target="_blank" class="text-white font-semibold hover:text-green-500 transition-colors">
+                    (+62)812-9000-9691
+                  </a>
+                </div>
+              </div>
+              
+              <div class="flex items-center space-x-4">
+                <div class="bg-primary/10 p-3 rounded-xl">
+                  <i class="fas fa-clock text-primary text-xl"></i>
+                </div>
+                <div>
+                  <div class="text-gray-400 text-sm">Jam Operasional</div>
+                  <div class="text-white font-semibold">Setiap Hari: 11:00 - 22:00 WIB</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="glass-effect rounded-3xl p-8">
+            <h4 class="text-xl font-bold text-white mb-4">Tips Reservasi</h4>
+            <ul class="space-y-3 text-gray-300">
+              <li class="flex items-start space-x-2">
+                <i class="fas fa-check text-primary mt-1"></i>
+                <span>Reservasi minimal 2 jam sebelum waktu kedatangan</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <i class="fas fa-check text-primary mt-1"></i>
+                <span>Untuk grup 8+ orang, harap reservasi 1 hari sebelumnya</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <i class="fas fa-check text-primary mt-1"></i>
+                <span>Informasikan alergi makanan saat reservasi</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <i class="fab fa-whatsapp text-green-500 mt-1"></i>
+                <span>Reservasi via WhatsApp lebih cepat direspon</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark border-t border-gray-800 py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="bg-primary p-2 rounded-lg">
+              <i class="fas fa-fish text-white text-xl"></i>
+            </div>
+            <h3 class="text-2xl font-heading font-bold text-white">寿司<span class="text-primary">樫村</span></h3>
+          </div>
+          <p class="text-gray-400">Restoran Jepang autentik dengan bahan berkualitas premium dan koki profesional berpengalaman.</p>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-bold text-white mb-4">Menu Utama</h4>
+          <ul class="space-y-2">
+            <li><a href="#home" class="text-gray-400 hover:text-primary transition-colors">Beranda</a></li>
+            <li><a href="#menu" class="text-gray-400 hover:text-primary transition-colors">Menu</a></li>
+            <li><a href="#galeri" class="text-gray-400 hover:text-primary transition-colors">Galeri</a></li>
+            <li><a href="#tentang" class="text-gray-400 hover:text-primary transition-colors">Tentang Kami</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-bold text-white mb-4">Layanan</h4>
+          <ul class="space-y-2">
+            <li><a href="#reservasi" class="text-gray-400 hover:text-primary transition-colors">Reservasi Online</a></li>
+            <li><a href="#menu" class="text-gray-400 hover:text-primary transition-colors">Catering</a></li>
+            <li><a href="#reservasi" class="text-gray-400 hover:text-primary transition-colors">Acara Khusus</a></li>
+            <li><a href="https://wa.me/6281290009691" target="_blank" class="text-gray-400 hover:text-green-500 transition-colors">Take Away</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-bold text-white mb-4">Hubungi Kami</h4>
+          <div class="space-y-3">
+            <a href="https://wa.me/6281290009691" target="_blank" class="flex items-center space-x-3 text-gray-400 hover:text-green-500 transition-colors">
+              <i class="fab fa-whatsapp text-green-500"></i>
+              <span>(+62)812-9000-9691</span>
+            </a>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                <i class="fab fa-instagram text-xl"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                <i class="fab fa-facebook text-xl"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                <i class="fab fa-tripadvisor text-xl"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 pt-8 text-center">
+        <p class="text-gray-500">© 2024 Shushi Kashimura. All rights reserved.</p>
+        <p class="text-gray-600 text-sm mt-2">Restoran Jepang Autentik | Jakarta, Indonesia</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div id="lightboxModal" class="lightbox-modal hidden">
+    <div class="relative">
+      <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-3xl hover:text-primary transition-colors z-10">
+        <i class="fas fa-times"></i>
+      </button>
+      <img id="lightboxImage" src="" alt="" class="lightbox-content rounded-lg">
+      <div id="lightboxCaption" class="text-white text-center mt-4 text-lg"></div>
+    </div>
+  </div>
+
+  <!-- Sticky WhatsApp Button -->
+  <a href="https://wa.me/6281290009691" target="_blank" 
+     class="whatsapp-float fixed bottom-6 right-6 z-40">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Sticky Reservasi Button -->
+  <a href="#reservasi" 
+     class="reservasi-float fixed bottom-24 right-6 z-40">
+    <i class="fas fa-calendar-alt"></i>
+  </a>
+
+  <!-- Back to Top -->
+  <button id="backToTop" 
+          class="fixed bottom-6 left-6 bg-dark-light border border-gray-800 w-12 h-12 rounded-full flex items-center justify-center text-primary hover:text-primary-dark transition-colors opacity-0 invisible transition-all duration-300 z-40">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Notification -->
+  <div id="notification" class="notification hidden">
+    <div class="flex items-start space-x-4">
+      <div class="flex-shrink-0">
+        <i id="notificationIcon" class="fas fa-check-circle text-primary text-xl mt-1"></i>
+      </div>
+      <div class="flex-1">
+        <p id="notificationTitle" class="font-bold text-white mb-1"></p>
+        <p id="notificationMessage" class="text-gray-300 text-sm"></p>
+      </div>
+      <button onclick="hideNotification()" class="text-gray-400 hover:text-white transition-colors">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Shushi Kashimura Website Loaded');
+      
+      // Initialize components
+      initBackToTop();
+      setupMobileMenu();
+      createSakura();
+      
+      // Setup reservasi form
+      document.getElementById('reservasiForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        submitReservasi();
+      });
+      
+      // Set default date to tomorrow
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      document.getElementById('reservasiTanggal').valueAsDate = tomorrow;
+      
+      // Add animation classes on scroll
+      setupScrollAnimations();
+    });
+    
+    // Create sakura falling animation
+    function createSakura() {
+      const container = document.getElementById('sakura-container');
+      const sakuraCount = 20;
+      
+      for (let i = 0; i < sakuraCount; i++) {
+        const sakura = document.createElement('div');
+        sakura.className = 'sakura';
+        
+        // Random position and animation delay
+        const left = Math.random() * 100;
+        const delay = Math.random() * 10;
+        const duration = 10 + Math.random() * 10;
+        
+        sakura.style.left = `${left}%`;
+        sakura.style.animation = `sakura-fall ${duration}s linear ${delay}s infinite`;
+        sakura.style.opacity = 0.3 + Math.random() * 0.4;
+        sakura.style.width = `${10 + Math.random() * 20}px`;
+        sakura.style.height = sakura.style.width;
+        
+        container.appendChild(sakura);
+      }
+    }
+    
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+      menu.classList.toggle('animate__animated', 'animate__fadeInDown');
+    }
+    
+    function setupMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') {
+          toggleMobileMenu();
+        }
+      });
+    }
+    
+    // Back to Top button
+    function initBackToTop() {
+      const button = document.getElementById('backToTop');
+      
+      window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+          button.classList.remove('opacity-0', 'invisible');
+          button.classList.add('opacity-100', 'visible');
+        } else {
+          button.classList.remove('opacity-100', 'visible');
+          button.classList.add('opacity-0', 'invisible');
+        }
+      });
+      
+      button.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+    
+    // Scroll animations
+    function setupScrollAnimations() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      // Observe all cards
+      document.querySelectorAll('.glass-effect, .menu-card, .gallery-card, .stat-card').forEach(card => {
+        observer.observe(card);
+      });
+    }
+    
+    // Submit reservasi form via WhatsApp
+    function submitReservasiWhatsApp() {
+      const name = document.getElementById('reservasiName').value.trim();
+      const jumlah = document.getElementById('reservasiJumlah').value;
+      const tanggal = document.getElementById('reservasiTanggal').value;
+      const waktu = document.getElementById('reservasiWaktu').value;
+      const telepon = document.getElementById('reservasiTelepon').value.trim();
+      const permintaan = document.getElementById('reservasiPermintaan').value.trim();
+      
+      if (!name || !telepon) {
+        showNotification('Form Tidak Lengkap', 'Harap isi nama dan nomor WhatsApp', 'warning');
+        return;
+      }
+      
+      // Format tanggal
+      const dateObj = new Date(tanggal);
+      const formattedDate = dateObj.toLocaleDateString('id-ID', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      
+      // Format pesan WhatsApp
+      let message = `Halo Shushi Kashimura,\n\nSaya ingin reservasi meja:\n\n`;
+      message += `👤 Nama: ${name}\n`;
+      message += `👥 Jumlah: ${jumlah} orang\n`;
+      message += `📅 Tanggal: ${formattedDate}\n`;
+      message += `🕐 Waktu: ${waktu}\n`;
+      message += `📱 WhatsApp: ${telepon}\n`;
+      
+      if (permintaan) {
+        message += `📝 Permintaan Khusus: ${permintaan}\n`;
+      }
+      
+      message += `\nTerima kasih.`;
+      
+      // Encode message for URL
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/6281290009691?text=${encodedMessage}`;
+      
+      // Open WhatsApp
+      window.open(whatsappUrl, '_blank');
+      
+      // Show notification
+      showNotification('WhatsApp Dibuka', `Pesan reservasi sudah disiapkan untuk ${name}. Silakan kirim melalui WhatsApp.`);
+    }
+    
+    // Submit reservasi form online (original function)
+    function submitReservasi() {
+      const name = document.getElementById('reservasiName').value.trim();
+      const jumlah = document.getElementById('reservasiJumlah').value;
+      const tanggal = document.getElementById('reservasiTanggal').value;
+      const waktu = document.getElementById('reservasiWaktu').value;
+      const telepon = document.getElementById('reservasiTelepon').value.trim();
+      
+      if (!name || !telepon) {
+        showNotification('Form Tidak Lengkap', 'Harap isi nama dan nomor WhatsApp', 'warning');
+        return;
+      }
+      
+      // Format tanggal
+      const dateObj = new Date(tanggal);
+      const formattedDate = dateObj.toLocaleDateString('id-ID', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      
+      const message = `Halo Shushi Kashimura,\n\nSaya ingin reservasi meja:\n\nNama: ${name}\nJumlah: ${jumlah} orang\nTanggal: ${formattedDate}\nWaktu: ${waktu}\nWhatsApp: ${telepon}\n\nTerima kasih.`;
+      
+      // In a real app, this would send to a server
+      // For demo, we'll just show a success message
+      showNotification('Reservasi Berhasil', `Reservasi untuk ${name} pada ${formattedDate} pukul ${waktu} telah tercatat. Kami akan konfirmasi via WhatsApp.`);
+      
+      // Reset form
+      document.getElementById('reservasiForm').reset();
+      
+      // Set default date to tomorrow again
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      document.getElementById('reservasiTanggal').valueAsDate = tomorrow;
+    }
+    
+    // Lightbox functionality
+    function openLightbox(imageSrc, caption) {
+      const lightbox = document.getElementById('lightboxModal');
+      const lightboxImage = document.getElementById('lightboxImage');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      
+      lightboxImage.src = imageSrc;
+      lightboxImage.alt = caption;
+      lightboxCaption.textContent = caption;
+      
+      lightbox.classList.remove('hidden');
+      lightbox.style.display = 'flex';
+      
+      // Prevent body scroll when lightbox is open
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightboxModal');
+      lightbox.classList.add('hidden');
+      lightbox.style.display = 'none';
+      
+      // Re-enable body scroll
+      document.body.style.overflow = 'auto';
+    }
+    
+    // Close lightbox when clicking outside the image
+    document.getElementById('lightboxModal').addEventListener('click', function(e) {
+      if (e.target.id === 'lightboxModal') {
+        closeLightbox();
+      }
+    });
+    
+    // Open gallery page (for demo)
+    function openGallery() {
+      showNotification('Galeri Lengkap', 'Halaman galeri lengkap akan segera tersedia!');
+    }
+    
+    // Show notification
+    function showNotification(title, message, type = 'success') {
+      const notification = document.getElementById('notification');
+      const icon = document.getElementById('notificationIcon');
+      const titleEl = document.getElementById('notificationTitle');
+      const messageEl = document.getElementById('notificationMessage');
+      
+      // Set type
+      if (type === 'warning') {
+        notification.className = 'notification border-l-4 border-yellow-500';
+        icon.className = 'fas fa-exclamation-triangle text-yellow-500 text-xl mt-1';
+      } else if (type === 'error') {
+        notification.className = 'notification border-l-4 border-red-500';
+        icon.className = 'fas fa-exclamation-circle text-red-500 text-xl mt-1';
+      } else {
+        notification.className = 'notification border-l-4 border-primary';
+        icon.className = 'fas fa-check-circle text-primary text-xl mt-1';
+      }
+      
+      titleEl.textContent = title;
+      messageEl.textContent = message;
+      
+      notification.classList.remove('hidden');
+      
+      // Auto hide
+      setTimeout(hideNotification, 3000);
+    }
+    
+    // Hide notification
+    function hideNotification() {
+      document.getElementById('notification').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
