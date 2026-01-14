@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Shushi Kashimura | Restoran Jepang Autentik</title>
   <meta name="description" content="Shushi Kashimura - Restoran Jepang autentik dengan bahan berkualitas premium. Pengalaman kuliner Jepang terbaik dengan cita rasa tradisional.">
   
@@ -13,9 +13,9 @@
       theme: {
         extend: {
           colors: {
-            primary: '#C62828', // Merah Jepang
-            secondary: '#2E7D32', // Hijau untuk matcha
-            accent: '#FF6F00', // Oranye untuk salmon
+            primary: '#C62828',
+            secondary: '#2E7D32',
+            accent: '#FF6F00',
             'primary-dark': '#B71C1C',
             dark: '#1A1A1A',
             'dark-light': '#2A2520',
@@ -36,6 +36,8 @@
             'fade-in': 'fadeIn 0.6s ease-out',
             'sakura-fall': 'sakuraFall 10s linear infinite',
             'zoom-in': 'zoomIn 0.5s ease-out',
+            'slide-in': 'slideIn 0.3s ease-out',
+            'bounce-slow': 'bounce 2s infinite',
           },
           keyframes: {
             float: {
@@ -59,7 +61,18 @@
             zoomIn: {
               '0%': { transform: 'scale(0.95)', opacity: '0' },
               '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+            slideIn: {
+              '0%': { transform: 'translateX(-100%)', opacity: '0' },
+              '100%': { transform: 'translateX(0)', opacity: '1' },
             }
+          },
+          screens: {
+            'xs': '375px',
+            'sm': '640px',
+            'md': '768px',
+            'lg': '1024px',
+            'xl': '1280px',
           }
         }
       }
@@ -93,11 +106,12 @@
       font-family: 'Noto Sans JP', sans-serif;
       color: #fcfcfc;
       overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
     }
     
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
-      width: 10px;
+      width: 8px;
     }
     
     ::-webkit-scrollbar-track {
@@ -164,7 +178,7 @@
       box-shadow: 0 10px 30px rgba(198, 40, 40, 0.1);
     }
     
-    /* Gallery Cards */
+    /* Gallery Cards - Enhanced */
     .gallery-card {
       background: linear-gradient(145deg, rgba(198, 40, 40, 0.05), rgba(255, 111, 0, 0.05));
       border: 1px solid rgba(198, 40, 40, 0.1);
@@ -172,6 +186,8 @@
       transition: all 0.3s ease;
       overflow: hidden;
       position: relative;
+      cursor: pointer;
+      height: 100%;
     }
     
     .gallery-card:hover {
@@ -185,6 +201,28 @@
       transform: translateY(0);
     }
     
+    .gallery-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(198, 40, 40, 0.1), rgba(255, 111, 0, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    .gallery-card:hover::before {
+      opacity: 1;
+    }
+    
+    .gallery-card img {
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
     .gallery-overlay {
       position: absolute;
       bottom: 0;
@@ -195,6 +233,50 @@
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.3s ease;
+      z-index: 2;
+    }
+    
+    /* Gallery Grid Layout */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 1.5rem;
+    }
+    
+    @media (min-width: 640px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    .gallery-item {
+      transition: all 0.3s ease;
+    }
+    
+    .gallery-item.hidden {
+      display: none;
+    }
+    
+    /* Filter Buttons */
+    .filter-btn {
+      transition: all 0.3s ease;
+    }
+    
+    .filter-btn.active {
+      background: linear-gradient(135deg, #C62828 0%, #B71C1C 100%);
+      box-shadow: 0 4px 15px rgba(198, 40, 40, 0.3);
+      color: white;
+    }
+    
+    .filter-btn:not(.active):hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
     }
     
     /* Stats Cards */
@@ -321,7 +403,7 @@
     
     /* Navbar */
     .navbar {
-      background: rgba(26, 26, 26, 0.95);
+      background: linear-gradient(90deg, #C62828 0%, #FF6F00 100%);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(198, 40, 40, 0.1);
     }
@@ -380,6 +462,19 @@
       max-width: 90%;
       max-height: 90%;
       animation: zoomIn 0.3s ease;
+    }
+    
+    /* Lightbox Navigation */
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1rem;
+      z-index: 10000;
     }
     
     /* Reservasi Button */
@@ -441,25 +536,227 @@
       background: linear-gradient(90deg, transparent, #C62828, transparent);
     }
     
-    /* Responsive Design */
-    @media (max-width: 768px) {
+    /* NEW: Mobile Bottom Navigation */
+    .mobile-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(26, 26, 26, 0.98);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(198, 40, 40, 0.2);
+      padding: 12px 0;
+      z-index: 9998;
+      display: none;
+    }
+    
+    .mobile-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      color: #9CA3AF;
+      transition: all 0.3s ease;
+      flex: 1;
+    }
+    
+    .mobile-nav-item.active {
+      color: #C62828;
+    }
+    
+    .mobile-nav-item i {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    
+    .mobile-nav-item span {
+      font-size: 11px;
+      font-weight: 500;
+    }
+    
+    /* NEW: Mobile Menu Improvement */
+    #mobileMenu {
+      background: rgba(26, 26, 26, 0.98);
+      backdrop-filter: blur(30px);
+      border-top: 1px solid rgba(198, 40, 40, 0.2);
+      animation: slideIn 0.3s ease-out;
+    }
+    
+    /* NEW: Menu Badge untuk Mobile */
+    .menu-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #C62828;
+      color: white;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: bold;
+      animation: bounce-slow 2s infinite;
+    }
+    
+    /* NEW: Mobile Swipe Indicator */
+    .swipe-indicator {
+      width: 40px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 3px;
+      margin: 8px auto;
+    }
+    
+    /* NEW: Touch-friendly Buttons */
+    .touch-button {
+      min-height: 48px;
+      min-width: 48px;
+    }
+    
+    /* NEW: Mobile Optimized Typography */
+    .mobile-text-sm {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    
+    .mobile-text-base {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    
+    .mobile-text-lg {
+      font-size: 18px;
+      line-height: 1.4;
+    }
+    
+    /* NEW: Card Hover for Mobile */
+    @media (hover: none) {
+      .menu-card:hover,
+      .gallery-card:hover,
+      .stat-card:hover {
+        transform: none;
+      }
+      
+      .btn-primary:hover,
+      .btn-secondary:hover,
+      .btn-whatsapp:hover {
+        transform: scale(0.98);
+      }
+    }
+    
+    /* Responsive Design Improvements */
+    @media (max-width: 640px) {
       .hero-pattern {
-        background-size: 60px 60px;
+        background-size: 40px 40px;
       }
       
       .btn-primary, .btn-secondary, .btn-whatsapp {
-        padding: 12px 24px;
+        padding: 14px 20px;
+        font-size: 14px;
+        width: 100%;
+        min-height: 48px;
       }
       
       .lightbox-content {
         max-width: 95%;
-        max-height: 80%;
+        max-height: 70%;
       }
       
       .reservasi-float, .whatsapp-float {
         width: 56px;
         height: 56px;
         font-size: 24px;
+      }
+      
+      .stat-card {
+        padding: 16px;
+      }
+      
+      .notification {
+        max-width: 90%;
+        right: 5%;
+        left: 5%;
+        padding: 16px;
+      }
+      
+      .mobile-nav {
+        display: flex;
+      }
+      
+      /* NEW: Hero Section Responsive */
+      .hero-title {
+        font-size: 2.5rem !important;
+        line-height: 1.2 !important;
+      }
+      
+      /* NEW: Form Inputs Responsive */
+      .form-input {
+        padding: 14px;
+        font-size: 16px;
+        -webkit-appearance: none;
+      }
+      
+      /* NEW: Gallery Cards Mobile */
+      .gallery-card {
+        margin-bottom: 12px;
+      }
+      
+      /* NEW: Hide elements on mobile */
+      .desktop-only {
+        display: none !important;
+      }
+      
+      /* NEW: Show elements on mobile */
+      .mobile-only {
+        display: block !important;
+      }
+      
+      /* NEW: Section Padding Mobile */
+      section {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+      }
+      
+      /* Gallery specific responsive */
+      .gallery-grid {
+        gap: 1rem;
+      }
+      
+      .filter-btn {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.75rem;
+      }
+      
+      .gallery-card .relative {
+        aspect-ratio: 3/2;
+      }
+    }
+    
+    @media (max-width: 375px) {
+      .hero-title {
+        font-size: 2rem !important;
+      }
+      
+      .stat-card .text-3xl {
+        font-size: 1.5rem;
+      }
+      
+      .btn-primary, .btn-secondary, .btn-whatsapp {
+        padding: 12px 16px;
+        font-size: 13px;
+      }
+    }
+    
+    @media (min-width: 641px) {
+      .mobile-only {
+        display: none !important;
+      }
+      
+      .mobile-nav {
+        display: none !important;
       }
     }
   </style>
@@ -475,16 +772,12 @@
       <div class="flex justify-between items-center">
         <div class="flex items-center space-x-3">
           <a href="#home" class="flex items-center space-x-3">
+            <!-- Logo Baru dengan gambar merah dan hitam -->
             <div class="relative">
-              <div class="absolute inset-0 bg-primary rounded-xl blur-sm"></div>
-              <div class="relative bg-primary p-3 rounded-xl">
-                <i class="fas fa-fish text-white text-2xl"></i>
-              </div>
-            </div>
-            <div>
-              <h1 class="text-2xl font-heading font-bold text-white">寿司<span class="text-primary">樫村</span></h1>
-              <p class="text-xs text-gray-400">Shushi Kashimura</p>
-            </div>
+        <img src="https://i.ibb.co.com/0yj3wHcQ/logo-kashimura.png" 
+       alt="Shushi Kashimura Logo" 
+       class="h-12 w-auto object-contain">
+        </div>
           </a>
         </div>
         
@@ -497,11 +790,11 @@
             <span>Menu</span>
             <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
           </a>
-          <a href="#galeri" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group">
+          <a href="galeri.html" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group">
             <span>Galeri</span>
             <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
           </a>
-          <a href="#tentang" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group">
+          <a href="tentang.html" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group">
             <span>Tentang</span>
             <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
           </a>
@@ -514,14 +807,14 @@
         <div class="flex items-center space-x-4">
           <a href="https://wa.me/6281290009691" target="_blank" class="hidden md:flex items-center space-x-2 text-gray-300 hover:text-green-500 transition-colors">
             <i class="fab fa-whatsapp text-green-500"></i>
-            <span class="font-medium">+62 812-9000-9691</span>
+            <span class="font-medium">+62812-9000-9691</span>
           </a>
           <a href="#reservasi" 
-             class="btn-primary text-sm">
+             class="btn-primary text-sm desktop-only">
             <i class="fas fa-calendar-check"></i>
             <span>Reservasi</span>
           </a>
-          <button class="lg:hidden text-gray-300 hover:text-primary transition-colors" onclick="toggleMobileMenu()">
+          <button class="lg:hidden text-gray-300 hover:text-primary transition-colors touch-button" onclick="toggleMobileMenu()">
             <i class="fas fa-bars text-xl"></i>
           </button>
         </div>
@@ -530,21 +823,39 @@
     
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="lg:hidden hidden absolute top-full left-0 right-0 bg-dark border-t border-gray-800 p-4">
-      <div class="flex flex-col space-y-4">
-        <a href="#home" class="text-gray-300 hover:text-primary py-2 transition-colors" onclick="toggleMobileMenu()">Beranda</a>
-        <a href="#menu" class="text-gray-300 hover:text-primary py-2 transition-colors" onclick="toggleMobileMenu()">Menu</a>
-        <a href="#galeri" class="text-gray-300 hover:text-primary py-2 transition-colors" onclick="toggleMobileMenu()">Galeri</a>
-        <a href="#tentang" class="text-gray-300 hover:text-primary py-2 transition-colors" onclick="toggleMobileMenu()">Tentang</a>
-        <a href="#reservasi" class="text-gray-300 hover:text-primary py-2 transition-colors" onclick="toggleMobileMenu()">Reservasi</a>
-        <a href="https://wa.me/6281290009691" target="_blank" class="text-gray-300 hover:text-green-500 py-2 transition-colors" onclick="toggleMobileMenu()">
-          <i class="fab fa-whatsapp text-green-500 mr-2"></i>+62 812-9000-9691
+      <div class="swipe-indicator"></div>
+      <div class="flex flex-col space-y-2">
+        <a href="#home" class="text-gray-300 hover:text-primary py-3 px-4 transition-colors rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center" onclick="toggleMobileMenu()">
+          <i class="fas fa-home mr-3 w-6 text-center"></i>
+          <span>Beranda</span>
+        </a>
+        <a href="menu-lengkap.html" class="text-gray-300 hover:text-primary py-3 px-4 transition-colors rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center relative" onclick="toggleMobileMenu()">
+          <i class="fas fa-utensils mr-3 w-6 text-center"></i>
+          <span>Menu</span>
+          <span class="menu-badge">新</span>
+        </a>
+        <a href="#galeri" class="text-gray-300 hover:text-primary py-3 px-4 transition-colors rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center" onclick="toggleMobileMenu()">
+          <i class="fas fa-images mr-3 w-6 text-center"></i>
+          <span>Galeri</span>
+        </a>
+        <a href="#tentang" class="text-gray-300 hover:text-primary py-3 px-4 transition-colors rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center" onclick="toggleMobileMenu()">
+          <i class="fas fa-info-circle mr-3 w-6 text-center"></i>
+          <span>Tentang</span>
+        </a>
+        <a href="#reservasi" class="text-gray-300 hover:text-primary py-3 px-4 transition-colors rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center" onclick="toggleMobileMenu()">
+          <i class="fas fa-calendar-alt mr-3 w-6 text-center"></i>
+          <span>Reservasi</span>
+        </a>
+        <a href="https://wa.me/6281290009691" target="_blank" class="text-gray-300 hover:text-green-500 py-3 px-4 transition-colors rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center" onclick="toggleMobileMenu()">
+          <i class="fab fa-whatsapp text-green-500 mr-3 w-6 text-center"></i>
+          <span>WhatsApp</span>
         </a>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section id="home" class="pt-32 pb-20 relative overflow-hidden hero-pattern">
+  <section id="home" class="pt-24 pb-12 md:pt-32 md:pb-20 relative overflow-hidden hero-pattern">
     <div class="absolute inset-0 bg-gradient-to-br from-dark via-dark-light to-dark opacity-95"></div>
     
     <!-- Floating Elements -->
@@ -552,70 +863,70 @@
     <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl floating-element-2"></div>
     
     <div class="max-w-7xl mx-auto px-4 relative z-10">
-      <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
         <div class="animate__animated animate__fadeInLeft">
-          <div class="inline-flex items-center space-x-2 bg-primary/10 px-4 py-2 rounded-full mb-6">
+          <div class="inline-flex items-center space-x-2 bg-primary/10 px-4 py-2 rounded-full mb-4 md:mb-6">
             <i class="fas fa-award text-primary"></i>
-            <span class="text-sm font-semibold">Restoran Jepang Autentik Sejak 2015</span>
+            <span class="text-sm font-semibold mobile-text-sm">KASHIMURA JAPANES FUSION SHUSI</span>
           </div>
           
-          <h1 class="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 leading-tight">
+          <h1 class="text-3xl xs:text-4xl md:text-5xl lg:text-7xl font-heading font-bold text-white mb-4 md:mb-6 leading-tight hero-title">
             本物の日本食体験<br>
             <span class="gradient-text">Pengalaman Kuliner Jepang Autentik</span>
           </h1>
           
-          <p class="text-xl text-gray-300 mb-8 leading-relaxed">
-            Menyajikan hidangan Jepang tradisional dengan bahan-bahan premium segar langsung dari pasar ikan Tsukiji. 
-            Dipersiapkan oleh koki berpengalaman dari Jepang.
+          <p class="text-base md:text-xl text-gray-300 mb-6 md:mb-8 leading-relaxed mobile-text-base">
+            Japanese fusion sushi that blends authentic tradition with contemporary flavors,
+            crafted from premium fresh ingredients for a bold and refined dining experience.
           </p>
           
-          <div class="flex flex-col sm:flex-row gap-4">
-            <a href="menu-lengkap.html" class="btn-primary">
+          <div class="flex flex-col sm:flex-row gap-3 md:gap-4 mb-8 md:mb-0">
+            <a href="menu-lengkap.html" class="btn-primary touch-button">
               <i class="fas fa-utensils"></i>
               <span>Lihat Menu</span>
             </a>
-            <a href="#reservasi" class="btn-secondary">
+            <a href="#reservasi" class="btn-secondary touch-button">
               <i class="fas fa-clock"></i>
               <span>Reservasi Online</span>
             </a>
           </div>
           
-          <div class="grid grid-cols-3 gap-6 mt-12">
+          <div class="grid grid-cols-3 gap-4 md:gap-6 mt-8 md:mt-12">
             <div class="stat-card">
-              <div class="text-3xl font-bold text-primary mb-2">8+</div>
-              <div class="text-sm text-gray-400">Tahun Pengalaman</div>
+              <div class="text-2xl md:text-3xl font-bold text-primary mb-1 md:mb-2">3+</div>
+              <div class="text-xs md:text-sm text-gray-400 mobile-text-sm">Tahun Pengalaman</div>
             </div>
             <div class="stat-card">
-              <div class="text-3xl font-bold text-primary mb-2">200+</div>
-              <div class="text-sm text-gray-400">Menu Hidangan</div>
+              <div class="text-2xl md:text-3xl font-bold text-primary mb-1 md:mb-2">65+</div>
+              <div class="text-xs md:text-sm text-gray-400 mobile-text-sm">Menu Hidangan</div>
             </div>
             <div class="stat-card">
-              <div class="text-3xl font-bold text-primary mb-2">5K+</div>
-              <div class="text-sm text-gray-400">Pelanggan</div>
+              <div class="text-2xl md:text-3xl font-bold text-primary mb-1 md:mb-2">15K+</div>
+              <div class="text-xs md:text-sm text-gray-400 mobile-text-sm">Telah Berkunjung</div>
             </div>
           </div>
         </div>
         
-        <div class="relative animate__animated animate__fadeInRight">
-          <div class="relative rounded-3xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-500">
+        <div class="relative animate__animated animate__fadeInRight mt-8 md:mt-0">
+          <div class="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-500">
             <img src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
                  alt="Sushi Platter" 
-                 class="w-full h-[600px] object-cover">
+                 class="w-full h-[300px] xs:h-[350px] md:h-[500px] lg:h-[600px] object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent opacity-70"></div>
           </div>
           
           <!-- Floating Card -->
-          <div class="absolute -bottom-6 -left-6 glass-effect p-6 rounded-2xl shadow-2xl max-w-xs">
-            <div class="flex items-center space-x-3 mb-3">
-              <div class="bg-primary/20 p-2 rounded-lg">
-                <i class="fas fa-clock text-primary text-xl"></i>
+          <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-left-6 glass-effect p-4 md:p-6 rounded-xl md:rounded-2xl shadow-2xl max-w-[180px] md:max-w-xs">
+            <div class="flex items-center space-x-2 md:space-x-3 mb-2 md:mb-3">
+              <div class="bg-primary/20 p-1 md:p-2 rounded-lg">
+                <i class="fas fa-clock text-primary text-lg md:text-xl"></i>
               </div>
               <div>
-                <div class="text-white font-semibold">Jam Buka</div>
-                <div class="text-sm text-gray-400">11:00 - 22:00 WIB</div>
+                <div class="text-white font-semibold text-sm md:text-base">Jam Buka</div>
+                <div class="text-xs md:text-sm text-gray-400">11:00 - 22:00 WIB</div>
               </div>
             </div>
-            <p class="text-sm text-gray-300">Setiap Hari</p>
+            <p class="text-xs md:text-sm text-gray-300">Setiap Hari</p>
           </div>
         </div>
       </div>
@@ -623,124 +934,124 @@
   </section>
 
   <!-- Features Section -->
-  <section id="keunggulan" class="py-20">
+  <section id="keunggulan" class="py-12 md:py-20">
     <div class="max-w-7xl mx-auto px-4">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-heading font-bold text-white mb-4 japanese-border">Keunggulan <span class="gradient-text">Shushi Kashimura</span></h2>
-        <p class="text-xl text-gray-400 max-w-3xl mx-auto">Kami menghadirkan pengalaman kuliner Jepang yang sesungguhnya</p>
+      <div class="text-center mb-8 md:mb-16">
+        <h2 class="text-2xl md:text-4xl font-heading font-bold text-white mb-3 md:mb-4 japanese-border">Keunggulan <span class="gradient-text">Shushi Kashimura</span></h2>
+        <p class="text-base md:text-xl text-gray-400 max-w-3xl mx-auto mobile-text-base">Kami menghadirkan pengalaman kuliner Jepang yang sesungguhnya</p>
       </div>
       
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="glass-effect p-6 rounded-2xl transition-all duration-300 hover:translate-y-[-8px] hover:border-primary/30">
-          <div class="bg-primary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6">
-            <i class="fas fa-fish text-primary text-2xl"></i>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div class="glass-effect p-4 md:p-6 rounded-xl md:rounded-2xl transition-all duration-300 hover:translate-y-[-8px] hover:border-primary/30 touch-button">
+          <div class="bg-primary/10 w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl flex items-center justify-center mb-4 md:mb-6">
+            <i class="fas fa-fish text-primary text-lg md:text-2xl"></i>
           </div>
-          <h3 class="text-xl font-semibold text-white mb-3">Bahan Segar</h3>
-          <p class="text-gray-400">Ikan dan seafood segar setiap hari dari supplier terpercaya</p>
+          <h3 class="text-lg md:text-xl font-semibold text-white mb-2 md:mb-3 mobile-text-lg">Bahan Segar</h3>
+          <p class="text-gray-400 text-sm md:text-base mobile-text-sm">Sayuran dan seafood segar setiap hari dari supplier terpercaya</p>
         </div>
         
-        <div class="glass-effect p-6 rounded-2xl transition-all duration-300 hover:translate-y-[-8px] hover:border-primary/30">
-          <div class="bg-primary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6">
-            <i class="fas fa-user-tie text-primary text-2xl"></i>
+        <div class="glass-effect p-4 md:p-6 rounded-xl md:rounded-2xl transition-all duration-300 hover:translate-y-[-8px] hover:border-primary/30 touch-button">
+          <div class="bg-primary/10 w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl flex items-center justify-center mb-4 md:mb-6">
+            <i class="fas fa-user-tie text-primary text-lg md:text-2xl"></i>
           </div>
-          <h3 class="text-xl font-semibold text-white mb-3">Koki Profesional</h3>
-          <p class="text-gray-400">Koki berpengalaman langsung dari Jepang dengan sertifikasi</p>
+          <h3 class="text-lg md:text-xl font-semibold text-white mb-2 md:mb-3 mobile-text-lg">Koki Profesional</h3>
+          <p class="text-gray-400 text-sm md:text-base mobile-text-sm">Koki berpengalaman langsung dari tempat resto jepang ternama</p>
         </div>
         
-        <div class="glass-effect p-6 rounded-2xl transition-all duration-300 hover:translate-y-[-8px] hover:border-primary/30">
-          <div class="bg-primary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6">
-            <i class="fas fa-home text-primary text-2xl"></i>
+        <div class="glass-effect p-4 md:p-6 rounded-xl md:rounded-2xl transition-all duration-300 hover:translate-y-[-8px] hover:border-primary/30 touch-button">
+          <div class="bg-primary/10 w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl flex items-center justify-center mb-4 md:mb-6">
+            <i class="fas fa-home text-primary text-lg md:text-2xl"></i>
           </div>
-          <h3 class="text-xl font-semibold text-white mb-3">Suasana Autentik</h3>
-          <p class="text-gray-400">Interior tradisional Jepang dengan sentuhan modern</p>
+          <h3 class="text-lg md:text-xl font-semibold text-white mb-2 md:mb-3 mobile-text-lg">Suasana Autentik</h3>
+          <p class="text-gray-400 text-sm md:text-base mobile-text-sm">Interior tradisional Jepang dengan sentuhan modern</p>
         </div>
         
-        <div class="glass-effect p-6 rounded-2xl transition-all duration-300 hover:translate-y-[-8px] hover:border-primary/30">
-          <div class="bg-primary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6">
-            <i class="fas fa-wine-glass-alt text-primary text-2xl"></i>
+        <div class="glass-effect p-4 md:p-6 rounded-xl md:rounded-2xl transition-all duration-300 hover:translate-y-[-8px] hover:border-primary/30 touch-button">
+          <div class="bg-primary/10 w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl flex items-center justify-center mb-4 md:mb-6">
+            <i class="fas fa-wine-glass-alt text-primary text-lg md:text-2xl"></i>
           </div>
-          <h3 class="text-xl font-semibold text-white mb-3">Minuman Lengkap</h3>
-          <p class="text-gray-400">Sake, shochu, bir Jepang, dan minuman tradisional lengkap</p>
+          <h3 class="text-lg md:text-xl font-semibold text-white mb-2 md:mb-3 mobile-text-lg">Minuman Lengkap</h3>
+          <p class="text-gray-400 text-sm md:text-base mobile-text-sm">Black coffe, Caffe latte, Capucinoa, dan minuman tradisional Ocha Free Refil</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Menu Section -->
-  <section id="menu" class="py-20 bg-dark-light">
+  <section id="menu" class="py-12 md:py-20 bg-dark-light">
     <div class="max-w-7xl mx-auto px-4">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-heading font-bold text-white mb-4 japanese-border">Menu <span class="gradient-text">Unggulan</span></h2>
-        <p class="text-xl text-gray-400 max-w-3xl mx-auto">Pilihan hidangan terbaik dari koki kami</p>
+      <div class="text-center mb-8 md:mb-16">
+        <h2 class="text-2xl md:text-4xl font-heading font-bold text-white mb-3 md:mb-4 japanese-border">Menu <span class="gradient-text">Unggulan</span></h2>
+        <p class="text-base md:text-xl text-gray-400 max-w-3xl mx-auto mobile-text-base">Pilihan hidangan terbaik dari koki kami</p>
       </div>
       
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
         <div class="menu-card animate__animated animate__fadeInUp">
-          <div class="relative h-48 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                 alt="Sashimi Platter" 
+          <div class="relative h-40 md:h-48 overflow-hidden">
+            <img src="https://i.ibb.co.com/7d66WsJM/komugi-platter.png" 
+                 alt="Komugi Platter" 
                  class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
             <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-bold">
-              Rp 280.000
+              Rp 200.000
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-white mb-2">Sashimi Platter Premium</h3>
-            <p class="text-gray-400 mb-4">Berisi 12 jenis sashimi segar: tuna, salmon, hamachi, uni, dan lainnya.</p>
+          <div class="p-4 md:p-6">
+            <h3 class="text-lg md:text-xl font-bold text-white mb-2 mobile-text-lg">Komugi Platter</h3>
+            <p class="text-gray-400 mb-3 md:mb-4 text-sm md:text-base mobile-text-sm">Saboro Beef Roll, Salmon Mentai.</p>
             <div class="flex items-center justify-between">
               <span class="text-primary font-semibold">★ 4.9</span>
-              <button class="text-primary hover:text-primary-dark transition-colors">
-                <i class="fas fa-plus-circle text-xl"></i>
+              <button class="text-primary hover:text-primary-dark transition-colors touch-button">
+                <i class="fas fa-plus-circle text-lg md:text-xl"></i>
               </button>
             </div>
           </div>
         </div>
         
         <div class="menu-card animate__animated animate__fadeInUp" style="animation-delay: 0.1s">
-          <div class="relative h-48 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                 alt="Nigiri Set" 
+          <div class="relative h-40 md:h-48 overflow-hidden">
+            <img src="https://i.ibb.co.com/JFnGz1wg/Kinko-plater.webp" 
+                 alt="Kinko Platter" 
                  class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
             <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-bold">
               Rp 180.000
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-white mb-2">Nigiri Omakase Set</h3>
-            <p class="text-gray-400 mb-4">10 piece nigiri pilihan koki dengan ikan terbaik hari ini.</p>
+          <div class="p-4 md:p-6">
+            <h3 class="text-lg md:text-xl font-bold text-white mb-2 mobile-text-lg">Kinko Platter</h3>
+            <p class="text-gray-400 mb-3 md:mb-4 text-sm md:text-base mobile-text-sm">Kani Maki, Spicy Blondie, Kappa Maki, Beef Volcano.</p>
             <div class="flex items-center justify-between">
               <span class="text-primary font-semibold">★ 4.8</span>
-              <button class="text-primary hover:text-primary-dark transition-colors">
-                <i class="fas fa-plus-circle text-xl"></i>
+              <button class="text-primary hover:text-primary-dark transition-colors touch-button">
+                <i class="fas fa-plus-circle text-lg md:text-xl"></i>
               </button>
             </div>
           </div>
         </div>
         
         <div class="menu-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
-          <div class="relative h-48 overflow-hidden">
-            <img src="https://i.ibb.co.com/vfsCvxD/download-5.jpg" 
-                 alt="Wagyu Teppanyaki" 
+          <div class="relative h-40 md:h-48 overflow-hidden">
+            <img src="https://i.ibb.co.com/3yMJZR8R/dragon-platter.webp" 
+                 alt="Dragon Platter" 
                  class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
             <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-bold">
               Rp 350.000
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-white mb-2">Wagyu A5 Teppanyaki</h3>
-            <p class="text-gray-400 mb-4">Wagyu grade A5 dengan sayuran segar, dimasak di depan Anda.</p>
+          <div class="p-4 md:p-6">
+            <h3 class="text-lg md:text-xl font-bold text-white mb-2 mobile-text-lg">Dragon Platter</h3>
+            <p class="text-gray-400 mb-3 md:mb-4 text-sm md:text-base mobile-text-sm">Spicy Beef, Spicy Salmon, Angry Pizza, Hot Unagi.</p>
             <div class="flex items-center justify-between">
               <span class="text-primary font-semibold">★ 5.0</span>
-              <button class="text-primary hover:text-primary-dark transition-colors">
-                <i class="fas fa-plus-circle text-xl"></i>
+              <button class="text-primary hover:text-primary-dark transition-colors touch-button">
+                <i class="fas fa-plus-circle text-lg md:text-xl"></i>
               </button>
             </div>
           </div>
         </div>
       </div>
       
-      <div class="text-center mt-12">
-        <a href="menu-lengkap.html" class="btn-primary">
+      <div class="text-center mt-8 md:mt-12">
+        <a href="menu-lengkap.html" class="btn-primary touch-button">
           <i class="fas fa-book-open"></i>
           <span>Lihat Menu Lengkap</span>
         </a>
@@ -748,143 +1059,296 @@
     </div>
   </section>
 
-  <!-- Gallery Section (Mengganti Testimoni) -->
-  <section id="galeri" class="py-20 japanese-pattern">
+  <!-- Gallery Section - ENHANCED VERSION -->
+  <section id="galeri" class="py-12 md:py-20 japanese-pattern">
     <div class="max-w-7xl mx-auto px-4">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-heading font-bold text-white mb-4 japanese-border">Galeri <span class="gradient-text">Tempat</span></h2>
-        <p class="text-xl text-gray-400 max-w-3xl mx-auto">Nikmati suasana autentik Jepang di setiap sudut restoran kami</p>
-      </div>
-      
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        <!-- Gallery Item 1: Sushi Bar -->
-        <div class="gallery-card animate__animated animate__fadeInUp" onclick="openLightbox('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Sushi Bar Premium')">
-          <div class="relative h-64 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                 alt="Sushi Bar" 
-                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
-            <div class="gallery-overlay">
-              <h3 class="text-xl font-bold text-white mb-2">Sushi Bar Premium</h3>
-              <p class="text-gray-300 text-sm">Nikmati pertunjukan langsung koki kami menyiapkan sushi terbaik</p>
-            </div>
-          </div>
-        </div>
+      <div class="text-center mb-8 md:mb-16">
+        <h2 class="text-2xl md:text-4xl font-heading font-bold text-white mb-3 md:mb-4 japanese-border">
+          Galeri <span class="gradient-text">Kashimura</span>
+        </h2>
+        <p class="text-base md:text-xl text-gray-400 max-w-3xl mx-auto mobile-text-base">
+          Jelajahi suasana autentik Jepang di setiap sudut Shushi Kashimura
+        </p>
         
-        <!-- Gallery Item 2: Private Room -->
-        <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay: 0.1s" onclick="openLightbox('https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Ruangan Privat Tatami')">
-          <div class="relative h-64 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                 alt="Private Room" 
-                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
-            <div class="gallery-overlay">
-              <h3 class="text-xl font-bold text-white mb-2">Ruangan Privat Tatami</h3>
-              <p class="text-gray-300 text-sm">Ruangan tradisional Jepang untuk acara khusus dan keluarga</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Gallery Item 3: Main Dining -->
-        <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s" onclick="openLightbox('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Area Makan Utama')">
-          <div class="relative h-64 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                 alt="Main Dining" 
-                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
-            <div class="gallery-overlay">
-              <h3 class="text-xl font-bold text-white mb-2">Area Makan Utama</h3>
-              <p class="text-gray-300 text-sm">Suasana elegan dengan sentuhan dekorasi tradisional Jepang</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Gallery Item 4: Teppanyaki Station -->
-        <div class="gallery-card animate__animated animate__fadeInUp" onclick="openLightbox('https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Teppanyaki Station')">
-          <div class="relative h-64 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                 alt="Teppanyaki Station" 
-                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
-            <div class="gallery-overlay">
-              <h3 class="text-xl font-bold text-white mb-2">Teppanyaki Station</h3>
-              <p class="text-gray-300 text-sm">Menyaksikan langsung koki memasak di depan Anda</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Gallery Item 5: Zen Garden View -->
-        <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay: 0.1s" onclick="openLightbox('https://images.unsplash.com/photo-1578474846511-04ba529f0b88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Pemandangan Zen Garden')">
-          <div class="relative h-64 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1578474846511-04ba529f0b88?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                 alt="Zen Garden" 
-                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
-            <div class="gallery-overlay">
-              <h3 class="text-xl font-bold text-white mb-2">Pemandangan Zen Garden</h3>
-              <p class="text-gray-300 text-sm">Taman Jepang tradisional yang menenangkan</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Gallery Item 6: Sake Bar -->
-        <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s" onclick="openLightbox('https://images.unsplash.com/photo-1560512823-829485b8bf24?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Sake & Cocktail Bar')">
-          <div class="relative h-64 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1560512823-829485b8bf24?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                 alt="Sake Bar" 
-                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
-            <div class="gallery-overlay">
-              <h3 class="text-xl font-bold text-white mb-2">Sake & Cocktail Bar</h3>
-              <p class="text-gray-300 text-sm">Koleksi sake terbaik dan minuman khas Jepang</p>
-            </div>
-          </div>
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap justify-center gap-2 md:gap-4 mt-6 md:mt-8">
+          <button class="filter-btn active px-4 py-2 rounded-full bg-primary text-white text-sm font-medium transition-all duration-300 touch-button" 
+                  data-filter="all">
+            <i class="fas fa-th-large mr-2"></i> Semua
+          </button>
+          <button class="filter-btn px-4 py-2 rounded-full glass-effect text-gray-300 hover:text-white text-sm font-medium transition-all duration-300 touch-button" 
+                  data-filter="interior">
+            <i class="fas fa-home mr-2"></i> Interior
+          </button>
+          <button class="filter-btn px-4 py-2 rounded-full glass-effect text-gray-300 hover:text-white text-sm font-medium transition-all duration-300 touch-button" 
+                  data-filter="makanan">
+            <i class="fas fa-utensils mr-2"></i> Makanan
+          </button>
+          <button class="filter-btn px-4 py-2 rounded-full glass-effect text-gray-300 hover:text-white text-sm font-medium transition-all duration-300 touch-button" 
+                  data-filter="sushi-bar">
+            <i class="fas fa-concierge-bell mr-2"></i> Sushi Bar
+          </button>
+          <button class="filter-btn px-4 py-2 rounded-full glass-effect text-gray-300 hover:text-white text-sm font-medium transition-all duration-300 touch-button" 
+                  data-filter="acara">
+            <i class="fas fa-users mr-2"></i> Acara Khusus
+          </button>
         </div>
       </div>
       
-      <div class="text-center">
-        <button onclick="openGallery()" class="btn-secondary">
+      <!-- Gallery Grid dengan Filter -->
+      <div class="gallery-grid mb-8 md:mb-12">
+        <!-- Item 1: Sushi Bar -->
+        <div class="gallery-item animate__animated animate__fadeInUp" data-category="sushi-bar">
+          <div class="gallery-card group" onclick="openLightbox('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Sushi Bar Premium')">
+            <div class="relative h-48 md:h-64 overflow-hidden">
+              <img src="https://i.ibb.co.com/xtRHXn48/Whats-App-Image-2026-01-13-at-7-04-58-PM.jpg" 
+                   alt="Sushi Bar Premium" 
+                   class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <span class="inline-block bg-primary text-white px-3 py-1 rounded-full text-xs font-medium">
+                  <i class="fas fa-video mr-1"></i> Live Kitchen
+                </span>
+              </div>
+              <div class="gallery-overlay">
+                <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Sushi Bar Premium</h3>
+                <p class="text-gray-300 text-xs md:text-sm mobile-text-sm">Nikmati pertunjukan langsung koki kami menyiapkan sushi terbaik</p>
+                <div class="flex items-center mt-2 text-xs text-gray-400">
+                  <i class="fas fa-clock mr-1"></i>
+                  <span>Buka 11:00-22:00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Item 2: Interior Modern -->
+        <div class="gallery-item animate__animated animate__fadeInUp" data-category="interior" style="animation-delay: 0.1s">
+          <div class="gallery-card group" onclick="openLightbox('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Interior Modern Jepang')">
+            <div class="relative h-48 md:h-64 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                   alt="Interior Modern" 
+                   class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+              <div class="absolute top-4 right-4 bg-dark/80 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-medium">
+                30 Kursi
+              </div>
+              <div class="gallery-overlay">
+                <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Interior Modern Jepang</h3>
+                <p class="text-gray-300 text-xs md:text-sm mobile-text-sm">Desain minimalis dengan sentuhan tradisional Jepang</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Item 3: Makanan Premium -->
+        <div class="gallery-item animate__animated animate__fadeInUp" data-category="makanan" style="animation-delay: 0.2s">
+          <div class="gallery-card group" onclick="openLightbox('https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Sashimi Platter Premium')">
+            <div class="relative h-48 md:h-64 overflow-hidden">
+              <img src="https://i.ibb.co.com/QjjGVw2S/himura-platter.webp" 
+                   alt="Himura Platter" 
+                   class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+              <div class="absolute top-4 left-4 bg-primary/90 text-white px-3 py-1 rounded-full text-xs font-medium">
+                Best Seller
+              </div>
+              <div class="gallery-overlay">
+                <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Himura Platter</h3>
+                <p class="text-gray-300 text-xs md:text-sm mobile-text-sm">Perpaduan Salmon dan Saboro</p>
+                <div class="flex items-center mt-2">
+                  <span class="text-accent font-bold">Rp 200.000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Item 4: Private Room -->
+        <div class="gallery-item animate__animated animate__fadeInUp" data-category="interior" style="animation-delay: 0.3s">
+          <div class="gallery-card group" onclick="openLightbox('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Private Dining Room')">
+            <div class="relative h-48 md:h-64 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                   alt="Private Room" 
+                   class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+              <div class="absolute top-4 right-4 bg-secondary/90 text-white px-3 py-1 rounded-full text-xs font-medium">
+                Max 12 Orang
+              </div>
+              <div class="gallery-overlay">
+                <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Private Dining Room</h3>
+                <p class="text-gray-300 text-xs md:text-sm mobile-text-sm">Ruangan eksklusif untuk meeting atau acara keluarga</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Item 5: Teppanyaki -->
+        <div class="gallery-item animate__animated animate__fadeInUp" data-category="sushi-bar" style="animation-delay: 0.4s">
+          <div class="gallery-card group" onclick="openLightbox('https://i.ibb.co.com/vfsCvxD/download-5.jpg', 'Teppanyaki Station')">
+            <div class="relative h-48 md:h-64 overflow-hidden">
+              <img src="https://i.ibb.co.com/vfsCvxD/download-5.jpg" 
+                   alt="Teppanyaki Station" 
+                   class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+              <div class="absolute top-4 left-4 bg-accent/90 text-white px-3 py-1 rounded-full text-xs font-medium">
+                Live Cooking
+              </div>
+              <div class="gallery-overlay">
+                <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Teppanyaki Station</h3>
+                <p class="text-gray-300 text-xs md:text-sm mobile-text-sm">Masakan segar langsung di depan Anda</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Item 6: Makanan Khas -->
+        <div class="gallery-item animate__animated animate__fadeInUp" data-category="makanan" style="animation-delay: 0.5s">
+          <div class="gallery-card group" onclick="openLightbox('https://images.unsplash.com/photo-1553621042-f6e147245754?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Nigiri Omakase Set')">
+            <div class="relative h-48 md:h-64 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                   alt="Nigiri Set" 
+                   class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+              <div class="gallery-overlay">
+                <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Nigiri Omakase Set</h3>
+                <p class="text-gray-300 text-xs md:text-sm mobile-text-sm">10 piece nigiri pilihan koki spesial</p>
+                <div class="flex items-center mt-2">
+                  <span class="text-accent font-bold">Rp 180.000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Item 7: Acara Khusus -->
+        <div class="gallery-item animate__animated animate__fadeInUp" data-category="acara" style="animation-delay: 0.6s">
+          <div class="gallery-card group" onclick="openLightbox('https://images.unsplash.com/photo-1516733968668-dbdce39c4651?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Acara Ulang Tahun')">
+            <div class="relative h-48 md:h-64 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1516733968668-dbdce39c4651?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                   alt="Acara Khusus" 
+                   class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+              <div class="absolute top-4 right-4 bg-primary/90 text-white px-3 py-1 rounded-full text-xs font-medium">
+                Special Event
+              </div>
+              <div class="gallery-overlay">
+                <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Acara Ulang Tahun</h3>
+                <p class="text-gray-300 text-xs md:text-sm mobile-text-sm">Tempat sempurna untuk celebration bersama keluarga</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Item 8: Minuman Tradisional -->
+        <div class="gallery-item animate__animated animate__fadeInUp" data-category="makanan" style="animation-delay: 0.7s">
+          <div class="gallery-card group" onclick="openLightbox('https://images.unsplash.com/photo-1561047029-3000c68339ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Minuman Tradisional Jepang')">
+            <div class="relative h-48 md:h-64 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1561047029-3000c68339ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                   alt="Minuman Jepang" 
+                   class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+              <div class="gallery-overlay">
+                <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Minuman Tradisional</h3>
+                <p class="text-gray-300 text-xs md:text-sm mobile-text-sm">Sake, ocha, dan minuman tradisional lainnya</p>
+                <div class="flex items-center mt-2 text-xs text-gray-400">
+                  <i class="fas fa-wine-glass-alt mr-1"></i>
+                  <span>Free Refill Ocha</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Item 9: Outdoor Area -->
+        <div class="gallery-item animate__animated animate__fadeInUp" data-category="interior" style="animation-delay: 0.8s">
+          <div class="gallery-card group" onclick="openLightbox('https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Outdoor Dining Area')">
+            <div class="relative h-48 md:h-64 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                   alt="Outdoor Area" 
+                   class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+              <div class="absolute top-4 left-4 bg-secondary/90 text-white px-3 py-1 rounded-full text-xs font-medium">
+                Smoking Area
+              </div>
+              <div class="gallery-overlay">
+                <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Outdoor Dining Area</h3>
+                <p class="text-gray-300 text-xs md:text-sm mobile-text-sm">Area outdoor dengan suasana alam yang nyaman</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Gallery Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 md:mb-12">
+        <div class="glass-effect p-4 rounded-xl text-center">
+          <div class="text-2xl md:text-3xl font-bold text-primary mb-1">50+</div>
+          <div class="text-xs md:text-sm text-gray-400">Foto Galeri</div>
+        </div>
+        <div class="glass-effect p-4 rounded-xl text-center">
+          <div class="text-2xl md:text-3xl font-bold text-primary mb-1">4</div>
+          <div class="text-xs md:text-sm text-gray-400">Area Restoran</div>
+        </div>
+        <div class="glass-effect p-4 rounded-xl text-center">
+          <div class="text-2xl md:text-3xl font-bold text-primary mb-1">30</div>
+          <div class="text-xs md:text-sm text-gray-400">Kursi Tersedia</div>
+        </div>
+        <div class="glass-effect p-4 rounded-xl text-center">
+          <div class="text-2xl md:text-3xl font-bold text-primary mb-1">5★</div>
+          <div class="text-xs md:text-sm text-gray-400">Rating Kebersihan</div>
+        </div>
+      </div>
+      
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
+        <a href="#galeri" class="btn-primary touch-button" onclick="showMoreGallery()">
           <i class="fas fa-images"></i>
           <span>Lihat Semua Foto</span>
+        </a>
+        <button onclick="showVideoTour()" class="btn-secondary touch-button">
+          <i class="fas fa-play-circle"></i>
+          <span>Video Tour Restoran</span>
         </button>
+        <a href="https://wa.me/6281290009691" target="_blank" class="btn-whatsapp touch-button">
+          <i class="fab fa-whatsapp"></i>
+          <span>Tanya via WhatsApp</span>
+        </a>
       </div>
     </div>
   </section>
 
   <!-- About Section -->
-  <section id="tentang" class="py-20 bg-dark-light">
+  <section id="tentang" class="py-12 md:py-20 bg-dark-light">
     <div class="max-w-4xl mx-auto px-4">
-      <div class="glass-effect rounded-3xl p-8 md:p-12">
-        <div class="text-center mb-12">
-          <h2 class="text-4xl font-heading font-bold text-white mb-4 japanese-border">Tentang <span class="gradient-text">Shushi Kashimura</span></h2>
-          <p class="text-xl text-gray-300">Membawa tradisi kuliner Jepang ke Jakarta sejak 2015</p>
+      <div class="glass-effect rounded-2xl md:rounded-3xl p-6 md:p-12">
+        <div class="text-center mb-8 md:mb-12">
+          <h2 class="text-2xl md:text-4xl font-heading font-bold text-white mb-3 md:mb-4 japanese-border">Tentang <span class="gradient-text">Shushi Kashimura</span></h2>
+          <p class="text-base md:text-xl text-gray-300 mobile-text-base">Membawa tradisi kuliner Jepang ke Jakarta sejak 2015</p>
         </div>
         
-        <div class="grid md:grid-cols-2 gap-8 items-center">
-          <div class="relative">
+        <div class="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
+          <div class="relative order-2 md:order-1">
             <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
                  alt="Interior Restoran" 
-                 class="rounded-2xl shadow-2xl">
+                 class="rounded-xl md:rounded-2xl shadow-2xl w-full">
           </div>
           
-          <div>
-            <p class="text-gray-300 mb-6 leading-relaxed">
-              Shushi Kashimura didirikan oleh Chef Kenji Yamamoto, seorang koki dengan pengalaman 20 tahun 
-              di berbagai restoran bintang Michelin di Tokyo. Kami berkomitmen menghadirkan pengalaman 
-              kuliner Jepang yang autentik dengan bahan-bahan terbaik.
+          <div class="order-1 md:order-2">
+            <p class="text-gray-300 mb-4 md:mb-6 leading-relaxed mobile-text-base">
+              Shushi Kashimura didirikan oleh Entrepreneur Muda, seorang pekerja dengan pengalaman 15 tahun 
+              di berbagai restoran bintang Di jakarta. Berkomitmen menghadirkan pengalaman 
+              kuliner Japanese fusion yang autentik dengan bahan-bahan terbaik.
             </p>
             
-            <div class="space-y-4">
+            <div class="space-y-3 md:space-y-4 mb-6 md:mb-8">
               <div class="flex items-start space-x-3">
-                <i class="fas fa-check-circle text-primary mt-1"></i>
-                <span class="text-gray-300">Bahan-bahan premium import langsung dari Jepang</span>
+                <i class="fas fa-check-circle text-primary mt=1 flex-shrink-0"></i>
+                <span class="text-gray-300 mobile-text-sm">Bahan-bahan lokal premium import langsung dari Supplier terbaik</span>
               </div>
               <div class="flex items-start space-x-3">
-                <i class="fas fa-check-circle text-primary mt-1"></i>
-                <span class="text-gray-300">Koki bersertifikasi dengan pengalaman internasional</span>
+                <i class="fas fa-check-circle text-primary mt=1 flex-shrink-0"></i>
+                <span class="text-gray-300 mobile-text-sm">Koki dengan pengalaman Japanese Resto terbaik jakarta</span>
               </div>
               <div class="flex items-start space-x-3">
-                <i class="fas fa-check-circle text-primary mt-1"></i>
-                <span class="text-gray-300">Suasana yang nyaman dengan desain interior tradisional Jepang</span>
+                <i class="fas fa-check-circle text-primary mt=1 flex-shrink-0"></i>
+                <span class="text-gray-300 mobile-text-sm">Suasana yang nyaman dengan sentuhan desain interior Modern </span>
               </div>
             </div>
             
-            <div class="mt-8">
-              <a href="#reservasi" class="btn-primary">
+            <div class="mt-6 md:mt-8">
+              <a href="#reservasi" class="btn-primary touch-button w-full md:w-auto">
                 <i class="fas fa-calendar-alt"></i>
                 <span>Reservasi Sekarang</span>
               </a>
@@ -896,21 +1360,21 @@
   </section>
 
   <!-- CTA Section -->
-  <section class="py-20">
+  <section class="py-12 md:py-20">
     <div class="max-w-4xl mx-auto px-4">
-      <div class="cta-section p-8 md:p-12 text-center">
-        <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-6">
+      <div class="cta-section p-6 md:p-12 text-center">
+        <h2 class="text-xl md:text-3xl lg:text-4xl font-heading font-bold text-white mb-4 md:mb-6 mobile-text-lg">
           Nikmati Pengalaman Kuliner <span class="gradient-text">Jepang Autentik</span>
         </h2>
-        <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+        <p class="text-base md:text-xl text-gray-300 mb-6 md:mb-8 max-w-2xl mx-auto mobile-text-base">
           Reservasi sekarang dan dapatkan diskon 15% untuk pemesanan pertama melalui website
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#reservasi" class="btn-primary">
+        <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
+          <a href="#reservasi" class="btn-primary touch-button">
             <i class="fas fa-calendar-check"></i>
             <span>Reservasi Online</span>
           </a>
-          <a href="https://wa.me/6281290009691" target="_blank" class="btn-whatsapp">
+          <a href="https://wa.me/6281290009691" target="_blank" class="btn-whatsapp touch-button">
             <i class="fab fa-whatsapp"></i>
             <span>Chat WhatsApp</span>
           </a>
@@ -920,48 +1384,48 @@
   </section>
 
   <!-- Contact & Reservasi Section -->
-  <section id="reservasi" class="py-20">
+  <section id="reservasi" class="py-12 md:py-20">
     <div class="max-w-4xl mx-auto px-4">
-      <div class="text-center mb-12">
-        <h2 class="text-4xl font-heading font-bold text-white mb-4 japanese-border">Reservasi <span class="gradient-text">Meja</span></h2>
-        <p class="text-xl text-gray-400">Pesan meja Anda sekarang untuk pengalaman terbaik</p>
+      <div class="text-center mb-8 md:mb-12">
+        <h2 class="text-2xl md:text-4xl font-heading font-bold text-white mb-3 md:mb-4 japanese-border">Reservasi <span class="gradient-text">Meja</span></h2>
+        <p class="text-base md:text-xl text-gray-400 mobile-text-base">Pesan meja Anda sekarang untuk pengalaman terbaik</p>
       </div>
       
-      <div class="grid lg:grid-cols-2 gap-12">
-        <div class="glass-effect rounded-3xl p-8">
-          <form id="reservasiForm" class="space-y-6">
+      <div class="grid lg:grid-cols-2 gap-6 md:gap-12">
+        <div class="glass-effect rounded-2xl md:rounded-3xl p-6 md:p-8">
+          <form id="reservasiForm" class="space-y-4 md:space-y-6">
             <div>
-              <label class="block text-gray-300 mb-2">Nama Lengkap</label>
+              <label class="block text-gray-300 mb-2 mobile-text-sm">Nama Lengkap</label>
               <input type="text" id="reservasiName" placeholder="Masukkan nama Anda" 
-                     class="form-input w-full" required>
+                     class="form-input w-full touch-button" required>
             </div>
             
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 gap-3 md:gap-4">
               <div>
-                <label class="block text-gray-300 mb-2">Jumlah Orang</label>
-                <select id="reservasiJumlah" class="form-input w-full" required>
+                <label class="block text-gray-300 mb-2 mobile-text-sm">Jumlah Orang</label>
+                <select id="reservasiJumlah" class="form-input w-full touch-button" required>
                   <option value="1">1 Orang</option>
-                  <option value="2">2 Orang</option>
+                  <option value="2" selected>2 Orang</option>
                   <option value="3">3 Orang</option>
                   <option value="4">4 Orang</option>
                   <option value="5">5-8 Orang</option>
-                  <option value="9">9+ Orang (Group)</option>
+                  <option value="9">9+ Orang</option>
                 </select>
               </div>
               
               <div>
-                <label class="block text-gray-300 mb-2">Tanggal</label>
+                <label class="block text-gray-300 mb-2 mobile-text-sm">Tanggal</label>
                 <input type="date" id="reservasiTanggal" 
-                       class="form-input w-full" required>
+                       class="form-input w-full touch-button" required>
               </div>
             </div>
             
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 gap-3 md:gap-4">
               <div>
-                <label class="block text-gray-300 mb-2">Waktu</label>
-                <select id="reservasiWaktu" class="form-input w-full" required>
+                <label class="block text-gray-300 mb-2 mobile-text-sm">Waktu</label>
+                <select id="reservasiWaktu" class="form-input w-full touch-button" required>
                   <option value="11:00">11:00</option>
-                  <option value="12:00">12:00</option>
+                  <option value="12:00" selected>12:00</option>
                   <option value="13:00">13:00</option>
                   <option value="18:00">18:00</option>
                   <option value="19:00">19:00</option>
@@ -971,19 +1435,19 @@
               </div>
               
               <div>
-                <label class="block text-gray-300 mb-2">Nomor WhatsApp</label>
+                <label class="block text-gray-300 mb-2 mobile-text-sm">Nomor WhatsApp</label>
                 <input type="tel" id="reservasiTelepon" placeholder="0812-3456-7890" 
-                       class="form-input w-full" required>
+                       class="form-input w-full touch-button" required>
               </div>
             </div>
             
             <div>
-              <label class="block text-gray-300 mb-2">Permintaan Khusus</label>
+              <label class="block text-gray-300 mb-2 mobile-text-sm">Permintaan Khusus</label>
               <textarea id="reservasiPermintaan" placeholder="Permintaan khusus (kursi bayi, alergi, dll)" 
-                        rows="3" class="form-input w-full"></textarea>
+                        rows="3" class="form-input w-full touch-button"></textarea>
             </div>
             
-            <button type="button" onclick="submitReservasiWhatsApp()" class="btn-primary w-full">
+            <button type="button" onclick="submitReservasiWhatsApp()" class="btn-primary w-full touch-button">
               <i class="fab fa-whatsapp"></i>
               <span>Reservasi via WhatsApp</span>
             </button>
@@ -992,70 +1456,70 @@
               <p class="text-gray-400 text-sm">Atau</p>
             </div>
             
-            <button type="submit" class="btn-secondary w-full">
+            <button type="submit" class="btn-secondary w-full touch-button">
               <i class="fas fa-paper-plane"></i>
               <span>Kirim Reservasi Online</span>
             </button>
           </form>
         </div>
         
-        <div class="space-y-6">
-          <div class="glass-effect rounded-3xl p-8">
-            <h3 class="text-2xl font-bold text-white mb-6">Info Kontak</h3>
+        <div class="space-y-4 md:space-y-6">
+          <div class="glass-effect rounded-2xl md:rounded-3xl p-6 md:p-8">
+            <h3 class="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 mobile-text-lg">Info Kontak</h3>
             
             <div class="space-y-4">
-              <div class="flex items-center space-x-4">
-                <div class="bg-primary/10 p-3 rounded-xl">
-                  <i class="fas fa-map-marker-alt text-primary text-xl"></i>
+              <div class="flex items-center space-x-3 md:space-x-4">
+                <div class="bg-primary/10 p-2 md:p-3 rounded-lg md:rounded-xl flex-shrink-0">
+                  <i class="fas fa-map-marker-alt text-primary text-lg md:text-xl"></i>
                 </div>
                 <div>
-                  <div class="text-gray-400 text-sm">Alamat</div>
-                  <div class="text-white font-semibold">Jl. Kp Mleayu. 123, Jakarta Timur</div>
+                  <div class="text-gray-400 text-sm mobile-text-sm">Alamat</div>
+                  <div class="text-white font-semibold mobile-text-base">Jl. Kp Mleayu. 123, Jakarta Timur</div>
                 </div>
               </div>
               
-              <div class="flex items-center space-x-4">
-                <div class="bg-green-500/10 p-3 rounded-xl">
-                  <i class="fab fa-whatsapp text-green-500 text-xl"></i>
+              <div class="flex items-center space-x-3 md:space-x-4">
+                <div class="bg-green-500/10 p-2 md:p-3 rounded-lg md:rounded-xl flex-shrink-0">
+                  <i class="fab fa-whatsapp text-green-500 text-lg md:text-xl"></i>
                 </div>
                 <div>
-                  <div class="text-gray-400 text-sm">WhatsApp</div>
-                  <a href="https://wa.me/6281290009691" target="_blank" class="text-white font-semibold hover:text-green-500 transition-colors">
+                  <div class="text-gray-400 text-sm mobile-text-sm">WhatsApp</div>
+                  <a href="https://wa.me/6281290009691" target="_blank" class="text-white font-semibold hover:text-green-500 transition-colors mobile-text-base">
                     (+62)812-9000-9691
                   </a>
                 </div>
               </div>
               
-              <div class="flex items-center space-x-4">
-                <div class="bg-primary/10 p-3 rounded-xl">
-                  <i class="fas fa-clock text-primary text-xl"></i>
+              <div class="flex items-center space-x-3 md:space-x-4">
+                <div class="bg-primary/10 p-2 md:p-3 rounded-lg md:rounded-xl flex-shrink-0">
+                  <i class="fas fa-clock text-primary text-lg md:text-xl"></i>
                 </div>
                 <div>
-                  <div class="text-gray-400 text-sm">Jam Operasional</div>
-                  <div class="text-white font-semibold">Setiap Hari: 11:00 - 22:00 WIB</div>
+                  <div class="text-gray-400 text-sm mobile-text-sm">Jam Operasional</div>
+                  <div class="text-white font-semibold mobile-text-base">Setiap Hari: 11:00 - 22:00 WIB</div>
                 </div>
               </div>
             </div>
           </div>
           
-          <div class="glass-effect rounded-3xl p-8">
-            <h4 class="text-xl font-bold text-white mb-4">Tips Reservasi</h4>
-            <ul class="space-y-3 text-gray-300">
+          <div class="glass-effect rounded-2xl md:rounded-3xl p-6 md:p-8">
+            <h4 class="text-lg md:text-xl font-bold text-white mb-3 md:mb-4 mobile-text-lg">Tips Reservasi</h4>
+            <ul class="space-y-2 md:space-y-3 text-gray-300">
               <li class="flex items-start space-x-2">
-                <i class="fas fa-check text-primary mt-1"></i>
-                <span>Reservasi minimal 2 jam sebelum waktu kedatangan</span>
+                <i class="fas fa-check text-primary mt=1 flex-shrink-0"></i>
+                <span class="mobile-text-sm">Reservasi minimal 2 jam sebelum waktu kedatangan</span>
               </li>
               <li class="flex items-start space-x-2">
-                <i class="fas fa-check text-primary mt-1"></i>
-                <span>Untuk grup 8+ orang, harap reservasi 1 hari sebelumnya</span>
+                <i class="fas fa-check text-primary mt=1 flex-shrink-0"></i>
+                <span class="mobile-text-sm">Untuk grup 8+ orang, harap reservasi 1 hari sebelumnya</span>
               </li>
               <li class="flex items-start space-x-2">
-                <i class="fas fa-check text-primary mt-1"></i>
-                <span>Informasikan alergi makanan saat reservasi</span>
+                <i class="fas fa-check text-primary mt=1 flex-shrink-0"></i>
+                <span class="mobile-text-sm">Informasikan alergi makanan saat reservasi</span>
               </li>
               <li class="flex items-start space-x-2">
-                <i class="fab fa-whatsapp text-green-500 mt-1"></i>
-                <span>Reservasi via WhatsApp lebih cepat direspon</span>
+                <i class="fab fa-whatsapp text-green-500 mt=1 flex-shrink-0"></i>
+                <span class="mobile-text-sm">Reservasi via WhatsApp lebih cepat direspon</span>
               </li>
             </ul>
           </div>
@@ -1065,94 +1529,147 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-dark border-t border-gray-800 py-12">
+  <footer class="bg-dark border-t border-gray-800 py-8 md:py-12">
     <div class="max-w-7xl mx-auto px-4">
-      <div class="grid md:grid-cols-4 gap-8 mb-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
         <div>
           <div class="flex items-center space-x-3 mb-4">
-            <div class="bg-primary p-2 rounded-lg">
-              <i class="fas fa-fish text-white text-xl"></i>
-            </div>
-            <h3 class="text-2xl font-heading font-bold text-white">寿司<span class="text-primary">樫村</span></h3>
+            <h3 class="text-xl md:text-2xl font-heading font-bold text-white">寿司<span class="text-primary">樫村</span></h3>
           </div>
-          <p class="text-gray-400">Restoran Jepang autentik dengan bahan berkualitas premium dan koki profesional berpengalaman.</p>
+          <p class="text-gray-400 text-sm md:text-base mobile-text-sm">Restoran Jepang autentik dengan bahan berkualitas premium dan koki profesional berpengalaman.</p>
         </div>
         
         <div>
-          <h4 class="text-lg font-bold text-white mb-4">Menu Utama</h4>
+          <h4 class="text-base md:text-lg font-bold text-white mb-3 md:mb-4">Menu Utama</h4>
           <ul class="space-y-2">
-            <li><a href="#home" class="text-gray-400 hover:text-primary transition-colors">Beranda</a></li>
-            <li><a href="#menu" class="text-gray-400 hover:text-primary transition-colors">Menu</a></li>
-            <li><a href="#galeri" class="text-gray-400 hover:text-primary transition-colors">Galeri</a></li>
-            <li><a href="#tentang" class="text-gray-400 hover:text-primary transition-colors">Tentang Kami</a></li>
+            <li><a href="#home" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base mobile-text-sm">Beranda</a></li>
+            <li><a href="#menu" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base mobile-text-sm">Menu</a></li>
+            <li><a href="#galeri" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base mobile-text-sm">Galeri</a></li>
+            <li><a href="#tentang" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base mobile-text-sm">Tentang Kami</a></li>
           </ul>
         </div>
         
         <div>
-          <h4 class="text-lg font-bold text-white mb-4">Layanan</h4>
+          <h4 class="text-base md:text-lg font-bold text-white mb-3 md:mb-4">Layanan</h4>
           <ul class="space-y-2">
-            <li><a href="#reservasi" class="text-gray-400 hover:text-primary transition-colors">Reservasi Online</a></li>
-            <li><a href="#menu" class="text-gray-400 hover:text-primary transition-colors">Catering</a></li>
-            <li><a href="#reservasi" class="text-gray-400 hover:text-primary transition-colors">Acara Khusus</a></li>
-            <li><a href="https://wa.me/6281290009691" target="_blank" class="text-gray-400 hover:text-green-500 transition-colors">Take Away</a></li>
+            <li><a href="#reservasi" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base mobile-text-sm">Reservasi Online</a></li>
+            <li><a href="#menu" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base mobile-text-sm">Catering</a></li>
+            <li><a href="#reservasi" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base mobile-text-sm">Acara Khusus</a></li>
+            <li><a href="https://wa.me/6281290009691" target="_blank" class="text-gray-400 hover:text-green-500 transition-colors text-sm md:text-base mobile-text-sm">Take Away</a></li>
           </ul>
         </div>
         
         <div>
-          <h4 class="text-lg font-bold text-white mb-4">Hubungi Kami</h4>
+          <h4 class="text-base md:text-lg font-bold text-white mb-3 md:mb-4">Hubungi Kami</h4>
           <div class="space-y-3">
-            <a href="https://wa.me/6281290009691" target="_blank" class="flex items-center space-x-3 text-gray-400 hover:text-green-500 transition-colors">
+            <a href="https://wa.me/6281290009691" target="_blank" class="flex items-center space-x-2 md:space-x-3 text-gray-400 hover:text-green-500 transition-colors text-sm md:text-base mobile-text-sm">
               <i class="fab fa-whatsapp text-green-500"></i>
               <span>(+62)812-9000-9691</span>
             </a>
             <div class="flex space-x-4">
               <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                <i class="fab fa-instagram text-xl"></i>
+                <i class="fab fa-instagram text-lg md:text-xl"></i>
               </a>
               <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                <i class="fab fa-facebook text-xl"></i>
+                <i class="fab fa-facebook text-lg md:text-xl"></i>
               </a>
               <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                <i class="fab fa-tripadvisor text-xl"></i>
+                <i class="fab fa-tripadvisor text-lg md:text-xl"></i>
               </a>
             </div>
           </div>
         </div>
       </div>
       
-      <div class="border-t border-gray-800 pt-8 text-center">
-        <p class="text-gray-500">© 2024 Shushi Kashimura. All rights reserved.</p>
-        <p class="text-gray-600 text-sm mt-2">Restoran Jepang Autentik | Jakarta, Indonesia</p>
+      <div class="border-t border-gray-800 pt-6 md:pt-8 text-center">
+        <p class="text-gray-500 text-sm md:text-base mobile-text-sm">© 2024 Shushi Kashimura. All rights reserved.</p>
+        <p class="text-gray-600 text-xs md:text-sm mt-2 mobile-text-sm">Restoran Jepang Autentik | Jakarta, Indonesia</p>
       </div>
     </div>
   </footer>
 
+  <!-- NEW: Mobile Bottom Navigation -->
+  <div class="mobile-nav">
+    <div class="flex justify-around">
+      <a href="#home" class="mobile-nav-item" onclick="setActiveNavItem(this)">
+        <i class="fas fa-home"></i>
+        <span>Beranda</span>
+      </a>
+      <a href="menu-lengkap.html" class="mobile-nav-item relative" onclick="setActiveNavItem(this)">
+        <i class="fas fa-utensils"></i>
+        <span>Menu</span>
+        <span class="menu-badge">新</span>
+      </a>
+      <a href="#galeri" class="mobile-nav-item" onclick="setActiveNavItem(this)">
+        <i class="fas fa-images"></i>
+        <span>Galeri</span>
+      </a>
+      <a href="#reservasi" class="mobile-nav-item" onclick="setActiveNavItem(this)">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Booking</span>
+      </a>
+      <a href="https://wa.me/6281290009691" target="_blank" class="mobile-nav-item" onclick="setActiveNavItem(this)">
+        <i class="fab fa-whatsapp"></i>
+        <span>Chat</span>
+      </a>
+    </div>
+  </div>
+
   <!-- Lightbox Modal -->
   <div id="lightboxModal" class="lightbox-modal hidden">
     <div class="relative">
-      <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-3xl hover:text-primary transition-colors z-10">
+      <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-3xl hover:text-primary transition-colors z-10 touch-button">
         <i class="fas fa-times"></i>
       </button>
+      <div class="lightbox-nav">
+        <button onclick="navigateLightbox(-1)" class="touch-button">
+          <i class="fas fa-chevron-left text-3xl text-white bg-dark/50 hover:bg-dark/80 rounded-full w-12 h-12 flex items-center justify-center"></i>
+        </button>
+        <button onclick="navigateLightbox(1)" class="touch-button">
+          <i class="fas fa-chevron-right text-3xl text-white bg-dark/50 hover:bg-dark/80 rounded-full w-12 h-12 flex items-center justify-center"></i>
+        </button>
+      </div>
       <img id="lightboxImage" src="" alt="" class="lightbox-content rounded-lg">
-      <div id="lightboxCaption" class="text-white text-center mt-4 text-lg"></div>
+      <div id="lightboxCaption" class="text-white text-center mt-4 text-base md:text-lg mobile-text-base"></div>
+    </div>
+  </div>
+
+  <!-- Video Tour Modal -->
+  <div id="videoModal" class="lightbox-modal hidden">
+    <div class="relative max-w-4xl w-full mx-4">
+      <button onclick="closeVideoModal()" class="absolute -top-12 right-0 text-white text-3xl hover:text-primary transition-colors z-10 touch-button">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
+        <iframe id="videoPlayer" class="w-full h-[300px] md:h-[500px]" 
+                src="" 
+                title="Video Tour Shushi Kashimura" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+        </iframe>
+      </div>
+      <div class="text-white text-center mt-4 text-base md:text-lg mobile-text-base">
+        Virtual Tour Shushi Kashimura
+      </div>
     </div>
   </div>
 
   <!-- Sticky WhatsApp Button -->
   <a href="https://wa.me/6281290009691" target="_blank" 
-     class="whatsapp-float fixed bottom-6 right-6 z-40">
+     class="whatsapp-float fixed bottom-24 right-4 md:right-6 z-40">
     <i class="fab fa-whatsapp"></i>
   </a>
 
   <!-- Sticky Reservasi Button -->
   <a href="#reservasi" 
-     class="reservasi-float fixed bottom-24 right-6 z-40">
+     class="reservasi-float fixed bottom-40 right-4 md:bottom-24 md:right-6 z-40">
     <i class="fas fa-calendar-alt"></i>
   </a>
 
   <!-- Back to Top -->
   <button id="backToTop" 
-          class="fixed bottom-6 left-6 bg-dark-light border border-gray-800 w-12 h-12 rounded-full flex items-center justify-center text-primary hover:text-primary-dark transition-colors opacity-0 invisible transition-all duration-300 z-40">
+          class="fixed bottom-6 left-4 md:bottom-6 md:left-6 bg-dark-light border border-gray-800 w-12 h-12 rounded-full flex items-center justify-center text-primary hover:text-primary-dark transition-colors opacity-0 invisible transition-all duration-300 z-40 touch-button">
     <i class="fas fa-arrow-up"></i>
   </button>
 
@@ -1163,10 +1680,10 @@
         <i id="notificationIcon" class="fas fa-check-circle text-primary text-xl mt-1"></i>
       </div>
       <div class="flex-1">
-        <p id="notificationTitle" class="font-bold text-white mb-1"></p>
-        <p id="notificationMessage" class="text-gray-300 text-sm"></p>
+        <p id="notificationTitle" class="font-bold text-white mb-1 mobile-text-base"></p>
+        <p id="notificationMessage" class="text-gray-300 text-sm mobile-text-sm"></p>
       </div>
-      <button onclick="hideNotification()" class="text-gray-400 hover:text-white transition-colors">
+      <button onclick="hideNotification()" class="text-gray-400 hover:text-white transition-colors touch-button">
         <i class="fas fa-times"></i>
       </button>
     </div>
@@ -1174,6 +1691,10 @@
 
   <!-- JavaScript -->
   <script>
+    // Global variables for gallery
+    let currentImageIndex = 0;
+    let galleryImages = [];
+    
     // Initialize when page loads
     document.addEventListener('DOMContentLoaded', function() {
       console.log('Shushi Kashimura Website Loaded');
@@ -1182,6 +1703,7 @@
       initBackToTop();
       setupMobileMenu();
       createSakura();
+      setupMobileNavigation();
       
       // Setup reservasi form
       document.getElementById('reservasiForm').addEventListener('submit', function(e) {
@@ -1196,12 +1718,18 @@
       
       // Add animation classes on scroll
       setupScrollAnimations();
+      
+      // Setup touch-friendly interactions
+      setupTouchInteractions();
+      
+      // Setup gallery filter
+      setupGalleryFilter();
     });
     
     // Create sakura falling animation
     function createSakura() {
       const container = document.getElementById('sakura-container');
-      const sakuraCount = 20;
+      const sakuraCount = window.innerWidth < 768 ? 10 : 20;
       
       for (let i = 0; i < sakuraCount; i++) {
         const sakura = document.createElement('div');
@@ -1225,8 +1753,17 @@
     // Mobile menu toggle
     function toggleMobileMenu() {
       const menu = document.getElementById('mobileMenu');
-      menu.classList.toggle('hidden');
-      menu.classList.toggle('animate__animated', 'animate__fadeInDown');
+      const isHidden = menu.classList.contains('hidden');
+      
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        menu.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      } else {
+        menu.classList.add('hidden');
+        menu.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
     }
     
     function setupMobileMenu() {
@@ -1236,6 +1773,53 @@
           toggleMobileMenu();
         }
       });
+      
+      document.addEventListener('click', function(e) {
+        const menu = document.getElementById('mobileMenu');
+        const menuButton = document.querySelector('button[onclick="toggleMobileMenu()"]');
+        
+        if (!menu.classList.contains('hidden') && 
+            !menu.contains(e.target) && 
+            !menuButton.contains(e.target)) {
+          toggleMobileMenu();
+        }
+      });
+    }
+    
+    // Setup mobile bottom navigation
+    function setupMobileNavigation() {
+      const navItems = document.querySelectorAll('.mobile-nav-item');
+      
+      const currentHash = window.location.hash || '#home';
+      navItems.forEach(item => {
+        if (item.getAttribute('href') === currentHash) {
+          item.classList.add('active');
+        }
+      });
+      
+      navItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+          if (this.getAttribute('href').startsWith('#')) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
+              });
+            }
+          }
+        });
+      });
+    }
+    
+    function setActiveNavItem(element) {
+      document.querySelectorAll('.mobile-nav-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      element.classList.add('active');
     }
     
     // Back to Top button
@@ -1267,11 +1851,211 @@
         });
       }, { threshold: 0.1 });
       
-      // Observe all cards
       document.querySelectorAll('.glass-effect, .menu-card, .gallery-card, .stat-card').forEach(card => {
         observer.observe(card);
       });
     }
+    
+    // Setup touch-friendly interactions
+    function setupTouchInteractions() {
+      document.querySelectorAll('.touch-button, button, a').forEach(element => {
+        element.addEventListener('touchstart', function() {
+          this.classList.add('active');
+        });
+        
+        element.addEventListener('touchend', function() {
+          this.classList.remove('active');
+        });
+      });
+      
+      let lastTouchEnd = 0;
+      document.addEventListener('touchend', function(event) {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+          event.preventDefault();
+        }
+        lastTouchEnd = now;
+      }, false);
+    }
+    
+    // GALLERY FUNCTIONS
+    function setupGalleryFilter() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Remove active class from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          
+          // Add active class to clicked button
+          this.classList.add('active');
+          
+          const filterValue = this.getAttribute('data-filter');
+          
+          // Filter gallery items
+          galleryItems.forEach(item => {
+            if (filterValue === 'all') {
+              item.classList.remove('hidden');
+              item.style.display = 'block';
+            } else {
+              if (item.getAttribute('data-category') === filterValue) {
+                item.classList.remove('hidden');
+                item.style.display = 'block';
+              } else {
+                item.classList.add('hidden');
+                item.style.display = 'none';
+              }
+            }
+          });
+          
+          // Add animation to visible items
+          const visibleItems = document.querySelectorAll('.gallery-item:not(.hidden)');
+          visibleItems.forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.1}s`;
+            item.classList.add('animate__animated', 'animate__fadeInUp');
+          });
+        });
+      });
+    }
+    
+    // Open lightbox with navigation
+    function openLightbox(imageSrc, caption) {
+      // Collect all gallery images
+      const galleryCards = document.querySelectorAll('.gallery-card:not(.hidden)');
+      galleryImages = [];
+      
+      galleryCards.forEach(card => {
+        const img = card.querySelector('img');
+        const title = card.querySelector('h3')?.textContent || caption;
+        if (img && img.src) {
+          galleryImages.push({
+            src: img.src.replace(/w=\d+/, 'w=1200').replace(/q=\d+/, 'q=80'),
+            caption: title
+          });
+        }
+      });
+      
+      // Find current index
+      currentImageIndex = galleryImages.findIndex(img => 
+        img.src.includes(imageSrc.split('/').pop().split('?')[0]) || 
+        img.caption === caption
+      );
+      
+      if (currentImageIndex === -1) currentImageIndex = 0;
+      
+      // Update lightbox
+      updateLightbox();
+      
+      const lightbox = document.getElementById('lightboxModal');
+      lightbox.classList.remove('hidden');
+      lightbox.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function updateLightbox() {
+      if (galleryImages.length === 0) return;
+      
+      const lightboxImage = document.getElementById('lightboxImage');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      const navButtons = document.querySelectorAll('.lightbox-nav button');
+      
+      const image = galleryImages[currentImageIndex];
+      
+      lightboxImage.src = image.src;
+      lightboxImage.alt = image.caption;
+      lightboxCaption.textContent = image.caption;
+      
+      // Update navigation button visibility
+      if (navButtons.length > 0) {
+        navButtons[0].style.display = currentImageIndex > 0 ? 'flex' : 'none';
+        navButtons[1].style.display = currentImageIndex < galleryImages.length - 1 ? 'flex' : 'none';
+      }
+    }
+    
+    function navigateLightbox(direction) {
+      currentImageIndex += direction;
+      
+      if (currentImageIndex < 0) {
+        currentImageIndex = galleryImages.length - 1;
+      } else if (currentImageIndex >= galleryImages.length) {
+        currentImageIndex = 0;
+      }
+      
+      updateLightbox();
+    }
+    
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightboxModal');
+      lightbox.classList.add('hidden');
+      lightbox.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+    
+    // Video Tour Modal
+    function showVideoTour() {
+      const videoModal = document.getElementById('videoModal');
+      const videoPlayer = document.getElementById('videoPlayer');
+      
+      // Use a placeholder video or your actual video URL
+      videoPlayer.src = "asset/video/kashimura.mp4";
+      
+      videoModal.classList.remove('hidden');
+      videoModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      
+      showNotification('Video Tour', 'Menampilkan virtual tour restoran kami');
+    }
+    
+    function closeVideoModal() {
+      const videoModal = document.getElementById('videoModal');
+      const videoPlayer = document.getElementById('videoPlayer');
+      
+      videoPlayer.src = "";
+      videoModal.classList.add('hidden');
+      videoModal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+    
+    function showMoreGallery() {
+      showNotification('Galeri Lengkap', 'Scroll ke atas untuk melihat semua foto galeri kami!');
+      
+      // Smooth scroll to gallery section
+      const gallerySection = document.getElementById('galeri');
+      if (gallerySection) {
+        window.scrollTo({
+          top: gallerySection.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      }
+    }
+    
+    // Keyboard navigation for lightbox
+    document.addEventListener('keydown', function(e) {
+      const lightbox = document.getElementById('lightboxModal');
+      const videoModal = document.getElementById('videoModal');
+      
+      if (!lightbox.classList.contains('hidden')) {
+        if (e.key === 'ArrowLeft') {
+          navigateLightbox(-1);
+        } else if (e.key === 'ArrowRight') {
+          navigateLightbox(1);
+        } else if (e.key === 'Escape') {
+          closeLightbox();
+        }
+      }
+      
+      if (!videoModal.classList.contains('hidden') && e.key === 'Escape') {
+        closeVideoModal();
+      }
+    });
+    
+    // Close video modal when clicking outside
+    document.getElementById('videoModal').addEventListener('click', function(e) {
+      if (e.target.id === 'videoModal') {
+        closeVideoModal();
+      }
+    });
     
     // Submit reservasi form via WhatsApp
     function submitReservasiWhatsApp() {
@@ -1321,7 +2105,7 @@
       showNotification('WhatsApp Dibuka', `Pesan reservasi sudah disiapkan untuk ${name}. Silakan kirim melalui WhatsApp.`);
     }
     
-    // Submit reservasi form online (original function)
+    // Submit reservasi form online
     function submitReservasi() {
       const name = document.getElementById('reservasiName').value.trim();
       const jumlah = document.getElementById('reservasiJumlah').value;
@@ -1356,44 +2140,9 @@
       const tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate() + 1);
       document.getElementById('reservasiTanggal').valueAsDate = tomorrow;
-    }
-    
-    // Lightbox functionality
-    function openLightbox(imageSrc, caption) {
-      const lightbox = document.getElementById('lightboxModal');
-      const lightboxImage = document.getElementById('lightboxImage');
-      const lightboxCaption = document.getElementById('lightboxCaption');
       
-      lightboxImage.src = imageSrc;
-      lightboxImage.alt = caption;
-      lightboxCaption.textContent = caption;
-      
-      lightbox.classList.remove('hidden');
-      lightbox.style.display = 'flex';
-      
-      // Prevent body scroll when lightbox is open
-      document.body.style.overflow = 'hidden';
-    }
-    
-    function closeLightbox() {
-      const lightbox = document.getElementById('lightboxModal');
-      lightbox.classList.add('hidden');
-      lightbox.style.display = 'none';
-      
-      // Re-enable body scroll
-      document.body.style.overflow = 'auto';
-    }
-    
-    // Close lightbox when clicking outside the image
-    document.getElementById('lightboxModal').addEventListener('click', function(e) {
-      if (e.target.id === 'lightboxModal') {
-        closeLightbox();
-      }
-    });
-    
-    // Open gallery page (for demo)
-    function openGallery() {
-      showNotification('Galeri Lengkap', 'Halaman galeri lengkap akan segera tersedia!');
+      // Set active nav item
+      setActiveNavItem(document.querySelector('.mobile-nav-item[href="#reservasi"]'));
     }
     
     // Show notification
