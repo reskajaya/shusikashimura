@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Tentang Kami | Shushi Kashimura</title>
+  <meta name="description" content="Tentang Shushi Kashimura - Restoran Jepang autentik dengan koki profesional, bahan premium, dan komitmen terhadap tradisi kuliner Jepang.">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#C62828',
+            secondary: '#2E7D32',
+            accent: '#FF6F00',
+            'primary-dark': '#B71C1C',
+            dark: '#1A1A1A',
+            'dark-light': '#2A2520',
+            'japan-red': '#C62828',
+            'sakura-pink': '#F8BBD0',
+            'wasabi-green': '#C5E1A5',
+            'soy-brown': '#5D4037',
+            'rice-white': '#FFF8E1',
+          },
+          fontFamily: {
+            'sans': ['"Noto Sans JP"', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            'heading': ['"Yuji Mai"', '"Noto Serif JP"', 'serif'],
+          },
+          animation: {
+            'float': 'float 3s ease-in-out infinite',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'slide-up': 'slideUp 0.5s ease-out',
+            'fade-in': 'fadeIn 0.6s ease-out',
+            'sakura-fall': 'sakuraFall 10s linear infinite',
+            'zoom-in': 'zoomIn 0.5s ease-out',
+            'slide-in': 'slideIn 0.3s ease-out',
+            'bounce-slow': 'bounce 2s infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            sakuraFall: {
+              '0%': { transform: 'translateY(-100px) rotate(0deg)', opacity: '0' },
+              '10%': { opacity: '1' },
+              '90%': { opacity: '1' },
+              '100%': { transform: 'translateY(100vh) rotate(360deg)', opacity: '0' },
+            },
+            zoomIn: {
+              '0%': { transform: 'scale(0.95)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+            slideIn: {
+              '0%': { transform: 'translateX(-100%)', opacity: '0' },
+              '100%': { transform: 'translateX(0)', opacity: '1' },
+            }
+          },
+          screens: {
+            'xs': '375px',
+            'sm': '640px',
+            'md': '768px',
+            'lg': '1024px',
+            'xl': '1280px',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Yuji+Mai&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Animate CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  
+  <style>
+    /* Copy semua style dari galeri.html */
+    :root {
+      --primary-glow: rgba(198, 40, 40, 0.15);
+      --accent-glow: rgba(255, 111, 0, 0.15);
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #1A1A1A 0%, #2A2520 100%);
+      font-family: 'Noto Sans JP', sans-serif;
+      color: #fcfcfc;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #2A2520;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #C62828;
+      border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B71C1C;
+    }
+    
+    /* Gradient Text */
+    .gradient-text {
+      background: linear-gradient(90deg, #C62828 0%, #FF6F00 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+    
+    /* Glass Effect */
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Timeline Styles */
+    .timeline-item {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 12px;
+      height: 12px;
+      background: #C62828;
+      border-radius: 50%;
+    }
+    
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 12px;
+      width: 2px;
+      height: calc(100% + 28px);
+      background: rgba(198, 40, 40, 0.3);
+    }
+    
+    .timeline-item:last-child::after {
+      display: none;
+    }
+    
+    /* Team Card */
+    .team-card {
+      background: linear-gradient(145deg, rgba(198, 40, 40, 0.05), transparent);
+      border: 1px solid rgba(198, 40, 40, 0.1);
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    
+    .team-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(198, 40, 40, 0.3);
+      box-shadow: 0 10px 30px rgba(198, 40, 40, 0.1);
+    }
+    
+    /* Value Card */
+    .value-card {
+      background: linear-gradient(145deg, rgba(46, 125, 50, 0.05), transparent);
+      border: 1px solid rgba(46, 125, 50, 0.1);
+      border-radius: 16px;
+      transition: all 0.3s ease;
+    }
+    
+    .value-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(46, 125, 50, 0.3);
+    }
+    
+    /* Japanese Pattern Background */
+    .japanese-pattern {
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(198, 40, 40, 0.1) 2px, transparent 2px),
+        radial-gradient(circle at 75% 75%, rgba(255, 111, 0, 0.1) 2px, transparent 2px);
+      background-size: 60px 60px;
+    }
+    
+    /* Sakura Effect */
+    .sakura {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #F8BBD0;
+      border-radius: 50% 0 50% 50%;
+      transform: rotate(45deg);
+      opacity: 0.7;
+      z-index: 1;
+    }
+    
+    /* Japanese Decorative Elements */
+    .japanese-border {
+      position: relative;
+      padding-bottom: 20px;
+    }
+    
+    .japanese-border::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #C62828, transparent);
+    }
+    
+    /* Mobile Navigation */
+    .mobile-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(26, 26, 26, 0.98);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(198, 40, 40, 0.2);
+      padding: 12px 0;
+      z-index: 9998;
+      display: none;
+    }
+    
+    .mobile-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      color: #9CA3AF;
+      transition: all 0.3s ease;
+      flex: 1;
+    }
+    
+    .mobile-nav-item.active {
+      color: #C62828;
+    }
+    
+    /* Button Styles */
+    .btn-primary {
+      background: linear-gradient(135deg, #C62828 0%, #B71C1C 100%);
+      color: #f7f7f4;
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(198, 40, 40, 0.3);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(198, 40, 40, 0.4);
+    }
+    
+    /* Navbar */
+    .navbar {
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(198, 40, 40, 0.1);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 640px) {
+      .mobile-nav {
+        display: flex;
+      }
+      
+      .timeline-item {
+        padding-left: 25px;
+      }
+    }
+    
+    @media (min-width: 641px) {
+      .mobile-nav {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen overflow-x-hidden">
+  <!-- Sakura Animation -->
+  <div id="sakura-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+  
+  <!-- Navigation -->
+  <nav class="navbar fixed top-0 left-0 right-0 z-50 py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+          <a href="index.html" class="flex items-center space-x-3">
+            <div class="relative">
+              <div class="absolute inset-0 bg-primary rounded-xl blur-sm"></div>
+              <div class="relative bg-primary p-3 rounded-xl">
+                <i class="fas fa-fish text-white text-2xl"></i>
+              </div>
+            </div>
+            <div>
+              <h1 class="text-2xl font-heading font-bold text-white">寿司<span class="text-primary">樫村</span></h1>
+              <p class="text-xs text-gray-400">Shushi Kashimura</p>
+            </div>
+          </a>
+        </div>
+        
+        <div class="hidden lg:flex space-x-8">
+          <a href="index.html" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group">
+            <span>Beranda</span>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a href="menu-lengkap.html" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group">
+            <span>Menu</span>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a href="galeri.html" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group">
+            <span>Galeri</span>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a href="tentang.html" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group active">
+            <span>Tentang</span>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a href="promosi.html" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group">
+            <span>Promosi</span>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
+        </div>
+        
+        <div class="flex items-center space-x-4">
+          <a href="https://wa.me/6281290009691" target="_blank" class="hidden md:flex items-center space-x-2 text-gray-300 hover:text-green-500 transition-colors">
+            <i class="fab fa-whatsapp text-green-500"></i>
+            <span class="font-medium">+62 812-9000-9691</span>
+          </a>
+          <a href="index.html#reservasi" 
+             class="btn-primary text-sm desktop-only">
+            <i class="fas fa-calendar-check"></i>
+            <span>Reservasi</span>
+          </a>
+          <button class="lg:hidden text-gray-300 hover:text-primary transition-colors touch-button" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="lg:hidden hidden absolute top-full left-0 right-0 bg-dark border-t border-gray-800 p-4">
+      <div class="swipe-indicator"></div>
+      <div class="flex flex-col space-y-2">
+        <a href="index.html" class="text-gray-300 hover:text-primary py-3 px-4 transition-colors rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center" onclick="toggleMobileMenu()">
+          <i class="fas fa-home mr-3 w-6 text-center"></i>
+          <span>Beranda</span>
+        </a>
+        <a href="menu-lengkap.html" class="text-gray-300 hover:text-primary py-3 px-4 transition-colors rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center" onclick="toggleMobileMenu()">
+          <i class="fas fa-utensils mr-3 w-6 text-center"></i>
+          <span>Menu</span>
+        </a>
+        <a href="galeri.html" class="text-gray-300 hover:text-primary py-3 px-4 transition-colors rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center" onclick="toggleMobileMenu()">
+          <i class="fas fa-images mr-3 w-6 text-center"></i>
+          <span>Galeri</span>
+        </a>
+        <a href="tentang.html" class="text-gray-300 hover:text-primary py-3 px-4 transition-colors rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center" onclick="toggleMobileMenu()">
+          <i class="fas fa-info-circle mr-3 w-6 text-center"></i>
+          <span>Tentang</span>
+        </a>
+        <a href="promosi.html" class="text-gray-300 hover:text-primary py-3 px-4 transition-colors rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center" onclick="toggleMobileMenu()">
+          <i class="fas fa-tag mr-3 w-6 text-center"></i>
+          <span>Promosi</span>
+        </a>
+        <a href="https://wa.me/6281290009691" target="_blank" class="text-gray-300 hover:text-green-500 py-3 px-4 transition-colors rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center" onclick="toggleMobileMenu()">
+          <i class="fab fa-whatsapp text-green-500 mr-3 w-6 text-center"></i>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header Section -->
+  <section class="pt-24 pb-8 md:pt-32 md:pb-12 relative overflow-hidden japanese-pattern">
+    <div class="absolute inset-0 bg-gradient-to-br from-dark via-dark-light to-dark opacity-95"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+      <div class="text-center">
+        <h1 class="text-3xl xs:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-4 md:mb-6 leading-tight">
+          <span class="gradient-text">Tentang</span> Kami
+        </h1>
+        <p class="text-base md:text-xl text-gray-300 max-w-3xl mx-auto mb-6">
+          Menghadirkan pengalaman kuliner Jepang autentik sejak 2015 dengan komitmen pada kualitas dan tradisi
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Story -->
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-16">
+        <div class="animate__animated animate__fadeInLeft">
+          <h2 class="text-2xl md:text-4xl font-heading font-bold text-white mb-4 md:mb-6 japanese-border">
+            Cerita <span class="gradient-text">Kami</span>
+          </h2>
+          <p class="text-gray-300 mb-4 md:mb-6 leading-relaxed">
+            Shushi Kashimura didirikan pada tahun 2015 oleh Chef Kenji Yamamoto, seorang koki dengan pengalaman 
+            20 tahun di berbagai restoran bintang Michelin di Tokyo. Misi kami sederhana: menghadirkan pengalaman 
+            kuliner Jepang yang autentik dan berkualitas tinggi di Jakarta.
+          </p>
+          <p class="text-gray-300 mb-4 md:mb-6 leading-relaxed">
+            Nama "Kashimura" dipilih sebagai penghormatan kepada kampung halaman Chef Yamamoto di Prefektur 
+            Kyoto, yang terkenal dengan tradisi kulinernya yang kaya dan perhatian terhadap detail.
+          </p>
+          <div class="flex items-center space-x-4 mt-8">
+            <div class="text-center">
+              <div class="text-3xl md:text-4xl font-bold text-primary mb-2">8+</div>
+              <div class="text-gray-400">Tahun Pengalaman</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl md:text-4xl font-bold text-primary mb-2">20+</div>
+              <div class="text-gray-400">Koki Profesional</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl md:text-4xl font-bold text-primary mb-2">50K+</div>
+              <div class="text-gray-400">Pelanggan Puas</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="animate__animated animate__fadeInRight">
+          <div class="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                 alt="Chef Kenji Yamamoto" 
+                 class="w-full h-[400px] md:h-[500px] object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent opacity-70"></div>
+            <div class="absolute bottom-6 left-6">
+              <h3 class="text-xl md:text-2xl font-bold text-white">Chef Kenji Yamamoto</h3>
+              <p class="text-gray-300">Founder & Head Chef</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Our Timeline -->
+      <div class="mb-16">
+        <h2 class="text-2xl md:text-4xl font-heading font-bold text-white mb-8 md:mb-12 text-center japanese-border">
+          Perjalanan <span class="gradient-text">Kami</span>
+        </h2>
+        
+        <div class="max-w-4xl mx-auto">
+          <div class="timeline-item animate__animated animate__fadeInUp">
+            <div class="glass-effect p-6 rounded-xl">
+              <div class="text-primary font-bold text-lg mb-2">2015</div>
+              <h3 class="text-xl font-bold text-white mb-3">Pembukaan Restoran Pertama</h3>
+              <p class="text-gray-300">
+                Shushi Kashimura resmi dibuka di Jakarta Timur dengan konsep sushi bar tradisional.
+                Kami memulai dengan 10 karyawan dan menu sederhana yang fokus pada sushi dan sashimi.
+              </p>
+            </div>
+          </div>
+          
+          <div class="timeline-item animate__animated animate__fadeInUp" style="animation-delay: 0.1s">
+            <div class="glass-effect p-6 rounded-xl">
+              <div class="text-primary font-bold text-lg mb-2">2017</div>
+              <h3 class="text-xl font-bold text-white mb-3">Ekspansi Menu</h3>
+              <p class="text-gray-300">
+                Menambahkan teppanyaki counter dan private dining rooms. Menu kami berkembang mencakup 
+                ramen, donburi, dan hidangan Jepang lainnya.
+              </p>
+            </div>
+          </div>
+          
+          <div class="timeline-item animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+            <div class="glass-effect p-6 rounded-xl">
+              <div class="text-primary font-bold text-lg mb-2">2019</div>
+              <h3 class="text-xl font-bold text-white mb-3">Sertifikasi Halal</h3>
+              <p class="text-gray-300">
+                Mendapatkan sertifikasi halal MUI untuk semua menu kami, membuat pengalaman kuliner 
+                Jepang autentik dapat dinikmati oleh lebih banyak orang.
+              </p>
+            </div>
+          </div>
+          
+          <div class="timeline-item animate__animated animate__fadeInUp" style="animation-delay: 0.3s">
+            <div class="glass-effect p-6 rounded-xl">
+              <div class="text-primary font-bold text-lg mb-2">2021</div>
+              <h3 class="text-xl font-bold text-white mb-3">Renovasi & Modernisasi</h3>
+              <p class="text-gray-300">
+                Melakukan renovasi besar-besaran dengan desain interior modern yang tetap mempertahankan 
+                elemen tradisional Jepang. Menambahkan sistem reservasi online.
+              </p>
+            </div>
+          </div>
+          
+          <div class="timeline-item animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
+            <div class="glass-effect p-6 rounded-xl">
+              <div class="text-primary font-bold text-lg mb-2">2024</div>
+              <h3 class="text-xl font-bold text-white mb-3">Website & Digital Transformation</h3>
+              <p class="text-gray-300">
+                Meluncurkan website dan sistem pemesanan online lengkap. Memperluas layanan dengan 
+                catering untuk acara khusus dan paket makan malam romantis.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Our Values -->
+      <div class="mb-16">
+        <h2 class="text-2xl md:text-4xl font-heading font-bold text-white mb-8 md:mb-12 text-center japanese-border">
+          Nilai <span class="gradient-text">Kami</span>
+        </h2>
+        
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="value-card p-6 text-center animate__animated animate__fadeInUp">
+            <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-leaf text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">Kesegaran</h3>
+            <p class="text-gray-300">
+              Hanya menggunakan bahan-bahan segar yang datang setiap hari dari supplier terpercaya.
+            </p>
+          </div>
+          
+          <div class="value-card p-6 text-center animate__animated animate__fadeInUp" style="animation-delay: 0.1s">
+            <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-hands-helping text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">Pelayanan</h3>
+            <p class="text-gray-300">
+              Memberikan pelayanan terbaik dengan perhatian pada detail dan keramahan khas Jepang.
+            </p>
+          </div>
+          
+          <div class="value-card p-6 text-center animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+            <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-award text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">Autentisitas</h3>
+            <p class="text-gray-300">
+              Menjaga keaslian resep dan teknik memasak tradisional Jepang dalam setiap hidangan.
+            </p>
+          </div>
+          
+          <div class="value-card p-6 text-center animate__animated animate__fadeInUp" style="animation-delay: 0.3s">
+            <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-heart text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">Passion</h3>
+            <p class="text-gray-300">
+              Memasak dengan cinta dan dedikasi untuk menciptakan pengalaman kuliner yang tak terlupakan.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Our Team -->
+      <div>
+        <h2 class="text-2xl md:text-4xl font-heading font-bold text-white mb-8 md:mb-12 text-center japanese-border">
+          Tim <span class="gradient-text">Kami</span>
+        </h2>
+        
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="team-card p-6 text-center animate__animated animate__fadeInUp">
+            <div class="w-32 h-32 rounded-full mx-auto mb-4 overflow-hidden border-4 border-primary/20">
+              <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                   alt="Chef Kenji" 
+                   class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Chef Kenji Yamamoto</h3>
+            <p class="text-primary mb-3">Founder & Head Sushi Chef</p>
+            <p class="text-gray-300 text-sm">
+              Pengalaman 20 tahun di restoran Michelin Tokyo. Spesialis sushi dan sashimi.
+            </p>
+          </div>
+          
+          <div class="team-card p-6 text-center animate__animated animate__fadeInUp" style="animation-delay: 0.1s">
+            <div class="w-32 h-32 rounded-full mx-auto mb-4 overflow-hidden border-4 border-primary/20">
+              <img src="https://images.unsplash.com/photo-1595475038784-bbe439ff41e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                   alt="Chef Hiroshi" 
+                   class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Chef Hiroshi Tanaka</h3>
+            <p class="text-primary mb-3">Teppanyaki Master</p>
+            <p class="text-gray-300 text-sm">
+              Ahli teppanyaki dengan pengalaman 15 tahun. Terkenal dengan pertunjukan memasaknya.
+            </p>
+          </div>
+          
+          <div class="team-card p-6 text-center animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+            <div class="w-32 h-32 rounded-full mx-auto mb-4 overflow-hidden border-4 border-primary/20">
+              <img src="https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                   alt="Suki" 
+                   class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Suki Nakamura</h3>
+            <p class="text-primary mb-3">Restaurant Manager</p>
+            <p class="text-gray-300 text-sm">
+              Manajer dengan pengalaman 10 tahun di industri hospitality. Ahli dalam wine pairing.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-12">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="glass-effect rounded-2xl md:rounded-3xl p-6 md:p-12 text-center">
+        <h2 class="text-2xl md:text-3xl font-heading font-bold text-white mb-4">
+          Ingin Merasakan <span class="gradient-text">Pengalaman Kami?</span>
+        </h2>
+        <p class="text-base md:text-xl text-gray-300 mb-6 max-w-2xl mx-auto">
+          Nikmati keahlian koki kami dan bahan-bahan premium dalam suasana autentik Jepang
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
+          <a href="index.html#reservasi" class="btn-primary">
+            <i class="fas fa-calendar-check"></i>
+            <span>Reservasi Sekarang</span>
+          </a>
+          <a href="menu-lengkap.html" class="btn-secondary">
+            <i class="fas fa-book-open"></i>
+            <span>Lihat Menu</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark border-t border-gray-800 py-8 md:py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
+        <div>
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="bg-primary p-2 rounded-lg">
+              <i class="fas fa-fish text-white text-xl"></i>
+            </div>
+            <h3 class="text-xl md:text-2xl font-heading font-bold text-white">寿司<span class="text-primary">樫村</span></h3>
+          </div>
+          <p class="text-gray-400 text-sm md:text-base">Restoran Jepang autentik dengan bahan berkualitas premium dan koki profesional berpengalaman.</p>
+        </div>
+        
+        <div>
+          <h4 class="text-base md:text-lg font-bold text-white mb-3 md:mb-4">Menu Utama</h4>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base">Beranda</a></li>
+            <li><a href="menu-lengkap.html" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base">Menu</a></li>
+            <li><a href="galeri.html" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base">Galeri</a></li>
+            <li><a href="tentang.html" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base">Tentang Kami</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-base md:text-lg font-bold text-white mb-3 md:mb-4">Layanan</h4>
+          <ul class="space-y-2">
+            <li><a href="index.html#reservasi" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base">Reservasi Online</a></li>
+            <li><a href="menu-lengkap.html" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base">Catering</a></li>
+            <li><a href="index.html#reservasi" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base">Acara Khusus</a></li>
+            <li><a href="https://wa.me/6281290009691" target="_blank" class="text-gray-400 hover:text-green-500 transition-colors text-sm md:text-base">Take Away</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-base md:text-lg font-bold text-white mb-3 md:mb-4">Hubungi Kami</h4>
+          <div class="space-y-3">
+            <a href="https://wa.me/6281290009691" target="_blank" class="flex items-center space-x-2 md:space-x-3 text-gray-400 hover:text-green-500 transition-colors text-sm md:text-base">
+              <i class="fab fa-whatsapp text-green-500"></i>
+              <span>(+62)812-9000-9691</span>
+            </a>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                <i class="fab fa-instagram text-lg md:text-xl"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                <i class="fab fa-facebook text-lg md:text-xl"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                <i class="fab fa-tripadvisor text-lg md:text-xl"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 pt-6 md:pt-8 text-center">
+        <p class="text-gray-500 text-sm md:text-base">© 2024 Shushi Kashimura. All rights reserved.</p>
+        <p class="text-gray-600 text-xs md:text-sm mt-2">Restoran Jepang Autentik | Jakarta, Indonesia</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Navigation -->
+  <div class="mobile-nav">
+    <div class="flex justify-around">
+      <a href="index.html" class="mobile-nav-item" onclick="setActiveNavItem(this)">
+        <i class="fas fa-home"></i>
+        <span>Beranda</span>
+      </a>
+      <a href="menu-lengkap.html" class="mobile-nav-item" onclick="setActiveNavItem(this)">
+        <i class="fas fa-utensils"></i>
+        <span>Menu</span>
+      </a>
+      <a href="galeri.html" class="mobile-nav-item" onclick="setActiveNavItem(this)">
+        <i class="fas fa-images"></i>
+        <span>Galeri</span>
+      </a>
+      <a href="tentang.html" class="mobile-nav-item active" onclick="setActiveNavItem(this)">
+        <i class="fas fa-info-circle"></i>
+        <span>Tentang</span>
+      </a>
+      <a href="https://wa.me/6281290009691" target="_blank" class="mobile-nav-item" onclick="setActiveNavItem(this)">
+        <i class="fab fa-whatsapp"></i>
+        <span>Chat</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- WhatsApp Float Button -->
+  <a href="https://wa.me/6281290009691" target="_blank" 
+     class="whatsapp-float fixed bottom-24 right-4 md:right-6 z-40">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Back to Top -->
+  <button id="backToTop" 
+          class="fixed bottom-6 left-4 md:bottom-6 md:left-6 bg-dark-light border border-gray-800 w-12 h-12 rounded-full flex items-center justify-center text-primary hover:text-primary-dark transition-colors opacity-0 invisible transition-all duration-300 z-40 touch-button">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize sakura animation
+      createSakura();
+      
+      // Initialize back to top button
+      initBackToTop();
+      
+      // Setup mobile menu
+      setupMobileMenu();
+      
+      // Setup mobile navigation
+      setupMobileNavigation();
+      
+      // Add scroll animations
+      setupScrollAnimations();
+    });
+    
+    // Create sakura falling animation
+    function createSakura() {
+      const container = document.getElementById('sakura-container');
+      const sakuraCount = window.innerWidth < 768 ? 10 : 20;
+      
+      for (let i = 0; i < sakuraCount; i++) {
+        const sakura = document.createElement('div');
+        sakura.className = 'sakura';
+        
+        const left = Math.random() * 100;
+        const delay = Math.random() * 10;
+        const duration = 10 + Math.random() * 10;
+        
+        sakura.style.left = `${left}%`;
+        sakura.style.animation = `sakura-fall ${duration}s linear ${delay}s infinite`;
+        sakura.style.opacity = 0.3 + Math.random() * 0.4;
+        sakura.style.width = `${10 + Math.random() * 20}px`;
+        sakura.style.height = sakura.style.width;
+        
+        container.appendChild(sakura);
+      }
+    }
+    
+    // Mobile menu functions
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const isHidden = menu.classList.contains('hidden');
+      
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      } else {
+        menu.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+    }
+    
+    function setupMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') {
+          toggleMobileMenu();
+        }
+      });
+      
+      document.addEventListener('click', function(e) {
+        const menu = document.getElementById('mobileMenu');
+        const menuButton = document.querySelector('button[onclick="toggleMobileMenu()"]');
+        
+        if (!menu.classList.contains('hidden') && 
+            !menu.contains(e.target) && 
+            !menuButton.contains(e.target)) {
+          toggleMobileMenu();
+        }
+      });
+    }
+    
+    // Mobile navigation setup
+    function setupMobileNavigation() {
+      const navItems = document.querySelectorAll('.mobile-nav-item');
+      
+      navItems.forEach(item => {
+        item.addEventListener('click', function() {
+          setActiveNavItem(this);
+        });
+      });
+    }
+    
+    function setActiveNavItem(element) {
+      document.querySelectorAll('.mobile-nav-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      element.classList.add('active');
+    }
+    
+    // Back to Top button
+    function initBackToTop() {
+      const button = document.getElementById('backToTop');
+      
+      window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+          button.classList.remove('opacity-0', 'invisible');
+          button.classList.add('opacity-100', 'visible');
+        } else {
+          button.classList.remove('opacity-100', 'visible');
+          button.classList.add('opacity-0', 'invisible');
+        }
+      });
+      
+      button.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+    
+    // Scroll animations
+    function setupScrollAnimations() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      document.querySelectorAll('.team-card, .value-card, .timeline-item').forEach(card => {
+        observer.observe(card);
+      });
+    }
+  </script>
+</body>
+</html>

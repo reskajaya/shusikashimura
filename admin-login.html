@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin - Shushi Kashimura</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Yuji+Mai&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #1A1A1A 0%, #2A2520 100%);
+            font-family: 'Noto Sans JP', sans-serif;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .login-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            max-width: 420px;
+            width: 90%;
+            overflow: hidden;
+        }
+        
+        .login-header {
+            background: linear-gradient(135deg, rgba(198, 40, 40, 0.2), rgba(46, 125, 50, 0.1));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #C62828 0%, #FF6F00 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .form-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            color: #fff;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #C62828;
+            box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #C62828 0%, #B71C1C 100%);
+            color: white;
+            font-weight: bold;
+            padding: 16px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(198, 40, 40, 0.3);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #2A2520, #3A3530);
+            border-left: 4px solid #C62828;
+            padding: 16px 20px;
+            border-radius: 12px;
+            z-index: 1000;
+            max-width: 350px;
+            display: none;
+            animation: slideIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .sakura {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #F8BBD0;
+            border-radius: 50% 0 50% 50%;
+            transform: rotate(45deg);
+            opacity: 0.7;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sakura Animation -->
+    <div id="sakura-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+    
+    <!-- Login Container -->
+    <div class="login-container">
+        <!-- Header -->
+        <div class="login-header p-8 text-center">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-red-600 to-red-800 rounded-2xl mb-6 shadow-lg">
+                <i class="fas fa-fish text-white text-3xl"></i>
+            </div>
+            <h1 class="text-4xl font-bold font-heading mb-2">寿司<span class="text-red-500">樫村</span></h1>
+            <p class="text-gray-400">Shushi Kashimura - Admin Panel</p>
+        </div>
+        
+        <!-- Form -->
+        <div class="p-8">
+            <form id="loginForm" class="space-y-6">
+                <div>
+                    <label class="block text-gray-300 mb-3 font-medium">
+                        <i class="fas fa-user mr-2"></i>Username
+                    </label>
+                    <input type="text" id="username" 
+                           class="form-input w-full" 
+                           placeholder="Masukkan username admin" 
+                           required
+                           autocomplete="username">
+                </div>
+                
+                <div>
+                    <label class="block text-gray-300 mb-3 font-medium">
+                        <i class="fas fa-lock mr-2"></i>Password
+                    </label>
+                    <input type="password" id="password" 
+                           class="form-input w-full" 
+                           placeholder="Masukkan password" 
+                           required
+                           autocomplete="current-password">
+                </div>
+                
+                <div class="pt-2">
+                    <button type="submit" id="loginButton" class="btn-primary w-full flex items-center justify-center">
+                        <i class="fas fa-sign-in-alt mr-3"></i>
+                        <span id="loginText">Login ke Dashboard</span>
+                        <span id="loginLoading" class="hidden ml-3">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </span>
+                    </button>
+                </div>
+                
+                <!-- Login Info -->
+                <div class="mt-6 pt-6 border-t border-gray-800">
+                    <div class="bg-gray-900/50 rounded-xl p-4">
+                        <h4 class="font-bold text-gray-300 mb-2">
+                            <i class="fas fa-info-circle mr-2 text-blue-400"></i>Informasi Login
+                        </h4>
+                        <div class="space-y-2 text-sm text-gray-400">
+                            <div class="flex items-center">
+                                <i class="fas fa-user-secret mr-2 text-yellow-400"></i>
+                                <span>Username: <code class="bg-gray-800 px-2 py-1 rounded ml-1">admin</code></span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-key mr-2 text-yellow-400"></i>
+                                <span>Password: <code class="bg-gray-800 px-2 py-1 rounded ml-1">shushi2024</code></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Back to Website -->
+                <div class="text-center">
+                    <a href="index.html" class="inline-flex items-center text-gray-400 hover:text-red-400 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Kembali ke Website
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification hidden">
+        <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0">
+                <i id="notificationIcon" class="fas fa-check-circle text-red-500 text-xl mt-1"></i>
+            </div>
+            <div class="flex-1">
+                <p id="notificationTitle" class="font-bold text-white mb-1"></p>
+                <p id="notificationMessage" class="text-gray-300 text-sm"></p>
+            </div>
+            <button onclick="hideNotification()" class="text-gray-400 hover:text-white transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Login page loaded');
+            createSakura();
+            
+            // Auto-focus on username field
+            document.getElementById('username').focus();
+            
+            // Setup form submission
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                handleLogin();
+            });
+            
+            // Enter key support
+            document.getElementById('password').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleLogin();
+                }
+            });
+            
+            // Check if already logged in
+            if (sessionStorage.getItem('admin_logged_in') === 'true') {
+                showNotification('Info', 'Anda sudah login, mengarahkan ke dashboard...', 'info');
+                setTimeout(() => {
+                    window.location.href = 'admin-dashboard.html';
+                }, 1500);
+            }
+        });
+        
+        // Create sakura falling animation
+        function createSakura() {
+            const container = document.getElementById('sakura-container');
+            const sakuraCount = 15;
+            
+            for (let i = 0; i < sakuraCount; i++) {
+                const sakura = document.createElement('div');
+                sakura.className = 'sakura';
+                
+                // Random position and animation
+                const left = Math.random() * 100;
+                const delay = Math.random() * 10;
+                const duration = 15 + Math.random() * 15;
+                const size = 10 + Math.random() * 20;
+                
+                sakura.style.left = `${left}%`;
+                sakura.style.animation = `sakuraFall ${duration}s linear ${delay}s infinite`;
+                sakura.style.opacity = 0.3 + Math.random() * 0.4;
+                sakura.style.width = `${size}px`;
+                sakura.style.height = `${size}px`;
+                
+                container.appendChild(sakura);
+            }
+        }
+        
+        // Handle login
+        function handleLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            // Show loading
+            document.getElementById('loginText').classList.add('hidden');
+            document.getElementById('loginLoading').classList.remove('hidden');
+            document.getElementById('loginButton').disabled = true;
+            
+            // Simulate API call delay
+            setTimeout(() => {
+                // Authentication
+                const validCredentials = [
+                    { username: 'admin', password: 'shushi2024' },
+                    { username: 'chef', password: 'kashimura123' },
+                    { username: 'manager', password: 'sushiadmin' }
+                ];
+                
+                const isValid = validCredentials.some(cred => 
+                    cred.username === username && cred.password === password
+                );
+                
+                if (isValid) {
+                    // Success
+                    sessionStorage.setItem('admin_logged_in', 'true');
+                    sessionStorage.setItem('admin_username', username);
+                    sessionStorage.setItem('admin_login_time', new Date().toISOString());
+                    
+                    showNotification('Login Berhasil', `Selamat datang, ${username}!`);
+                    
+                    // Redirect to dashboard
+                    setTimeout(() => {
+                        window.location.href = 'admin-dashboard.html';
+                    }, 1500);
+                    
+                } else {
+                    // Error
+                    showNotification('Login Gagal', 'Username atau password salah', 'error');
+                    
+                    // Reset button
+                    document.getElementById('loginText').classList.remove('hidden');
+                    document.getElementById('loginLoading').classList.add('hidden');
+                    document.getElementById('loginButton').disabled = false;
+                    
+                    // Shake animation
+                    const form = document.getElementById('loginForm');
+                    form.classList.add('animate__animated', 'animate__headShake');
+                    setTimeout(() => {
+                        form.classList.remove('animate__animated', 'animate__headShake');
+                    }, 1000);
+                    
+                    // Clear password field
+                    document.getElementById('password').value = '';
+                    document.getElementById('password').focus();
+                }
+            }, 800);
+        }
+        
+        // Show notification
+        function showNotification(title, message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const icon = document.getElementById('notificationIcon');
+            const titleEl = document.getElementById('notificationTitle');
+            const messageEl = document.getElementById('notificationMessage');
+            
+            // Set type
+            if (type === 'error') {
+                notification.className = 'notification border-l-4 border-red-500';
+                icon.className = 'fas fa-exclamation-circle text-red-500 text-xl mt-1';
+            } else if (type === 'warning') {
+                notification.className = 'notification border-l-4 border-yellow-500';
+                icon.className = 'fas fa-exclamation-triangle text-yellow-500 text-xl mt-1';
+            } else if (type === 'info') {
+                notification.className = 'notification border-l-4 border-blue-500';
+                icon.className = 'fas fa-info-circle text-blue-500 text-xl mt-1';
+            } else {
+                notification.className = 'notification border-l-4 border-green-500';
+                icon.className = 'fas fa-check-circle text-green-500 text-xl mt-1';
+            }
+            
+            titleEl.textContent = title;
+            messageEl.textContent = message;
+            
+            notification.classList.remove('hidden');
+            
+            // Auto hide
+            setTimeout(hideNotification, 3000);
+        }
+        
+        // Hide notification
+        function hideNotification() {
+            document.getElementById('notification').classList.add('hidden');
+        }
+        
+        // Add CSS for animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sakuraFall {
+                0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+                10% { opacity: 1; }
+                90% { opacity: 1; }
+                100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Galeri | Shushi Kashimura</title>
+  <meta name="description" content="Galeri Shushi Kashimura - Lihat suasana restoran, hidangan spesial, dan pengalaman kuliner Jepang autentik kami.">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#C62828',
+            secondary: '#2E7D32',
+            accent: '#FF6F00',
+            'primary-dark': '#B71C1C',
+            dark: '#1A1A1A',
+            'dark-light': '#2A2520',
+            'japan-red': '#C62828',
+            'sakura-pink': '#F8BBD0',
+            'wasabi-green': '#C5E1A5',
+            'soy-brown': '#5D4037',
+            'rice-white': '#FFF8E1',
+          },
+          fontFamily: {
+            'sans': ['"Noto Sans JP"', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            'heading': ['"Yuji Mai"', '"Noto Serif JP"', 'serif'],
+          },
+          animation: {
+            'float': 'float 3s ease-in-out infinite',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'slide-up': 'slideUp 0.5s ease-out',
+            'fade-in': 'fadeIn 0.6s ease-out',
+            'sakura-fall': 'sakuraFall 10s linear infinite',
+            'zoom-in': 'zoomIn 0.5s ease-out',
+            'slide-in': 'slideIn 0.3s ease-out',
+            'bounce-slow': 'bounce 2s infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            sakuraFall: {
+              '0%': { transform: 'translateY(-100px) rotate(0deg)', opacity: '0' },
+              '10%': { opacity: '1' },
+              '90%': { opacity: '1' },
+              '100%': { transform: 'translateY(100vh) rotate(360deg)', opacity: '0' },
+            },
+            zoomIn: {
+              '0%': { transform: 'scale(0.95)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+            slideIn: {
+              '0%': { transform: 'translateX(-100%)', opacity: '0' },
+              '100%': { transform: 'translateX(0)', opacity: '1' },
+            }
+          },
+          screens: {
+            'xs': '375px',
+            'sm': '640px',
+            'md': '768px',
+            'lg': '1024px',
+            'xl': '1280px',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Yuji+Mai&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Animate CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  
+  <style>
+    /* Copy semua style dari index.html */
+    :root {
+      --primary-glow: rgba(198, 40, 40, 0.15);
+      --accent-glow: rgba(255, 111, 0, 0.15);
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #1A1A1A 0%, #2A2520 100%);
+      font-family: 'Noto Sans JP', sans-serif;
+      color: #fcfcfc;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #2A2520;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #C62828;
+      border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B71C1C;
+    }
+    
+    /* Gradient Text */
+    .gradient-text {
+      background: linear-gradient(90deg, #C62828 0%, #FF6F00 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+    
+    /* Glass Effect */
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Gallery Card Styles */
+    .gallery-card {
+      background: linear-gradient(145deg, rgba(198, 40, 40, 0.05), rgba(255, 111, 0, 0.05));
+      border: 1px solid rgba(198, 40, 40, 0.1);
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .gallery-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(198, 40, 40, 0.3);
+      box-shadow: 0 10px 30px rgba(198, 40, 40, 0.1);
+    }
+    
+    .gallery-card:hover .gallery-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(26, 26, 26, 0.95), transparent);
+      padding: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+    }
+    
+    /* Japanese Pattern Background */
+    .japanese-pattern {
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(198, 40, 40, 0.1) 2px, transparent 2px),
+        radial-gradient(circle at 75% 75%, rgba(255, 111, 0, 0.1) 2px, transparent 2px);
+      background-size: 60px 60px;
+    }
+    
+    /* Sakura Effect */
+    .sakura {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #F8BBD0;
+      border-radius: 50% 0 50% 50%;
+      transform: rotate(45deg);
+      opacity: 0.7;
+      z-index: 1;
+    }
+    
+    /* Lightbox */
+    .lightbox-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 90%;
+      animation: zoomIn 0.3s ease;
+    }
+    
+    /* Japanese Decorative Elements */
+    .japanese-border {
+      position: relative;
+      padding-bottom: 20px;
+    }
+    
+    .japanese-border::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #C62828, transparent);
+    }
+    
+    /* Mobile Navigation */
+    .mobile-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(26, 26, 26, 0.98);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(198, 40, 40, 0.2);
+      padding: 12px 0;
+      z-index: 9998;
+      display: none;
+    }
+    
+    .mobile-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      color: #9CA3AF;
+      transition: all 0.3s ease;
+      flex: 1;
+    }
+    
+    .mobile-nav-item.active {
+      color: #C62828;
+    }
+    
+    /* Button Styles */
+    .btn-primary {
+      background: linear-gradient(135deg, #C62828 0%, #B71C1C 100%);
+      color: #f7f7f4;
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(198, 40, 40, 0.3);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(198, 40, 40, 0.4);
+    }
+    
+    /* Navbar */
+    .navbar {
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(198, 40, 40, 0.1);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 640px) {
+      .mobile-nav {
+        display: flex;
+      }
+      
+      .gallery-card {
+        margin-bottom: 12px;
+      }
+      
+      .lightbox-content {
+        max-width: 95%;
+        max-height: 70%;
+      }
+    }
+    
+    @media (min-width: 641px) {
+      .mobile-nav {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen overflow-x-hidden">
+  <!-- Sakura Animation -->
+  <div id="sakura-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+  
+  <!-- Navigation -->
+  <nav class="navbar fixed top-0 left-0 right-0 z-50 py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+          <a href="index.html" class="flex items-center space-x-3">
+            <div class="relative">
+              <div class="absolute inset-0 bg-primary rounded-xl blur-sm"></div>
+              <div class="relative bg-primary p-3 rounded-xl">
+                <i class="fas fa-fish text-white text-2xl"></i>
+              </div>
+            </div>
+            <div>
+              <h1 class="text-2xl font-heading font-bold text-white">寿司<span class="text-primary">樫村</span></h1>
+              <p class="text-xs text-gray-400">Shushi Kashimura</p>
+            </div>
+          </a>
+        </div>
+        
+        <div class="hidden lg:flex space-x-8">
+          <a href="index.html" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group">
+            <span>Beranda</span>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a href="menu-lengkap.html" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group">
+            <span>Menu</span>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a href="galeri.html" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group active">
+            <span>Galeri</span>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a href="tentang.html" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group">
+            <span>Tentang</span>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a href="promosi.html" class="text-gray-300 hover:text-primary transition-colors duration-300 font-medium relative group">
+            <span>Promosi</span>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
+        </div>
+        
+        <div class="flex items-center space-x-4">
+          <a href="https://wa.me/6281290009691" target="_blank" class="hidden md:flex items-center space-x-2 text-gray-300 hover:text-green-500 transition-colors">
+            <i class="fab fa-whatsapp text-green-500"></i>
+            <span class="font-medium">+62 812-9000-9691</span>
+          </a>
+          <a href="index.html#reservasi" 
+             class="btn-primary text-sm desktop-only">
+            <i class="fas fa-calendar-check"></i>
+            <span>Reservasi</span>
+          </a>
+          <button class="lg:hidden text-gray-300 hover:text-primary transition-colors touch-button" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="lg:hidden hidden absolute top-full left-0 right-0 bg-dark border-t border-gray-800 p-4">
+      <div class="swipe-indicator"></div>
+      <div class="flex flex-col space-y-2">
+        <a href="index.html" class="text-gray-300 hover:text-primary py-3 px-4 transition-colors rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center" onclick="toggleMobileMenu()">
+          <i class="fas fa-home mr-3 w-6 text-center"></i>
+          <span>Beranda</span>
+        </a>
+        <a href="menu-lengkap.html" class="text-gray-300 hover:text-primary py-3 px-4 transition-colors rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center" onclick="toggleMobileMenu()">
+          <i class="fas fa-utensils mr-3 w-6 text-center"></i>
+          <span>Menu</span>
+        </a>
+        <a href="galeri.html" class="text-gray-300 hover:text-primary py-3 px-4 transition-colors rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center" onclick="toggleMobileMenu()">
+          <i class="fas fa-images mr-3 w-6 text-center"></i>
+          <span>Galeri</span>
+        </a>
+        <a href="tentang.html" class="text-gray-300 hover:text-primary py-3 px-4 transition-colors rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center" onclick="toggleMobileMenu()">
+          <i class="fas fa-info-circle mr-3 w-6 text-center"></i>
+          <span>Tentang</span>
+        </a>
+        <a href="promosi.html" class="text-gray-300 hover:text-primary py-3 px-4 transition-colors rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center" onclick="toggleMobileMenu()">
+          <i class="fas fa-tag mr-3 w-6 text-center"></i>
+          <span>Promosi</span>
+        </a>
+        <a href="https://wa.me/6281290009691" target="_blank" class="text-gray-300 hover:text-green-500 py-3 px-4 transition-colors rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center" onclick="toggleMobileMenu()">
+          <i class="fab fa-whatsapp text-green-500 mr-3 w-6 text-center"></i>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header Section -->
+  <section class="pt-24 pb-8 md:pt-32 md:pb-12 relative overflow-hidden japanese-pattern">
+    <div class="absolute inset-0 bg-gradient-to-br from-dark via-dark-light to-dark opacity-95"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+      <div class="text-center">
+        <h1 class="text-3xl xs:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-4 md:mb-6 leading-tight">
+          <span class="gradient-text">Galeri</span> Shushi Kashimura
+        </h1>
+        <p class="text-base md:text-xl text-gray-300 max-w-3xl mx-auto mb-6">
+          Lihat suasana autentik, hidangan spesial, dan momen indah di restoran kami
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Categories -->
+  <section class="py-8">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+        <button class="px-4 py-2 rounded-full bg-primary text-white font-semibold transition-all duration-300" onclick="filterGallery('all')">
+          Semua
+        </button>
+        <button class="px-4 py-2 rounded-full glass-effect text-gray-300 hover:text-primary font-semibold transition-all duration-300" onclick="filterGallery('interior')">
+          Interior
+        </button>
+        <button class="px-4 py-2 rounded-full glass-effect text-gray-300 hover:text-primary font-semibold transition-all duration-300" onclick="filterGallery('food')">
+          Hidangan
+        </button>
+        <button class="px-4 py-2 rounded-full glass-effect text-gray-300 hover:text-primary font-semibold transition-all duration-300" onclick="filterGallery('chef')">
+          Koki
+        </button>
+        <button class="px-4 py-2 rounded-full glass-effect text-gray-300 hover:text-primary font-semibold transition-all duration-300" onclick="filterGallery('event')">
+          Acara
+        </button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        
+        <!-- Interior Items -->
+        <div class="gallery-card animate__animated animate__fadeInUp" data-category="interior" onclick="openLightbox('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Sushi Bar Premium')">
+          <div class="relative h-48 md:h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Sushi Bar" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="gallery-overlay">
+              <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Sushi Bar Premium</h3>
+              <p class="text-gray-300 text-xs md:text-sm">Nikmati pertunjukan langsung koki kami</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-card animate__animated animate__fadeInUp" data-category="interior" onclick="openLightbox('https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Private Dining Room')">
+          <div class="relative h-48 md:h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Private Room" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="gallery-overlay">
+              <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Private Dining Room</h3>
+              <p class="text-gray-300 text-xs md:text-sm">Ruang khusus untuk acara keluarga atau bisnis</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-card animate__animated animate__fadeInUp" data-category="interior" onclick="openLightbox('https://images.unsplash.com/photo-1578474846511-04ba529f0b88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Traditional Japanese Decor')">
+          <div class="relative h-48 md:h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1578474846511-04ba529f0b88?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Japanese Decor" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="gallery-overlay">
+              <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Dekorasi Tradisional</h3>
+              <p class="text-gray-300 text-xs md:text-sm">Sentuhan autentik budaya Jepang</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Food Items -->
+        <div class="gallery-card animate__animated animate__fadeInUp" data-category="food" onclick="openLightbox('https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Sashimi Platter Premium')">
+          <div class="relative h-48 md:h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Sashimi Platter" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="gallery-overlay">
+              <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Sashimi Platter</h3>
+              <p class="text-gray-300 text-xs md:text-sm">12 jenis sashimi segar pilihan</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-card animate__animated animate__fadeInUp" data-category="food" onclick="openLightbox('https://images.unsplash.com/photo-1553621042-f6e147245754?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Nigiri Omakase Set')">
+          <div class="relative h-48 md:h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Nigiri Set" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="gallery-overlay">
+              <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Nigiri Omakase</h3>
+              <p class="text-gray-300 text-xs md:text-sm">10 piece nigiri pilihan koki</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-card animate__animated animate__fadeInUp" data-category="food" onclick="openLightbox('https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Ramen Special')">
+          <div class="relative h-48 md:h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Ramen" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="gallery-overlay">
+              <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Ramen Special</h3>
+              <p class="text-gray-300 text-xs md:text-sm">Kaldu 12 jam dengan chashu premium</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chef Items -->
+        <div class="gallery-card animate__animated animate__fadeInUp" data-category="chef" onclick="openLightbox('https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Chef Kenji Yamamoto')">
+          <div class="relative h-48 md:h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Chef Preparing Sushi" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="gallery-overlay">
+              <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Chef Kenji</h3>
+              <p class="text-gray-300 text-xs md:text-sm">Koki berpengalaman 20 tahun dari Tokyo</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-card animate__animated animate__fadeInUp" data-category="chef" onclick="openLightbox('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Teppanyaki Show')">
+          <div class="relative h-48 md:h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Teppanyaki Show" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="gallery-overlay">
+              <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Teppanyaki Show</h3>
+              <p class="text-gray-300 text-xs md:text-sm">Pertunjukan memasak langsung di depan Anda</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-card animate__animated animate__fadeInUp" data-category="chef" onclick="openLightbox('https://images.unsplash.com/photo-1578474846511-04ba529f0b88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Sushi Masterclass')">
+          <div class="relative h-48 md:h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1569058532251-9e19b79d7c6a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Sushi Preparation" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="gallery-overlay">
+              <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Sushi Masterclass</h3>
+              <p class="text-gray-300 text-xs md:text-sm">Pelatihan membuat sushi untuk tamu</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Items -->
+        <div class="gallery-card animate__animated animate__fadeInUp" data-category="event" onclick="openLightbox('https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Birthday Celebration')">
+          <div class="relative h-48 md:h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Birthday Party" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="gallery-overlay">
+              <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Ulang Tahun Spesial</h3>
+              <p class="text-gray-300 text-xs md:text-sm">Paket spesial untuk perayaan ulang tahun</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-card animate__animated animate__fadeInUp" data-category="event" onclick="openLightbox('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Corporate Event')">
+          <div class="relative h-48 md:h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Corporate Event" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="gallery-overlay">
+              <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Acara Perusahaan</h3>
+              <p class="text-gray-300 text-xs md:text-sm">Ruang meeting dan dining untuk bisnis</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-card animate__animated animate__fadeInUp" data-category="event" onclick="openLightbox('https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Sake Tasting Night')">
+          <div class="relative h-48 md:h-64 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1566633808645-70280c0a28f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Sake Tasting" 
+                 class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+            <div class="gallery-overlay">
+              <h3 class="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Sake Tasting Night</h3>
+              <p class="text-gray-300 text-xs md:text-sm">Acara khusus pencicipan sake premium</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Load More Button -->
+      <div class="text-center mt-8">
+        <button onclick="loadMoreImages()" class="btn-primary">
+          <i class="fas fa-plus"></i>
+          <span>Muat Lebih Banyak</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-12">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="glass-effect rounded-2xl md:rounded-3xl p-6 md:p-12 text-center">
+        <h2 class="text-2xl md:text-3xl font-heading font-bold text-white mb-4 mobile-text-lg">
+          Ingin Mengunjungi <span class="gradient-text">Restoran Kami?</span>
+        </h2>
+        <p class="text-base md:text-xl text-gray-300 mb-6 max-w-2xl mx-auto">
+          Lihat langsung suasana autentik Jepang dan nikmati pengalaman kuliner terbaik
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
+          <a href="index.html#reservasi" class="btn-primary">
+            <i class="fas fa-calendar-check"></i>
+            <span>Reservasi Sekarang</span>
+          </a>
+          <a href="https://wa.me/6281290009691" target="_blank" class="btn-secondary">
+            <i class="fas fa-directions"></i>
+            <span>Tanya Lokasi</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark border-t border-gray-800 py-8 md:py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
+        <div>
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="bg-primary p-2 rounded-lg">
+              <i class="fas fa-fish text-white text-xl"></i>
+            </div>
+            <h3 class="text-xl md:text-2xl font-heading font-bold text-white">寿司<span class="text-primary">樫村</span></h3>
+          </div>
+          <p class="text-gray-400 text-sm md:text-base">Restoran Jepang autentik dengan bahan berkualitas premium dan koki profesional berpengalaman.</p>
+        </div>
+        
+        <div>
+          <h4 class="text-base md:text-lg font-bold text-white mb-3 md:mb-4">Menu Utama</h4>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base">Beranda</a></li>
+            <li><a href="menu-lengkap.html" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base">Menu</a></li>
+            <li><a href="galeri.html" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base">Galeri</a></li>
+            <li><a href="tentang.html" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base">Tentang Kami</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-base md:text-lg font-bold text-white mb-3 md:mb-4">Layanan</h4>
+          <ul class="space-y-2">
+            <li><a href="index.html#reservasi" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base">Reservasi Online</a></li>
+            <li><a href="menu-lengkap.html" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base">Catering</a></li>
+            <li><a href="index.html#reservasi" class="text-gray-400 hover:text-primary transition-colors text-sm md:text-base">Acara Khusus</a></li>
+            <li><a href="https://wa.me/6281290009691" target="_blank" class="text-gray-400 hover:text-green-500 transition-colors text-sm md:text-base">Take Away</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-base md:text-lg font-bold text-white mb-3 md:mb-4">Hubungi Kami</h4>
+          <div class="space-y-3">
+            <a href="https://wa.me/6281290009691" target="_blank" class="flex items-center space-x-2 md:space-x-3 text-gray-400 hover:text-green-500 transition-colors text-sm md:text-base">
+              <i class="fab fa-whatsapp text-green-500"></i>
+              <span>(+62)812-9000-9691</span>
+            </a>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                <i class="fab fa-instagram text-lg md:text-xl"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                <i class="fab fa-facebook text-lg md:text-xl"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                <i class="fab fa-tripadvisor text-lg md:text-xl"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 pt-6 md:pt-8 text-center">
+        <p class="text-gray-500 text-sm md:text-base">© 2024 Shushi Kashimura. All rights reserved.</p>
+        <p class="text-gray-600 text-xs md:text-sm mt-2">Restoran Jepang Autentik | Jakarta, Indonesia</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Navigation -->
+  <div class="mobile-nav">
+    <div class="flex justify-around">
+      <a href="index.html" class="mobile-nav-item" onclick="setActiveNavItem(this)">
+        <i class="fas fa-home"></i>
+        <span>Beranda</span>
+      </a>
+      <a href="menu-lengkap.html" class="mobile-nav-item" onclick="setActiveNavItem(this)">
+        <i class="fas fa-utensils"></i>
+        <span>Menu</span>
+      </a>
+      <a href="galeri.html" class="mobile-nav-item active" onclick="setActiveNavItem(this)">
+        <i class="fas fa-images"></i>
+        <span>Galeri</span>
+      </a>
+      <a href="promosi.html" class="mobile-nav-item" onclick="setActiveNavItem(this)">
+        <i class="fas fa-tag"></i>
+        <span>Promo</span>
+      </a>
+      <a href="https://wa.me/6281290009691" target="_blank" class="mobile-nav-item" onclick="setActiveNavItem(this)">
+        <i class="fab fa-whatsapp"></i>
+        <span>Chat</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div id="lightboxModal" class="lightbox-modal hidden">
+    <div class="relative">
+      <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-3xl hover:text-primary transition-colors z-10 touch-button">
+        <i class="fas fa-times"></i>
+      </button>
+      <img id="lightboxImage" src="" alt="" class="lightbox-content rounded-lg">
+      <div id="lightboxCaption" class="text-white text-center mt-4 text-base md:text-lg"></div>
+    </div>
+  </div>
+
+  <!-- WhatsApp Float Button -->
+  <a href="https://wa.me/6281290009691" target="_blank" 
+     class="whatsapp-float fixed bottom-24 right-4 md:right-6 z-40">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Back to Top -->
+  <button id="backToTop" 
+          class="fixed bottom-6 left-4 md:bottom-6 md:left-6 bg-dark-light border border-gray-800 w-12 h-12 rounded-full flex items-center justify-center text-primary hover:text-primary-dark transition-colors opacity-0 invisible transition-all duration-300 z-40 touch-button">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize sakura animation
+      createSakura();
+      
+      // Initialize back to top button
+      initBackToTop();
+      
+      // Setup mobile menu
+      setupMobileMenu();
+      
+      // Setup mobile navigation
+      setupMobileNavigation();
+      
+      // Add scroll animations
+      setupScrollAnimations();
+    });
+    
+    // Create sakura falling animation
+    function createSakura() {
+      const container = document.getElementById('sakura-container');
+      const sakuraCount = window.innerWidth < 768 ? 10 : 20;
+      
+      for (let i = 0; i < sakuraCount; i++) {
+        const sakura = document.createElement('div');
+        sakura.className = 'sakura';
+        
+        const left = Math.random() * 100;
+        const delay = Math.random() * 10;
+        const duration = 10 + Math.random() * 10;
+        
+        sakura.style.left = `${left}%`;
+        sakura.style.animation = `sakura-fall ${duration}s linear ${delay}s infinite`;
+        sakura.style.opacity = 0.3 + Math.random() * 0.4;
+        sakura.style.width = `${10 + Math.random() * 20}px`;
+        sakura.style.height = sakura.style.width;
+        
+        container.appendChild(sakura);
+      }
+    }
+    
+    // Gallery filter function
+    function filterGallery(category) {
+      const cards = document.querySelectorAll('.gallery-card');
+      const buttons = document.querySelectorAll('.flex button');
+      
+      // Update active button
+      buttons.forEach(btn => {
+        if (btn.textContent.trim().toLowerCase() === category || 
+            (category === 'all' && btn.textContent.trim().toLowerCase() === 'semua')) {
+          btn.className = 'px-4 py-2 rounded-full bg-primary text-white font-semibold transition-all duration-300';
+        } else {
+          btn.className = 'px-4 py-2 rounded-full glass-effect text-gray-300 hover:text-primary font-semibold transition-all duration-300';
+        }
+      });
+      
+      // Show/hide cards
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'block';
+          setTimeout(() => {
+            card.classList.add('animate__animated', 'animate__fadeIn');
+          }, 10);
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+    
+    // Load more images function
+    function loadMoreImages() {
+      // In a real app, this would load more images from server
+      alert('Fitur "Muat Lebih Banyak" sedang dikembangkan. Semua gambar sudah ditampilkan.');
+    }
+    
+    // Lightbox functions
+    function openLightbox(imageSrc, caption) {
+      const lightbox = document.getElementById('lightboxModal');
+      const lightboxImage = document.getElementById('lightboxImage');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      
+      lightboxImage.src = imageSrc;
+      lightboxImage.alt = caption;
+      lightboxCaption.textContent = caption;
+      
+      lightbox.classList.remove('hidden');
+      lightbox.style.display = 'flex';
+      
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightboxModal');
+      lightbox.classList.add('hidden');
+      lightbox.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+    
+    // Close lightbox when clicking outside
+    document.getElementById('lightboxModal').addEventListener('click', function(e) {
+      if (e.target.id === 'lightboxModal') {
+        closeLightbox();
+      }
+    });
+    
+    // Mobile menu functions
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const isHidden = menu.classList.contains('hidden');
+      
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      } else {
+        menu.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+    }
+    
+    function setupMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') {
+          toggleMobileMenu();
+        }
+      });
+      
+      document.addEventListener('click', function(e) {
+        const menu = document.getElementById('mobileMenu');
+        const menuButton = document.querySelector('button[onclick="toggleMobileMenu()"]');
+        
+        if (!menu.classList.contains('hidden') && 
+            !menu.contains(e.target) && 
+            !menuButton.contains(e.target)) {
+          toggleMobileMenu();
+        }
+      });
+    }
+    
+    // Mobile navigation setup
+    function setupMobileNavigation() {
+      const navItems = document.querySelectorAll('.mobile-nav-item');
+      
+      navItems.forEach(item => {
+        item.addEventListener('click', function() {
+          setActiveNavItem(this);
+        });
+      });
+    }
+    
+    function setActiveNavItem(element) {
+      document.querySelectorAll('.mobile-nav-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      element.classList.add('active');
+    }
+    
+    // Back to Top button
+    function initBackToTop() {
+      const button = document.getElementById('backToTop');
+      
+      window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+          button.classList.remove('opacity-0', 'invisible');
+          button.classList.add('opacity-100', 'visible');
+        } else {
+          button.classList.remove('opacity-100', 'visible');
+          button.classList.add('opacity-0', 'invisible');
+        }
+      });
+      
+      button.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+    
+    // Scroll animations
+    function setupScrollAnimations() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      document.querySelectorAll('.gallery-card').forEach(card => {
+        observer.observe(card);
+      });
+    }
+  </script>
+</body>
+</html>

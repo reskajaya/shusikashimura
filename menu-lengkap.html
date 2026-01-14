@@ -1,0 +1,2371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Menu Lengkap - Shushi Kashimura</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#C62828',
+            secondary: '#2E7D32',
+            accent: '#FF6F00',
+            dark: '#1A1A1A',
+            'dark-light': '#2A2520',
+            'gold': '#FFD700',
+            'gold-light': '#FFF8DC',
+            'silver': '#C0C0C0'
+          },
+          fontFamily: {
+            'sans': ['"Noto Sans JP"', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            'heading': ['"Yuji Mai"', '"Noto Serif JP"', 'serif'],
+          },
+          screens: {
+            'xs': '375px',
+            'sm': '640px',
+            'md': '768px',
+            'lg': '1024px',
+            'xl': '1280px',
+            '2xl': '1536px',
+          },
+          animation: {
+            'float': 'float 3s ease-in-out infinite',
+            'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+            'shimmer': 'shimmer 2s linear infinite',
+            'bounce-glow': 'bounce-glow 2s ease-in-out infinite',
+            'slide-up': 'slide-up 0.5s ease-out',
+            'fade-in': 'fade-in 0.5s ease-out',
+            'scale-in': 'scale-in 0.3s ease-out',
+            'wiggle': 'wiggle 0.5s ease-in-out'
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' }
+            },
+            'pulse-glow': {
+              '0%, 100%': { opacity: 1 },
+              '50%': { opacity: 0.7 }
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-1000px 0' },
+              '100%': { backgroundPosition: '1000px 0' }
+            },
+            'bounce-glow': {
+              '0%, 100%': { 
+                transform: 'scale(1)',
+                boxShadow: '0 0 20px rgba(255, 111, 0, 0.5)'
+              },
+              '50%': { 
+                transform: 'scale(1.05)',
+                boxShadow: '0 0 30px rgba(255, 111, 0, 0.8)'
+              }
+            },
+            'slide-up': {
+              '0%': { transform: 'translateY(20px)', opacity: 0 },
+              '100%': { transform: 'translateY(0)', opacity: 1 }
+            },
+            'fade-in': {
+              '0%': { opacity: 0 },
+              '100%': { opacity: 1 }
+            },
+            'scale-in': {
+              '0%': { transform: 'scale(0.9)', opacity: 0 },
+              '100%': { transform: 'scale(1)', opacity: 1 }
+            },
+            wiggle: {
+              '0%, 100%': { transform: 'rotate(-3deg)' },
+              '50%': { transform: 'rotate(3deg)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Yuji+Mai&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Animate CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  
+  <style>
+    /* CSS yang sama seperti sebelumnya... */
+    body {
+      background: linear-gradient(135deg, #1A1A1A 0%, #2A2520 100%);
+      font-family: 'Noto Sans JP', sans-serif;
+      color: #F0F0F0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(90deg, #C62828 0%, #FF6F00 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .gradient-gold {
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    /* Mobile Menu Styles - NEW */
+    .mobile-menu-container {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 280px;
+      height: 100vh;
+      background: linear-gradient(135deg, #1A1A1A 0%, #2A2520 100%);
+      z-index: 9999;
+      transition: left 0.3s ease-in-out;
+      box-shadow: 5px 0 30px rgba(0, 0, 0, 0.5);
+      overflow-y: auto;
+    }
+    
+    .mobile-menu-container.active {
+      left: 0;
+    }
+    
+    .mobile-menu-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      z-index: 9998;
+    }
+    
+    .mobile-menu-overlay.active {
+      display: block;
+    }
+    
+    .mobile-menu-header {
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(198, 40, 40, 0.1);
+    }
+    
+    .mobile-menu-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .mobile-menu-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .mobile-menu-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: rotate(90deg);
+    }
+    
+    .mobile-menu-nav {
+      padding: 20px 0;
+    }
+    
+    .mobile-menu-link {
+      display: flex;
+      align-items: center;
+      padding: 16px 24px;
+      color: #E5E7EB;
+      text-decoration: none;
+      transition: all 0.3s;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .mobile-menu-link:hover,
+    .mobile-menu-link.active {
+      background: rgba(198, 40, 40, 0.1);
+      color: #FF8A8A;
+      padding-left: 32px;
+      border-left: 4px solid #C62828;
+    }
+    
+    .mobile-menu-link i {
+      width: 24px;
+      margin-right: 12px;
+      font-size: 18px;
+    }
+    
+    .mobile-menu-footer {
+      padding: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: auto;
+    }
+    
+    .mobile-menu-social {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .mobile-menu-social a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: all 0.3s;
+    }
+    
+    .mobile-menu-social a:hover {
+      background: #C62828;
+      transform: translateY(-3px);
+    }
+    
+    /* Existing CSS styles tetap sama... */
+    .banner-slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      height: 450px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+    
+    @media (max-width: 768px) {
+      .banner-slider {
+        height: 320px;
+        border-radius: 16px;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .banner-slider {
+        height: 280px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .banner-slider {
+        height: 220px;
+        border-radius: 12px;
+      }
+    }
+    
+    .banner-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+    }
+    
+    .banner-slide.active {
+      opacity: 1;
+    }
+    
+    .banner-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .banner-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.1) 100%);
+      padding: 3rem;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    @media (max-width: 1024px) {
+      .banner-overlay {
+        padding: 2rem;
+        background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 100%);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .banner-overlay {
+        padding: 1.5rem;
+        background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.75) 100%);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .banner-overlay {
+        padding: 1rem;
+        justify-content: flex-end;
+        background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+      }
+    }
+    
+    .banner-type-badge {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      animation: scale-in 0.5s ease-out;
+    }
+    
+    .banner-type-hero { 
+      background: linear-gradient(135deg, #C62828, #B71C1C);
+      color: white;
+      box-shadow: 0 5px 15px rgba(198, 40, 40, 0.4);
+    }
+    .banner-type-promo { 
+      background: linear-gradient(135deg, #FF6F00, #E65100);
+      color: white;
+      box-shadow: 0 5px 15px rgba(255, 111, 0, 0.4);
+    }
+    .banner-type-info { 
+      background: linear-gradient(135deg, #2196F3, #0D47A1);
+      color: white;
+      box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+    }
+    
+    .slider-controls {
+      position: absolute;
+      bottom: 25px;
+      right: 25px;
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+    
+    @media (max-width: 768px) {
+      .slider-controls {
+        bottom: 15px;
+        right: 15px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .slider-controls {
+        bottom: 10px;
+        right: 10px;
+        gap: 8px;
+      }
+    }
+    
+    .slider-btn {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 18px;
+    }
+    
+    @media (max-width: 768px) {
+      .slider-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .slider-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+      }
+    }
+    
+    .slider-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: scale(1.1);
+    }
+    
+    .slider-dots {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+    
+    @media (max-width: 768px) {
+      .slider-dots {
+        bottom: 20px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .slider-dots {
+        bottom: 15px;
+        gap: 6px;
+      }
+    }
+    
+    .slider-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    @media (max-width: 480px) {
+      .slider-dot {
+        width: 10px;
+        height: 10px;
+      }
+    }
+    
+    .slider-dot.active {
+      background: white;
+      transform: scale(1.3);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Promo Banner Styles */
+    .promo-section-title {
+      position: relative;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .promo-section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, #C62828 0%, #FF6F00 100%);
+      border-radius: 2px;
+    }
+    
+    @media (max-width: 768px) {
+      .promo-section-title {
+        margin-bottom: 30px;
+      }
+      
+      .promo-section-title::after {
+        width: 80px;
+        height: 3px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .promo-section-title {
+        margin-bottom: 20px;
+      }
+      
+      .promo-section-title::after {
+        width: 60px;
+        height: 2px;
+      }
+    }
+    
+    /* Promo Card Layout */
+    .promo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    @media (max-width: 1024px) {
+      .promo-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .promo-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .promo-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+    
+    /* Promo Cards Styles - Design 1, 2, 3 */
+    .promo-card-ribbon {
+      position: relative;
+      background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(42, 37, 32, 0.95));
+      border-radius: 20px;
+      padding: 30px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 111, 0, 0.2);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      animation: slide-up 0.5s ease-out;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .promo-card-ribbon::before {
+      content: 'HOT DEAL';
+      position: absolute;
+      top: 20px;
+      right: -35px;
+      background: linear-gradient(135deg, #FF6F00, #C62828);
+      color: white;
+      padding: 8px 40px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transform: rotate(45deg);
+      box-shadow: 0 5px 15px rgba(255, 111, 0, 0.4);
+      z-index: 1;
+    }
+    
+    .promo-card-ribbon .promo-badge {
+      display: inline-flex;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(255, 111, 0, 0.15), rgba(198, 40, 40, 0.15));
+      border: 2px solid rgba(255, 111, 0, 0.3);
+      padding: 8px 20px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+      animation: wiggle 0.5s ease-in-out;
+    }
+    
+    .promo-card-ribbon .discount-badge {
+      background: linear-gradient(135deg, #FF6F00, #C62828);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 50px;
+      font-size: 28px;
+      font-weight: 900;
+      margin-right: 20px;
+      animation: bounce-glow 2s ease-in-out infinite;
+      box-shadow: 0 10px 25px rgba(255, 111, 0, 0.4);
+    }
+    
+    /* Design 2: Elegant Gold Style */
+    .promo-card-gold {
+      background: linear-gradient(135deg, rgba(42, 37, 32, 0.95), rgba(26, 26, 26, 0.95));
+      border-radius: 20px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      animation: slide-up 0.5s ease-out 0.1s both;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .promo-card-gold::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      bottom: -2px;
+      left: -2px;
+      background: linear-gradient(135deg, #FFD700, #FFA500, #C62828);
+      border-radius: 22px;
+      z-index: -1;
+    }
+    
+    .promo-card-gold .gold-badge {
+      display: inline-flex;
+      align-items: center;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color: #1A1A1A;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    }
+    
+    .promo-card-gold .gold-icon {
+      font-size: 20px;
+      margin-right: 8px;
+    }
+    
+    .promo-card-gold .discount-circle {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      margin-right: 25px;
+      box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+      animation: float 3s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    
+    /* Design 3: Clean Minimalist */
+    .promo-card-minimal {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      animation: slide-up 0.5s ease-out 0.2s both;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .promo-card-minimal::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #C62828 0%, #FF6F00 100%);
+      border-radius: 20px 20px 0 0;
+    }
+    
+    .promo-card-minimal .minimal-badge {
+      display: inline-block;
+      background: rgba(255, 111, 0, 0.1);
+      color: #FF6F00;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255, 111, 0, 0.2);
+    }
+    
+    .promo-card-minimal .discount-minimal {
+      color: #C62828;
+      font-size: 42px;
+      font-weight: 900;
+      margin-right: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Responsive Promo Cards */
+    @media (max-width: 768px) {
+      .promo-card-ribbon,
+      .promo-card-gold,
+      .promo-card-minimal {
+        padding: 20px;
+      }
+      
+      .promo-card-ribbon::before {
+        font-size: 10px;
+        padding: 6px 30px;
+        right: -30px;
+      }
+      
+      .promo-card-gold .discount-circle {
+        width: 80px;
+        height: 80px;
+        margin-right: 15px;
+      }
+      
+      .promo-card-minimal .discount-minimal {
+        font-size: 36px;
+        margin-right: 15px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .promo-card-ribbon,
+      .promo-card-gold,
+      .promo-card-minimal {
+        padding: 16px;
+      }
+      
+      .promo-card-ribbon::before {
+        font-size: 9px;
+        padding: 5px 25px;
+        right: -25px;
+      }
+      
+      .promo-card-gold .discount-circle {
+        width: 70px;
+        height: 70px;
+        margin-right: 12px;
+      }
+      
+      .promo-card-minimal .discount-minimal {
+        font-size: 32px;
+        margin-right: 12px;
+      }
+    }
+    
+    /* Promo Content */
+    .promo-content-wrapper {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+    
+    .promo-text-content {
+      flex: 1;
+    }
+    
+    .promo-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    
+    .promo-description {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .promo-details {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .promo-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    
+    .promo-original-price {
+      text-decoration: line-through;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 1rem;
+    }
+    
+    .promo-save {
+      color: #FF6F00;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    
+    /* Countdown Timer */
+    .countdown-timer {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .countdown-item {
+      background: rgba(255, 111, 0, 0.1);
+      border: 1px solid rgba(255, 111, 0, 0.3);
+      border-radius: 10px;
+      padding: 12px;
+      min-width: 60px;
+      text-align: center;
+      backdrop-filter: blur(5px);
+      flex: 1;
+    }
+    
+    .countdown-value {
+      font-size: 24px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #C62828, #FF6F00);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1;
+    }
+    
+    .countdown-label {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    @media (max-width: 768px) {
+      .countdown-timer {
+        gap: 8px;
+        margin-top: 15px;
+      }
+      
+      .countdown-item {
+        min-width: 50px;
+        padding: 10px;
+      }
+      
+      .countdown-value {
+        font-size: 20px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .countdown-timer {
+        gap: 5px;
+      }
+      
+      .countdown-item {
+        min-width: 40px;
+        padding: 8px;
+      }
+      
+      .countdown-value {
+        font-size: 18px;
+      }
+      
+      .countdown-label {
+        font-size: 9px;
+      }
+    }
+    
+    /* Promo Image Container */
+    .promo-image-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      height: 200px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .promo-image-container {
+        height: 160px;
+        margin-bottom: 15px;
+        border-radius: 12px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .promo-image-container {
+        height: 140px;
+        border-radius: 10px;
+      }
+    }
+    
+    .promo-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .promo-image-container:hover img {
+      transform: scale(1.05);
+    }
+    
+    .promo-image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.8) 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+    
+    /* Category Tags */
+    .category-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .category-tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      transition: all 0.3s;
+    }
+    
+    .category-tag:hover {
+      background: rgba(255, 111, 0, 0.1);
+      border-color: rgba(255, 111, 0, 0.3);
+      color: #FF6F00;
+    }
+    
+    /* Action Buttons */
+    .promo-action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #C62828, #B71C1C);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 5px 15px rgba(198, 40, 40, 0.4);
+      margin-top: auto;
+      text-align: center;
+      width: 100%;
+    }
+    
+    .promo-action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(198, 40, 40, 0.6);
+      background: linear-gradient(135deg, #B71C1C, #C62828);
+    }
+    
+    .promo-action-btn i {
+      margin-left: 8px;
+      transition: transform 0.3s;
+    }
+    
+    .promo-action-btn:hover i {
+      transform: translateX(5px);
+    }
+    
+    /* Menu Styles */
+    .menu-category-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .sushi-category { background: rgba(198, 40, 40, 0.2); color: #FF8A8A; }
+    .ramen-category { background: rgba(255, 152, 0, 0.2); color: #FFCC80; }
+    .appetizer-category { background: rgba(0, 150, 136, 0.2); color: #80CBC4; }
+    .main-category { background: rgba(33, 150, 243, 0.2); color: #81D4FA; }
+    .drink-category { background: rgba(76, 175, 80, 0.2); color: #A5D6A7; }
+    .dessert-category { background: rgba(156, 39, 176, 0.2); color: #E1BEE7; }
+    .bento-category { background: rgba(198, 40, 40, 0.2); color: #FF8A8A; }
+    .teppanyaki-category { background: rgba(255, 152, 0, 0.2); color: #FFCC80; }
+    
+    .menu-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    
+    .menu-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(198, 40, 40, 0.3);
+      box-shadow: 0 10px 30px rgba(198, 40, 40, 0.1);
+    }
+    
+    .badge {
+      background: linear-gradient(135deg, #C62828, #B71C1C);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .badge-chef { background: linear-gradient(135deg, #C62828, #B71C1C); }
+    .badge-new { background: linear-gradient(135deg, #2196F3, #1976D2); }
+    .badge-popular { background: linear-gradient(135deg, #FF9800, #F57C00); }
+    .badge-spicy { background: linear-gradient(135deg, #FF5722, #E64A19); }
+    .badge-vegetarian { background: linear-gradient(135deg, #4CAF50, #388E3C); }
+    
+    .menu-item-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px 12px 0 0;
+    }
+    
+    @media (max-width: 768px) {
+      .menu-item-image {
+        height: 180px;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .menu-item-image {
+        height: 160px;
+      }
+    }
+    
+    /* Menu Filter Styles */
+    .menu-filter-container {
+      margin-bottom: 30px;
+    }
+    
+    .menu-filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 8px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .filter-btn:hover {
+      background: rgba(198, 40, 40, 0.1);
+      border-color: rgba(198, 40, 40, 0.3);
+      color: #FF8A8A;
+    }
+    
+    .filter-btn.active {
+      background: linear-gradient(135deg, #C62828, #B71C1C);
+      color: white;
+      border-color: #C62828;
+    }
+    
+    /* Responsive Menu */
+    @media (max-width: 768px) {
+      .menu-filter-buttons {
+        gap: 8px;
+      }
+      
+      .filter-btn {
+        padding: 6px 16px;
+        font-size: 13px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .menu-filter-buttons {
+        gap: 5px;
+      }
+      
+      .filter-btn {
+        padding: 5px 12px;
+        font-size: 12px;
+      }
+    }
+    
+    /* Loading Animation */
+    .loading-spinner {
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      border-top: 3px solid #C62828;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Skeleton Loading */
+    .skeleton {
+      background: linear-gradient(90deg, #2A2520 25%, #3A3530 50%, #2A2520 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    
+    .skeleton-text {
+      height: 1rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+    
+    .skeleton-title {
+      height: 2rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+    
+    .skeleton-image {
+      height: 200px;
+      border-radius: 15px;
+      margin-bottom: 1rem;
+    }
+    
+    .skeleton-button {
+      height: 50px;
+      border-radius: 25px;
+      margin-top: 1rem;
+    }
+    
+    /* Text Utilities */
+    .line-clamp-1 {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+    }
+    
+    .line-clamp-2 {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+    
+    .line-clamp-3 {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+  <!-- Mobile Menu Container (Hidden by default) -->
+  <div id="mobileMenuContainer" class="mobile-menu-container">
+    <div class="mobile-menu-header">
+      <div class="mobile-menu-logo">
+        <div class="bg-primary p-2 rounded-lg">
+          <i class="fas fa-fish text-white text-xl"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-heading font-bold text-white">寿司<span class="text-primary">樫村</span></h1>
+          <p class="text-xs text-gray-400">Shushi Kashimura</p>
+        </div>
+      </div>
+    </div>
+    
+    <button class="mobile-menu-close" onclick="toggleMobileMenu()">
+      <i class="fas fa-times text-lg"></i>
+    </button>
+    
+    <div class="mobile-menu-nav">
+      <a href="index.html" class="mobile-menu-link" onclick="toggleMobileMenu()">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="#menu" class="mobile-menu-link active" onclick="toggleMobileMenu()">
+        <i class="fas fa-utensils"></i>
+        <span>Menu</span>
+      </a>
+      <a href="index.html#galeri" class="mobile-menu-link" onclick="toggleMobileMenu()">
+        <i class="fas fa-images"></i>
+        <span>Galeri</span>
+      </a>
+      <a href="index.html#reservasi" class="mobile-menu-link" onclick="toggleMobileMenu()">
+        <i class="fas fa-calendar-check"></i>
+        <span>Reservasi</span>
+      </a>
+      <a href="admin-dashboard.html" class="mobile-menu-link" onclick="toggleMobileMenu()">
+        <i class="fas fa-cog"></i>
+        <span>Admin Dashboard</span>
+      </a>
+    </div>
+    
+    <div class="mobile-menu-footer">
+      <p class="text-center text-gray-400 text-sm">Hubungi Kami</p>
+      <div class="mobile-menu-social">
+        <a href="#" title="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="#" title="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#" title="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="tel:+628123456789" title="Telepon">
+          <i class="fas fa-phone"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mobile Menu Overlay -->
+  <div id="mobileMenuOverlay" class="mobile-menu-overlay" onclick="toggleMobileMenu()"></div>
+
+  <!-- Navigation -->
+  <nav class="bg-dark/95 backdrop-blur-lg border-b border-gray-800 p-4 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex justify-between items-center">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center space-x-3">
+          <div class="bg-primary p-2 rounded-lg">
+            <i class="fas fa-fish text-white text-xl"></i>
+          </div>
+          <div>
+            <h1 class="text-xl font-heading font-bold text-white">寿司<span class="text-primary">樫村</span></h1>
+            <p class="text-xs text-gray-400">Shushi Kashimura</p>
+          </div>
+        </a>
+        
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-6">
+          <a href="index.html" class="text-gray-300 hover:text-primary transition-colors">
+            <i class="fas fa-home mr-2"></i>Home
+          </a>
+          <a href="#menu" class="text-gray-300 hover:text-primary transition-colors">
+            <i class="fas fa-utensils mr-2"></i>Menu
+          </a>
+          <a href="index.html#galeri" class="text-gray-300 hover:text-primary transition-colors">
+            <i class="fas fa-images mr-2"></i>Galeri
+          </a>
+          <a href="index.html#reservasi" class="bg-primary hover:bg-red-700 px-4 py-2 rounded-lg transition-colors">
+            <i class="fas fa-calendar-check mr-2"></i>Reservasi
+          </a>
+        </div>
+        
+        <!-- Mobile Menu Button -->
+        <button onclick="toggleMobileMenu()" class="md:hidden text-gray-300 hover:text-primary transition-colors">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <div class="relative py-12 md:py-20 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-dark via-dark-light to-dark opacity-90"></div>
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+      <div class="text-center">
+        <h1 class="text-3xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-4">
+          Menu <span class="gradient-text">Lengkap</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-6">
+          Jelajahi semua hidangan autentik Jepang kami yang dibuat dengan bahan premium
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Banner Slider Container -->
+  <div id="bannerSliderContainer" class="max-w-7xl mx-auto px-4 mb-8 md:mb-16">
+    <!-- Banner slider akan dimuat secara dinamis -->
+  </div>
+
+  <!-- Promo Banner Container -->
+  <div class="max-w-7xl mx-auto px-4 mb-12 md:mb-20">
+    <h2 class="promo-section-title text-2xl md:text-4xl font-bold text-white mb-8 md:mb-12">
+      <span class="gradient-text">Promo Spesial</span>
+    </h2>
+    
+    <div id="promoBannerContainer" class="promo-grid">
+      <!-- Promo banners akan dimuat secara dinamis -->
+      <div class="text-center py-16 col-span-full">
+        <div class="loading-spinner mb-4"></div>
+        <p class="text-gray-400">Memuat promo...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu Section -->
+  <div id="menu" class="max-w-7xl mx-auto px-4 pb-20 md:pb-32">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+        Menu <span class="gradient-text">Lengkap</span>
+      </h2>
+      <p class="text-gray-300 max-w-2xl mx-auto">
+        Temukan berbagai pilihan hidangan Jepang autentik kami
+      </p>
+    </div>
+
+    <!-- Menu Filter -->
+    <div class="menu-filter-container mb-8">
+      <div class="menu-filter-buttons">
+        <button class="filter-btn active" onclick="filterMenu('all')">Semua Menu</button>
+        <button class="filter-btn" onclick="filterMenu('sushi')">Small Platter</button>
+        <button class="filter-btn" onclick="filterMenu('Small Platter')">Medium Platter</button>
+        <button class="filter-btn" onclick="filterMenu('appetizer')">Appetizer</button>
+        <button class="filter-btn" onclick="filterMenu('Medium Platter')">Medium Platter</button>
+        <button class="filter-btn" onclick="filterMenu('Large Platter')">Large Platter</button>
+        <button class="filter-btn" onclick="filterMenu('Don buri')">Don buri</button>
+        <button class="filter-btn" onclick="filterMenu('Ramen')">Ramen</button>
+        <button class="filter-btn" onclick="filterMenu('Mentai Rice')">Mentai Rice</button>
+        <button class="filter-btn" onclick="filterMenu('Bento')">Bento</button>
+        <button class="filter-btn" onclick="filterMenu('Drinks')">Drinks</button>
+      </div>
+    </div>
+
+    <!-- Menu Grid -->
+    <div id="menuGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      <!-- Menu items will be loaded here from localStorage -->
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Global variables
+    let allMenuItems = [];
+    let activePromos = [];
+    let activeBanners = [];
+    let currentFilter = 'all';
+    let currentSlide = 0;
+    let slideInterval;
+    
+    // Mobile Menu Functionality
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenuContainer');
+      const mobileOverlay = document.getElementById('mobileMenuOverlay');
+      const menuButton = document.querySelector('.md\\:hidden .fa-bars, .md\\:hidden .fa-times');
+      
+      if (mobileMenu && mobileOverlay && menuButton) {
+        const isActive = mobileMenu.classList.contains('active');
+        
+        if (isActive) {
+          // Close menu
+          mobileMenu.classList.remove('active');
+          mobileOverlay.classList.remove('active');
+          document.body.style.overflow = 'auto';
+          menuButton.classList.remove('fa-times');
+          menuButton.classList.add('fa-bars');
+        } else {
+          // Open menu
+          mobileMenu.classList.add('active');
+          mobileOverlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          menuButton.classList.remove('fa-bars');
+          menuButton.classList.add('fa-times');
+        }
+      }
+    }
+    
+    // Close mobile menu when clicking on a link
+    function closeMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenuContainer');
+      const mobileOverlay = document.getElementById('mobileMenuOverlay');
+      const menuButton = document.querySelector('.md\\:hidden .fa-bars, .md\\:hidden .fa-times');
+      
+      if (mobileMenu && mobileOverlay && menuButton) {
+        mobileMenu.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        menuButton.classList.remove('fa-times');
+        menuButton.classList.add('fa-bars');
+      }
+    }
+    
+    // Close menu when pressing Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeMobileMenu();
+      }
+    });
+    
+    // Load data on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Menu page loaded - Loading data from admin dashboard');
+      
+      // Load all data
+      loadMenu();
+      loadPromos();
+      loadBanners();
+      
+      // Listen for updates
+      setupEventListeners();
+      
+      // Set up banner slider auto rotation
+      setupBannerSlider();
+    });
+    
+    // Setup event listeners
+    function setupEventListeners() {
+      // Listen for storage updates from admin dashboard
+      window.addEventListener('storage', function(e) {
+        console.log('Storage event detected:', e.key);
+        
+        if (e.key === 'shushi_kashimura_menu' || e.key === 'shushi_menu' || e.key === 'website_menu') {
+          console.log('Menu updated from admin dashboard');
+          loadMenu();
+        }
+        
+        if (e.key === 'shushi_kashimura_promos' || e.key === 'shushi_promos' || e.key === 'website_promos') {
+          console.log('Promo updated from admin dashboard');
+          loadPromos();
+        }
+        
+        if (e.key === 'shushi_kashimura_banners' || e.key === 'shushi_banners' || e.key === 'website_banners') {
+          console.log('Banners updated from admin dashboard');
+          loadBanners();
+        }
+      });
+      
+      // Custom events
+      window.addEventListener('promoUpdated', loadPromos);
+      window.addEventListener('bannersUpdated', loadBanners);
+    }
+    
+    // Setup banner slider auto rotation
+    function setupBannerSlider() {
+      // Auto rotate slides every 5 seconds
+      if (slideInterval) {
+        clearInterval(slideInterval);
+      }
+      
+      slideInterval = setInterval(() => {
+        if (activeBanners.length > 1) {
+          nextSlide();
+        }
+      }, 5000);
+    }
+    
+    // Create skeleton loading for promos
+    function createPromoSkeleton() {
+      return `
+        <div class="promo-card-minimal">
+          <div class="skeleton skeleton-text w-1/3 mb-4"></div>
+          <div class="skeleton skeleton-image mb-4"></div>
+          <div class="skeleton skeleton-title mb-4"></div>
+          <div class="skeleton skeleton-text mb-2"></div>
+          <div class="skeleton skeleton-text mb-2"></div>
+          <div class="skeleton skeleton-text w-2/3 mb-4"></div>
+          <div class="flex gap-2 mb-4">
+            <div class="skeleton skeleton-text w-16"></div>
+            <div class="skeleton skeleton-text w-16"></div>
+            <div class="skeleton skeleton-text w-16"></div>
+          </div>
+          <div class="skeleton skeleton-button"></div>
+        </div>
+      `.repeat(3);
+    }
+    
+    // Load banners from localStorage (from admin dashboard)
+    function loadBanners() {
+      console.log('Loading banners from admin dashboard...');
+      
+      // Try multiple storage keys (prioritize admin dashboard keys)
+      let bannerData = null;
+      const storageKeys = ['shushi_kashimura_banners', 'shushi_banners', 'website_banners'];
+      
+      for (const key of storageKeys) {
+        const data = localStorage.getItem(key);
+        if (data) {
+          try {
+            bannerData = JSON.parse(data);
+            console.log(`Loaded banners from ${key}:`, bannerData.length);
+            break;
+          } catch (e) {
+            console.error(`Error parsing ${key}:`, e);
+          }
+        }
+      }
+      
+      if (!bannerData || bannerData.length === 0) {
+        console.log('No banners found from admin');
+        return;
+      }
+      
+      // Filter active banners
+      const now = new Date();
+      activeBanners = bannerData.filter(banner => {
+        // Handle banners without endDate (for compatibility)
+        if (!banner.endDate) return banner.status === 'active';
+        
+        const endDate = new Date(banner.endDate);
+        return banner.status === 'active' && endDate > now;
+      }).sort((a, b) => a.order - b.order);
+      
+      console.log('Active banners loaded:', activeBanners.length);
+      
+      // Display banners
+      displayBanners();
+      setupBannerSlider();
+    }
+    
+    // Display banners in the banner slider
+    function displayBanners() {
+      const container = document.getElementById('bannerSliderContainer');
+      if (!container) return;
+      
+      if (activeBanners.length === 0) {
+        container.innerHTML = `
+          <div class="banner-slider bg-gradient-to-r from-primary/20 to-accent/20 flex items-center justify-center">
+            <div class="text-center p-8">
+              <i class="fas fa-image text-4xl md:text-6xl text-white opacity-50 mb-4"></i>
+              <h3 class="text-xl md:text-2xl font-bold text-white mb-2">Coming Soon</h3>
+              <p class="text-gray-300 text-sm md:text-base">Banner promosi akan segera hadir</p>
+            </div>
+          </div>
+        `;
+        return;
+      }
+      
+      let bannerHTML = '';
+      
+      // Check if we should show slider (more than 1 banner) or single banner
+      if (activeBanners.length > 1) {
+        // Create slider
+        bannerHTML = `
+          <div class="banner-slider">
+            ${activeBanners.map((banner, index) => `
+              <div class="banner-slide ${index === 0 ? 'active' : ''}" data-index="${index}">
+                ${banner.image ? `
+                <img src="${banner.image}" alt="${banner.title}" class="w-full h-full object-cover">
+                ` : `
+                <div class="w-full h-full bg-gradient-to-r from-primary/30 to-accent/30 flex items-center justify-center">
+                  <div class="text-center p-8">
+                    <i class="fas fa-image text-4xl md:text-6xl text-white opacity-50 mb-4"></i>
+                    <h3 class="text-xl md:text-3xl font-bold text-white">${banner.title}</h3>
+                  </div>
+                </div>
+                `}
+                <div class="banner-overlay">
+                  <span class="banner-type-badge banner-type-${banner.type || 'info'} text-xs md:text-sm">
+                    ${banner.type === 'hero' ? 'Featured' : banner.type === 'promo' ? 'Promo' : 'Info'}
+                  </span>
+                  <h2 class="text-2xl md:text-5xl font-bold text-white mb-2 md:mb-4">${banner.title}</h2>
+                  ${banner.description ? `
+                  <p class="text-gray-200 text-sm md:text-xl mb-4 md:mb-6 max-w-2xl">${banner.description}</p>
+                  ` : ''}
+                  ${banner.link && banner.link !== '#' ? `
+                  <a href="${banner.link}" 
+                     class="inline-flex items-center bg-primary hover:bg-red-700 text-white px-6 py-3 md:px-8 md:py-3 rounded-full transition-all text-base md:text-lg font-semibold">
+                    Lihat Detail <i class="fas fa-arrow-right ml-2"></i>
+                  </a>
+                  ` : ''}
+                </div>
+              </div>
+            `).join('')}
+            
+            <!-- Slider Controls -->
+            <div class="slider-controls">
+              <button class="slider-btn prev-btn" onclick="prevSlide()">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="slider-btn next-btn" onclick="nextSlide()">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+            
+            <!-- Slider Dots -->
+            <div class="slider-dots">
+              ${activeBanners.map((_, index) => `
+                <div class="slider-dot ${index === 0 ? 'active' : ''}" data-index="${index}" onclick="goToSlide(${index})"></div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      } else {
+        // Single banner
+        const banner = activeBanners[0];
+        bannerHTML = `
+          <div class="banner-slider">
+            <div class="banner-slide active">
+              ${banner.image ? `
+              <img src="${banner.image}" alt="${banner.title}" class="w-full h-full object-cover">
+              ` : `
+              <div class="w-full h-full bg-gradient-to-r from-primary/30 to-accent/30 flex items-center justify-center">
+                <div class="text-center p-8">
+                  <i class="fas fa-image text-4xl md:text-6xl text-white opacity-50 mb-4"></i>
+                  <h3 class="text-xl md:text-3xl font-bold text-white">${banner.title}</h3>
+                </div>
+              </div>
+              `}
+              <div class="banner-overlay">
+                <span class="banner-type-badge banner-type-${banner.type || 'info'} text-xs md:text-sm">
+                  ${banner.type === 'hero' ? 'Featured' : banner.type === 'promo' ? 'Promo' : 'Info'}
+                </span>
+                <h2 class="text-2xl md:text-5xl font-bold text-white mb-2 md:mb-4">${banner.title}</h2>
+                ${banner.description ? `
+                <p class="text-gray-200 text-sm md:text-xl mb-4 md:mb-6 max-w-2xl">${banner.description}</p>
+                ` : ''}
+                ${banner.link && banner.link !== '#' ? `
+                <a href="${banner.link}" 
+                   class="inline-flex items-center bg-primary hover:bg-red-700 text-white px-6 py-3 md:px-8 md:py-3 rounded-full transition-all text-base md:text-lg font-semibold">
+                  Lihat Detail <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      
+      container.innerHTML = bannerHTML;
+    }
+    
+    // Banner slider functions
+    function nextSlide() {
+      if (activeBanners.length <= 1) return;
+      
+      const slides = document.querySelectorAll('.banner-slide');
+      const dots = document.querySelectorAll('.slider-dot');
+      
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      
+      currentSlide = (currentSlide + 1) % activeBanners.length;
+      
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+    
+    function prevSlide() {
+      if (activeBanners.length <= 1) return;
+      
+      const slides = document.querySelectorAll('.banner-slide');
+      const dots = document.querySelectorAll('.slider-dot');
+      
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      
+      currentSlide = (currentSlide - 1 + activeBanners.length) % activeBanners.length;
+      
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+    
+    function goToSlide(index) {
+      if (activeBanners.length <= 1) return;
+      
+      const slides = document.querySelectorAll('.banner-slide');
+      const dots = document.querySelectorAll('.slider-dot');
+      
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      
+      currentSlide = index;
+      
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+    
+    // Load promos from localStorage (from admin dashboard) - OPTIMIZED VERSION
+    function loadPromos() {
+      console.log('Loading promos from admin dashboard...');
+      
+      const container = document.getElementById('promoBannerContainer');
+      if (!container) return;
+      
+      // Tampilkan skeleton loading untuk feedback visual
+      container.innerHTML = createPromoSkeleton();
+      
+      // Gunakan setTimeout untuk simulasi async dan mencegah blocking
+      setTimeout(() => {
+        try {
+          // Try multiple storage keys
+          let promoData = null;
+          const storageKeys = ['shushi_kashimura_promos', 'shushi_promos', 'website_promos'];
+          
+          for (const key of storageKeys) {
+            const data = localStorage.getItem(key);
+            if (data) {
+              try {
+                promoData = JSON.parse(data);
+                console.log(`Loaded promos from ${key}:`, promoData?.length || 0);
+                break;
+              } catch (e) {
+                console.error(`Error parsing ${key}:`, e);
+              }
+            }
+          }
+          
+          if (!promoData || promoData.length === 0) {
+            console.log('No promos found from admin');
+            showNoPromosMessage();
+            return;
+          }
+          
+          // Filter active promos dengan error handling
+          const now = new Date();
+          activePromos = promoData.filter(promo => {
+            try {
+              if (!promo || !promo.status || !promo.endDate) return false;
+              const endDate = new Date(promo.endDate);
+              return promo.status === 'active' && endDate > now;
+            } catch (error) {
+              console.error('Error filtering promo:', error, promo);
+              return false;
+            }
+          }).sort((a, b) => (a.order || 0) - (b.order || 0));
+          
+          console.log('Active promos loaded:', activePromos.length);
+          
+          // Display promos
+          displayPromos();
+          
+          // Start countdown timers
+          startCountdownTimers();
+          
+        } catch (error) {
+          console.error('Error loading promos:', error);
+          showNoPromosMessage();
+        }
+      }, 300); // Small delay for better UX
+    }
+    
+    // Show no promos message
+    function showNoPromosMessage() {
+      const container = document.getElementById('promoBannerContainer');
+      if (!container) return;
+      
+      container.innerHTML = `
+        <div class="col-span-full text-center py-16 animate__animated animate__fadeIn">
+          <i class="fas fa-tag text-6xl text-gray-600 mb-4"></i>
+          <h3 class="text-xl font-bold text-gray-400 mb-2">Tidak Ada Promo Saat Ini</h3>
+          <p class="text-gray-500 mb-6">Cek kembali nanti untuk promo menarik</p>
+          <div>
+            <a href="admin-dashboard.html" class="inline-flex items-center bg-primary hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-colors">
+              <i class="fas fa-plus-circle mr-2"></i>Tambah Promo di Admin Dashboard
+            </a>
+          </div>
+        </div>
+      `;
+    }
+    
+    // Display promos in the promo container
+    function displayPromos() {
+      const container = document.getElementById('promoBannerContainer');
+      if (!container) return;
+      
+      if (activePromos.length === 0) {
+        showNoPromosMessage();
+        return;
+      }
+      
+      let promoHTML = '';
+      
+      // Batasi jumlah promo yang ditampilkan untuk performa
+      const promosToShow = activePromos.slice(0, 6); // Maksimal 6 promo
+      
+      promosToShow.forEach((promo, index) => {
+        // Validate promo data
+        if (!promo || !promo.title) return;
+        
+        // Determine which card design to use based on promo type or index
+        const designType = promo.designType || (index % 3);
+        
+        switch(designType) {
+          case 0:
+            promoHTML += createRibbonPromoCard(promo);
+            break;
+          case 1:
+            promoHTML += createGoldPromoCard(promo);
+            break;
+          case 2:
+          default:
+            promoHTML += createMinimalPromoCard(promo);
+            break;
+        }
+      });
+      
+      container.innerHTML = promoHTML;
+      
+      // Re-attach countdown timers
+      startCountdownTimers();
+    }
+    
+    // Create Ribbon Style Promo Card
+    function createRibbonPromoCard(promo) {
+      const endDate = new Date(promo.endDate);
+      const now = new Date();
+      const timeLeft = endDate - now;
+      const daysLeft = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      
+      return `
+        <div class="promo-card-ribbon animate__animated animate__fadeInUp">
+          ${promo.image ? `
+          <div class="promo-image-container">
+            <img src="${promo.image}" alt="${promo.title}" loading="lazy">
+            <div class="promo-image-overlay">
+              <span class="promo-badge">
+                <i class="fas fa-fire mr-2"></i> Hot Promo
+              </span>
+            </div>
+          </div>
+          ` : ''}
+          
+          <div class="promo-content-wrapper">
+            <div class="discount-badge">
+              ${promo.discount || '30%'}
+            </div>
+            <div class="promo-text-content">
+              <h3 class="promo-title gradient-text">${promo.title}</h3>
+              <p class="promo-description">${promo.description || ''}</p>
+              
+              <div class="promo-details">
+                ${promo.originalPrice ? `
+                <div>
+                  <span class="promo-original-price">${promo.originalPrice}</span>
+                  <span class="promo-price">${promo.price || ''}</span>
+                </div>
+                ` : ''}
+                
+                ${promo.saveAmount ? `
+                <span class="promo-save">
+                  <i class="fas fa-piggy-bank mr-1"></i> Hemat ${promo.saveAmount}
+                </span>
+                ` : ''}
+              </div>
+              
+              ${promo.categories ? `
+              <div class="category-tags">
+                ${promo.categories.split(',').map(cat => `
+                  <span class="category-tag">${cat.trim()}</span>
+                `).join('')}
+              </div>
+              ` : ''}
+            </div>
+          </div>
+          
+          <div class="countdown-timer" data-end="${promo.endDate}">
+            <div class="countdown-item">
+              <div class="countdown-value days">00</div>
+              <div class="countdown-label">Hari</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-value hours">00</div>
+              <div class="countdown-label">Jam</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-value minutes">00</div>
+              <div class="countdown-label">Menit</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-value seconds">00</div>
+              <div class="countdown-label">Detik</div>
+            </div>
+          </div>
+          
+          <a href="${promo.link || '#'}" class="promo-action-btn">
+            Pesan Sekarang <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      `;
+    }
+    
+    // Create Gold Style Promo Card
+    function createGoldPromoCard(promo) {
+      return `
+        <div class="promo-card-gold animate__animated animate__fadeInUp">
+          <div class="gold-badge">
+            <i class="fas fa-crown gold-icon"></i> Premium Offer
+          </div>
+          
+          ${promo.image ? `
+          <div class="promo-image-container">
+            <img src="${promo.image}" alt="${promo.title}" loading="lazy">
+            <div class="promo-image-overlay">
+              <span class="minimal-badge">
+                <i class="fas fa-star mr-2"></i> Limited Time
+              </span>
+            </div>
+          </div>
+          ` : ''}
+          
+          <div class="promo-content-wrapper">
+            <div class="discount-circle">
+              <span class="text-dark font-black text-2xl">${promo.discount || '50%'}</span>
+              <span class="text-dark font-bold text-xs">OFF</span>
+            </div>
+            <div class="promo-text-content">
+              <h3 class="promo-title gradient-gold">${promo.title}</h3>
+              <p class="promo-description">${promo.description || ''}</p>
+              
+              <div class="promo-details">
+                ${promo.originalPrice ? `
+                <div>
+                  <span class="promo-original-price">${promo.originalPrice}</span>
+                  <span class="promo-price gradient-gold">${promo.price || ''}</span>
+                </div>
+                ` : ''}
+                
+                ${promo.saveAmount ? `
+                <span class="promo-save">
+                  <i class="fas fa-gem mr-1"></i> Save ${promo.saveAmount}
+                </span>
+                ` : ''}
+              </div>
+              
+              ${promo.categories ? `
+              <div class="category-tags">
+                ${promo.categories.split(',').map(cat => `
+                  <span class="category-tag">${cat.trim()}</span>
+                `).join('')}
+              </div>
+              ` : ''}
+            </div>
+          </div>
+          
+          <div class="countdown-timer" data-end="${promo.endDate}">
+            <div class="countdown-item">
+              <div class="countdown-value days">00</div>
+              <div class="countdown-label">Hari</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-value hours">00</div>
+              <div class="countdown-label">Jam</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-value minutes">00</div>
+              <div class="countdown-label">Menit</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-value seconds">00</div>
+              <div class="countdown-label">Detik</div>
+            </div>
+          </div>
+          
+          <a href="${promo.link || '#'}" class="promo-action-btn" style="background: linear-gradient(135deg, #FFD700, #FFA500);">
+            Claim Offer <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      `;
+    }
+    
+    // Create Minimalist Style Promo Card
+    function createMinimalPromoCard(promo) {
+      return `
+        <div class="promo-card-minimal animate__animated animate__fadeInUp">
+          <span class="minimal-badge">
+            <i class="fas fa-bolt mr-2"></i> Flash Sale
+          </span>
+          
+          ${promo.image ? `
+          <div class="promo-image-container">
+            <img src="${promo.image}" alt="${promo.title}" loading="lazy">
+          </div>
+          ` : ''}
+          
+          <div class="promo-content-wrapper">
+            <div class="promo-text-content">
+              <h3 class="promo-title text-white">${promo.title}</h3>
+              <p class="promo-description">${promo.description || ''}</p>
+              
+              <div class="promo-details">
+                <span class="discount-minimal">${promo.discount || '40%'}</span>
+                
+                ${promo.originalPrice ? `
+                <div>
+                  <span class="promo-original-price">${promo.originalPrice}</span>
+                  <span class="promo-price">${promo.price || ''}</span>
+                </div>
+                ` : ''}
+              </div>
+              
+              ${promo.categories ? `
+              <div class="category-tags">
+                ${promo.categories.split(',').map(cat => `
+                  <span class="category-tag">${cat.trim()}</span>
+                `).join('')}
+              </div>
+              ` : ''}
+            </div>
+          </div>
+          
+          <div class="countdown-timer" data-end="${promo.endDate}">
+            <div class="countdown-item">
+              <div class="countdown-value days">00</div>
+              <div class="countdown-label">Hari</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-value hours">00</div>
+              <div class="countdown-label">Jam</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-value minutes">00</div>
+              <div class="countdown-label">Menit</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-value seconds">00</div>
+              <div class="countdown-label">Detik</div>
+            </div>
+          </div>
+          
+          <a href="${promo.link || '#'}" class="promo-action-btn">
+            Dapatkan Sekarang <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      `;
+    }
+    
+    // Start countdown timers for all promos
+    function startCountdownTimers() {
+      const timers = document.querySelectorAll('.countdown-timer');
+      
+      timers.forEach(timer => {
+        const endDate = new Date(timer.dataset.end);
+        updateCountdown(timer, endDate);
+        
+        // Update every second
+        const intervalId = setInterval(() => {
+          updateCountdown(timer, endDate);
+        }, 1000);
+        
+        // Store interval ID for cleanup
+        timer.dataset.intervalId = intervalId;
+      });
+    }
+    
+    // Update countdown timer
+    function updateCountdown(timer, endDate) {
+      const now = new Date();
+      const timeLeft = endDate - now;
+      
+      if (timeLeft < 0) {
+        timer.innerHTML = '<div class="text-center text-gray-400 py-2">Promo telah berakhir</div>';
+        
+        // Clear interval
+        if (timer.dataset.intervalId) {
+          clearInterval(parseInt(timer.dataset.intervalId));
+        }
+        return;
+      }
+      
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+      
+      const daysEl = timer.querySelector('.days');
+      const hoursEl = timer.querySelector('.hours');
+      const minutesEl = timer.querySelector('.minutes');
+      const secondsEl = timer.querySelector('.seconds');
+      
+      if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+      if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+      if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+      if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+    }
+    
+    // Load menu from localStorage (from admin dashboard)
+    function loadMenu() {
+      console.log('Loading menu from admin dashboard...');
+      
+      try {
+        // Try multiple storage keys (prioritize admin dashboard keys)
+        let menuData = null;
+        const storageKeys = ['shushi_kashimura_menu', 'shushi_menu', 'website_menu'];
+        
+        for (const key of storageKeys) {
+          const data = localStorage.getItem(key);
+          if (data) {
+            try {
+              menuData = JSON.parse(data);
+              console.log(`Loaded menu from ${key}:`, menuData.length);
+              break;
+            } catch (e) {
+              console.error(`Error parsing ${key}:`, e);
+            }
+          }
+        }
+        
+        if (menuData && menuData.length > 0) {
+          allMenuItems = menuData;
+          console.log('Total menu items loaded:', allMenuItems.length);
+          
+          // Update UI
+          displayMenu('all');
+          
+          console.log('Menu loaded successfully from admin dashboard');
+        } else {
+          console.log('No menu data found from admin dashboard');
+          showSampleMenuMessage();
+        }
+        
+      } catch (error) {
+        console.error('Error loading menu:', error);
+        showSampleMenuMessage();
+      }
+    }
+    
+    // Display menu items
+    function displayMenu(filter = 'all') {
+      const container = document.getElementById('menuGrid');
+      if (!container) return;
+      
+      // Filter menu items
+      const filteredItems = filter === 'all' 
+        ? allMenuItems 
+        : allMenuItems.filter(item => item.category === filter);
+      
+      if (filteredItems.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full text-center py-16 animate__animated animate__fadeIn">
+            <i class="fas fa-utensils text-6xl text-gray-600 mb-4"></i>
+            <h3 class="text-xl font-bold text-gray-400 mb-2">Belum Ada Menu</h3>
+            <p class="text-gray-500">Silakan tambahkan menu melalui admin dashboard</p>
+            <div class="mt-4">
+              <a href="admin-dashboard.html" class="inline-flex items-center bg-primary hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-colors">
+                <i class="fas fa-cog mr-2"></i>Buka Admin Dashboard
+              </a>
+            </div>
+          </div>
+        `;
+        return;
+      }
+      
+      // Create menu cards
+      let menuHTML = '';
+      
+      filteredItems.forEach((item, index) => {
+        // Get category badge class
+        const categoryClass = getCategoryClass(item.category);
+        
+        // Create badges HTML
+        let badgesHTML = '';
+        if (item.badge && item.badge.length > 0) {
+          badgesHTML += `<span class="badge badge-${item.badge}">${getBadgeText(item.badge)}</span> `;
+        }
+        
+        // Get category name
+        const categoryName = getCategoryName(item.category);
+        
+        // Add animation delay for staggered effect
+        const animationDelay = index * 0.1;
+        
+        menuHTML += `
+          <div class="menu-card animate__animated animate__fadeInUp" style="animation-delay: ${animationDelay}s">
+            <div class="relative">
+              <img src="${item.image || 'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}" 
+                   alt="${item.name}" 
+                   class="menu-item-image"
+                   loading="lazy">
+              <div class="absolute top-4 right-4">
+                ${badgesHTML}
+              </div>
+            </div>
+            <div class="p-5">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold text-white line-clamp-1">${item.name}</h3>
+                <span class="text-primary font-bold text-lg whitespace-nowrap ml-2">${item.price}</span>
+              </div>
+              <p class="text-gray-300 mb-4 line-clamp-2">${item.description || 'Hidangan lezat dengan bahan-bahan pilihan'}</p>
+              <div class="flex justify-between items-center">
+                <span class="menu-category-badge ${categoryClass}">${categoryName}</span>
+                ${item.unit ? `<span class="text-gray-400 text-sm">${item.unit}</span>` : ''}
+              </div>
+              ${item.cookTime ? `
+              <div class="mt-3 text-gray-500 text-sm flex items-center">
+                <i class="fas fa-clock mr-2"></i> ${item.cookTime}
+              </div>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      });
+      
+      container.innerHTML = menuHTML;
+    }
+    
+    // Filter menu by category
+    function filterMenu(category) {
+      currentFilter = category;
+      displayMenu(category);
+      
+      // Update active button
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => {
+        if (btn.textContent.toLowerCase().includes(category) || 
+            (category === 'all' && btn.textContent.includes('Semua'))) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+      
+      // Scroll to menu section
+      const menuSection = document.getElementById('menu');
+      if (menuSection) {
+        menuSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    
+    // Get category display name
+    function getCategoryName(category) {
+      const categories = {
+        'sushi': 'Sushi & Sashimi',
+        'ramen': 'Ramen & Noodle',
+        'appetizer': 'Appetizer',
+        'main': 'Main Course',
+        'drink': 'Minuman',
+        'dessert': 'Dessert',
+        'bento': 'Bento Box',
+        'teppanyaki': 'Teppanyaki'
+      };
+      return categories[category] || category;
+    }
+    
+    // Get category class
+    function getCategoryClass(category) {
+      const classes = {
+        'sushi': 'sushi-category',
+        'ramen': 'ramen-category',
+        'appetizer': 'appetizer-category',
+        'main': 'main-category',
+        'drink': 'drink-category',
+        'dessert': 'dessert-category',
+        'bento': 'bento-category',
+        'teppanyaki': 'teppanyaki-category'
+      };
+      return classes[category] || 'sushi-category';
+    }
+    
+    // Get badge text
+    function getBadgeText(badge) {
+      const badgeNames = {
+        'chef': "Chef's Special",
+        'new': 'New',
+        'popular': 'Popular',
+        'spicy': 'Spicy',
+        'vegetarian': 'Vegetarian'
+      };
+      return badgeNames[badge] || badge;
+    }
+    
+    // Show sample menu message
+    function showSampleMenuMessage() {
+      const container = document.getElementById('menuGrid');
+      if (!container) return;
+      
+      container.innerHTML = `
+        <div class="col-span-full text-center py-16">
+          <i class="fas fa-utensils text-6xl text-gray-600 mb-4"></i>
+          <h3 class="text-xl font-bold text-gray-400 mb-2">Belum Ada Menu</h3>
+          <p class="text-gray-500 mb-6">Silakan tambahkan menu melalui admin dashboard terlebih dahulu</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="admin-dashboard.html" class="inline-flex items-center bg-primary hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-colors">
+              <i class="fas fa-cog mr-2"></i>Buka Admin Dashboard
+            </a>
+            <button onclick="loadSampleData()" class="inline-flex items-center bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition-colors">
+              <i class="fas fa-eye mr-2"></i>Tampilkan Contoh Menu
+            </button>
+          </div>
+        </div>
+      `;
+    }
+    
+    // Load sample data for demo
+    function loadSampleData() {
+      allMenuItems = [
+        {
+          id: '1',
+          name: 'Sushi Platter Premium',
+          category: 'sushi',
+          price: 'Rp 280.000',
+          unit: '12 pieces',
+          description: 'Berisi 12 jenis sushi premium: tuna, salmon, hamachi, uni, dan lainnya.',
+          badge: 'chef',
+          cookTime: '15-20 menit',
+          image: 'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        },
+        {
+          id: '2',
+          name: 'Ramen Spicy Miso',
+          category: 'ramen',
+          price: 'Rp 95.000',
+          unit: '1 bowl',
+          description: 'Ramen dengan kuah miso pedas, chashu pork, telur, dan sayuran segar.',
+          badge: 'spicy',
+          cookTime: '10-15 menit',
+          image: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        },
+        {
+          id: '3',
+          name: 'Salmon Sashimi',
+          category: 'sushi',
+          price: 'Rp 120.000',
+          unit: '8 pieces',
+          description: 'Salmon segar dipotong dengan ketebalan sempurna.',
+          badge: 'new',
+          cookTime: '5-10 menit',
+          image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        },
+        {
+          id: '4',
+          name: 'Green Tea',
+          category: 'drink',
+          price: 'Rp 25.000',
+          unit: '1 cup',
+          description: 'Teh hijau tradisional Jepang yang menyegarkan.',
+          image: 'https://images.unsplash.com/photo-1558898476-7f8d5d7b3b8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        },
+        {
+          id: '5',
+          name: 'Matcha Ice Cream',
+          category: 'dessert',
+          price: 'Rp 45.000',
+          unit: '1 scoop',
+          description: 'Es krim matcha dengan topping kacang merah.',
+          badge: 'new',
+          image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        },
+        {
+          id: '6',
+          name: 'Beef Teriyaki Bento',
+          category: 'bento',
+          price: 'Rp 120.000',
+          unit: '1 box',
+          description: 'Bento box dengan beef teriyaki, nasi, salad, dan miso soup.',
+          badge: 'popular',
+          cookTime: '15-20 menit',
+          image: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        }
+      ];
+      
+      displayMenu('all');
+      
+      // Show notification
+      alert('Contoh menu ditampilkan. Untuk menu asli, silakan gunakan admin dashboard.');
+    }
+    
+    // Expose functions to global scope
+    window.filterMenu = filterMenu;
+    window.loadSampleData = loadSampleData;
+    window.nextSlide = nextSlide;
+    window.prevSlide = prevSlide;
+    window.goToSlide = goToSlide;
+    window.toggleMobileMenu = toggleMobileMenu;
+    window.closeMobileMenu = closeMobileMenu;
+  </script>
+</body>
+</html>
